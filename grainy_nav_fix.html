@@ -29,11 +29,10 @@
   --amb:#F5A623;--adk:#180900;--div:rgba(255,255,255,.07);
   --font:'DM Sans',sans-serif;--tr:300ms cubic-bezier(.4,0,.2,1);
 }
-body{font-family:var(--font);background:var(--bg);margin:0;padding:0;width:100%;height:100%;overflow:hidden}
-html{height:100%;overflow:hidden}
-.phone{width:100%;height:100dvh;background:var(--bg);border-radius:0;border:none;box-shadow:none;overflow:hidden;position:fixed;inset:0}
+html{height:100%;height:-webkit-fill-available;overflow:hidden;background:#0e0e0e}
+body{font-family:var(--font);background:var(--bg);margin:0;padding:0;width:100%;height:100%;height:-webkit-fill-available;overflow:hidden}
+.phone{width:100%;height:100%;height:100dvh;background:var(--bg);border-radius:0;border:none;box-shadow:none;overflow:hidden;position:fixed;top:0;left:0;right:0;bottom:0}
 .island{display:none}
-.sbar{display:none}
 .leak{position:absolute;inset:0;pointer-events:none;z-index:1;transition:opacity .3s;
   background:radial-gradient(ellipse 230% 190% at -8% 112%,rgba(148,22,14,.52) 0%,rgba(120,18,12,.24) 32%,rgba(80,10,8,.08) 58%,transparent 76%),
              radial-gradient(ellipse 210% 180% at 110% -8%,rgba(80,18,130,.48) 0%,rgba(60,12,100,.2) 32%,rgba(35,8,65,.07) 58%,transparent 76%)}
@@ -56,7 +55,7 @@ html{height:100%;overflow:hidden}
 .scr{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .scr::-webkit-scrollbar{display:none}
 #modalCarousel::-webkit-scrollbar{display:none}
-.nwrap{position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:center;padding:50px 0 26px;z-index:50;pointer-events:none;background:linear-gradient(to bottom,transparent 0%,rgba(8,6,6,.92) 100%)}
+.nwrap{position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:center;padding:50px 0 calc(26px + env(safe-area-inset-bottom));z-index:50;pointer-events:none;background:linear-gradient(to bottom,transparent 0%,rgba(8,6,6,.92) 100%)}
 .npill{display:flex;align-items:center;gap:3px;background:rgba(16,12,12,.6);border:.5px solid rgba(255,255,255,.13);border-radius:60px;padding:6px 8px;box-shadow:0 8px 32px rgba(0,0,0,.5);pointer-events:all;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
 .ni{display:flex;align-items:center;gap:5px;padding:8px 14px;border-radius:50px;cursor:pointer;transition:background .2s;user-select:none;-webkit-tap-highlight-color:transparent}
 .ni.on{background:var(--amb)}
