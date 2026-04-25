@@ -29,18 +29,40 @@
   --amb:#F5A623;--adk:#180900;--div:rgba(255,255,255,.07);
   --font:'DM Sans',sans-serif;--tr:300ms cubic-bezier(.4,0,.2,1);
 }
-html{height:100%;height:-webkit-fill-available;overflow:hidden;background:#0e0e0e}
-body{font-family:var(--font);background:var(--bg);margin:0;padding:0;width:100%;height:100%;height:-webkit-fill-available;overflow:hidden}
+html{
+  height:100%;
+  height:-webkit-fill-available;
+  overflow:hidden;
+  background:#0e0e0e;
+}
+body{
+  font-family:var(--font);
+  background:var(--bg);
+  margin:0;padding:0;
+  width:100%;
+  height:100%;
+  height:-webkit-fill-available;
+  overflow:hidden;
+}
 .phone{
   width:100%;
-  height:100svh;
   background:var(--bg);
   border-radius:0;border:none;box-shadow:none;
   overflow:hidden;
   position:fixed;
-  top:0;left:0;right:0;bottom:0;
+  top:0;left:0;right:0;
+  bottom:env(safe-area-inset-bottom, 0px);
   display:flex;
   flex-direction:column;
+}
+/* 安全区背景色补全 */
+body::after{
+  content:'';
+  position:fixed;
+  bottom:0;left:0;right:0;
+  height:env(safe-area-inset-bottom, 0px);
+  background:#0e0e0e;
+  z-index:999;
 }
 .island{display:none}
 .leak{position:absolute;inset:0;pointer-events:none;z-index:1;transition:opacity .3s;
@@ -67,12 +89,13 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;width:100%;
 #modalCarousel::-webkit-scrollbar{display:none}
 .nwrap{
   position:fixed;
-  bottom:0;left:0;right:0;
+  bottom:env(safe-area-inset-bottom, 0px);
+  left:0;right:0;
   display:flex;justify-content:center;
-  padding:40px 0 calc(16px + env(safe-area-inset-bottom));
+  padding:40px 0 16px;
   z-index:500;
   pointer-events:none;
-  background:linear-gradient(to bottom,transparent 0%,rgba(8,6,6,.92) 100%);
+  background:linear-gradient(to bottom,transparent 0%,rgba(8,6,6,.95) 100%);
 }
 .npill{display:flex;align-items:center;gap:3px;background:rgba(16,12,12,.6);border:.5px solid rgba(255,255,255,.13);border-radius:60px;padding:6px 8px;box-shadow:0 8px 32px rgba(0,0,0,.5);pointer-events:all;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
 .ni{display:flex;align-items:center;gap:5px;padding:8px 14px;border-radius:50px;cursor:pointer;transition:background .2s;user-select:none;-webkit-tap-highlight-color:transparent}
