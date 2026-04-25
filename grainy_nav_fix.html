@@ -29,15 +29,26 @@
   --amb:#F5A623;--adk:#180900;--div:rgba(255,255,255,.07);
   --font:'DM Sans',sans-serif;--tr:300ms cubic-bezier(.4,0,.2,1);
 }
-body{font-family:var(--font);background:#1a1a1a;display:flex;justify-content:center;align-items:flex-start;min-height:100vh;padding:28px 16px}
-.phone{width:375px;height:812px;background:var(--bg);border-radius:52px;border:2px solid #252525;box-shadow:0 0 0 1px #111,0 40px 100px rgba(0,0,0,.8);overflow:hidden;position:relative}
-.island{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:120px;height:34px;background:#060606;border-radius:20px;z-index:200}
+body{font-family:var(--font);background:var(--bg);margin:0;padding:0;width:100%;height:100%;overflow:hidden}
+html{height:100%;overflow:hidden}
+.phone{width:100%;height:100dvh;background:var(--bg);border-radius:0;border:none;box-shadow:none;overflow:hidden;position:fixed;inset:0}
+.island{display:none}
+.sbar{display:none}
 .leak{position:absolute;inset:0;pointer-events:none;z-index:1;transition:opacity .3s;
   background:radial-gradient(ellipse 230% 190% at -8% 112%,rgba(148,22,14,.52) 0%,rgba(120,18,12,.24) 32%,rgba(80,10,8,.08) 58%,transparent 76%),
              radial-gradient(ellipse 210% 180% at 110% -8%,rgba(80,18,130,.48) 0%,rgba(60,12,100,.2) 32%,rgba(35,8,65,.07) 58%,transparent 76%)}
 .grain{position:absolute;inset:0;pointer-events:none;z-index:2;mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E")}
-.sbar{position:absolute;top:0;left:0;right:0;padding:16px 28px 0;display:flex;justify-content:space-between;font-size:13px;font-weight:500;color:rgba(255,255,255,.42);z-index:999;pointer-events:none}
+.sbar{display:none}
+/* 桌面端居中显示，最大宽度 430px */
+@media (min-width: 480px) {
+  .phone {
+    max-width: 430px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 430px;
+  }
+}
 .pages{position:absolute;inset:0;z-index:10}
 .page{position:absolute;inset:0;display:flex;flex-direction:column;opacity:0;pointer-events:none;transform:translateX(30px);transition:opacity var(--tr),transform var(--tr)}
 .page.active{opacity:1;pointer-events:all;transform:translateX(0)}
