@@ -46,7 +46,7 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
 .scr{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .scr::-webkit-scrollbar{display:none}
 #modalCarousel::-webkit-scrollbar{display:none}
-.nwrap{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:center;padding:50px 0 36px;z-index:50;pointer-events:none;background:linear-gradient(to bottom,transparent 0%,rgba(8,6,6,.92) 50%,rgba(8,6,6,1) 100%)}
+.nwrap{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:center;padding:50px 0 36px;z-index:50;pointer-events:none;background:linear-gradient(to bottom,transparent 0%,rgba(8,6,6,.92) 100%)}
 .npill{display:flex;align-items:center;gap:3px;background:rgba(255,255,255,.08);border:.5px solid rgba(255,255,255,.15);border-radius:60px;padding:6px 8px;box-shadow:0 8px 32px rgba(0,0,0,.5);pointer-events:all;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .ni{display:flex;align-items:center;gap:5px;padding:8px 14px;border-radius:50px;cursor:pointer;transition:background .2s;user-select:none;-webkit-tap-highlight-color:transparent}
 .ni.on{background:var(--amb)}
@@ -2184,57 +2184,53 @@ async function fetchLiveWeather() {
   const el = document.getElementById('liveWeather');
 
   // 1. 获取地理位置
-  let lat, lon, cityName;
+  let lat = 1.35, lon = 103.82, cityName = '新加坡';
   try {
     const pos = await new Promise((res, rej) =>
       navigator.geolocation.getCurrentPosition(res, rej, { timeout: 8000 })
     );
-    lat = pos.coords.latitude.toFixed(2);
-    lon = pos.coords.longitude.toFixed(2);
-  } catch (e) {
-    lat = '1.35'; lon = '103.82'; cityName = '新加坡';
-  }
+    lat = pos.coords.latitude;
+    lon = pos.coords.longitude;
+  } catch (e) {}
 
-  // 2. Claude API + web search 获取实时天气
   try {
-    const today = new Date();
-    const dateStr = `${today.getFullYear()}年${today.getMonth()+1}月${today.getDate()}日`;
-    const prompt = cityName
-      ? `今天是${dateStr}。请搜索${cityName}现在的实时天气。只返回JSON：{"city":"城市名","weather":"天气描述（如晴天/多云/小雨等）","temp":摄氏温度数字}`
-      : `今天是${dateStr}。我的坐标：纬度${lat}，经度${lon}。请搜索该坐标对应城市的实时天气。只返回JSON：{"city":"城市名","weather":"天气描述（如晴天/多云/小雨等）","temp":摄氏温度数字}`;
+    // 2. Open-Meteo 免费天气 API（无需 key）
+    const weatherResp = await fetch(
+      `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weathercode,windspeed_10m&timezone=auto`
+    );
+    const weatherData = await weatherResp.json();
+    const temp = Math.round(weatherData.current.temperature_2m);
+    const code = weatherData.current.weathercode;
 
-    const resp = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 200,
-        tools: [{ type: 'web_search_20250305', name: 'web_search' }],
-        messages: [{ role: 'user', content: prompt }]
-      })
-    });
+    // 3. 用 Open-Meteo geocoding 获取城市名
+    try {
+      const geoResp = await fetch(
+        `https://geocoding-api.open-meteo.com/v1/reverse?latitude=${lat}&longitude=${lon}&language=zh`
+      );
+      const geoData = await geoResp.json();
+      cityName = geoData.name || geoData.admin1 || '当前位置';
+    } catch(e) {}
 
-    const data = await resp.json();
-    const text = data.content.filter(b => b.type === 'text').map(b => b.text).join('');
-    const match = text.match(/\{[^}]+\}/);
-    if (match) {
-      const parsed = JSON.parse(match[0]);
-      const city    = parsed.city || '未知';
-      const weather = parsed.weather || '多云';
-      const temp    = parsed.temp != null ? Number(parsed.temp) : 28;
-      const wType   = mapWeatherType(weather, temp);
-
-      // 存到全局
-      liveWeatherData = { city, weather, temp, wType };
-
-      // 更新首页天气行
-      if (el) el.textContent = `今天 · ${city} · ${weather} ${temp}°`.trim();
-
-      // 更新拍摄计划页
-      updateWeatherUI();
-    } else {
-      if (el) el.textContent = '今天 · 天气获取中…';
+    // 4. WMO 天气代码转中文描述
+    function wmoToWeather(code) {
+      if (code === 0) return '晴天';
+      if (code <= 2) return '多云';
+      if (code === 3) return '阴天';
+      if (code <= 49) return '有雾';
+      if (code <= 59) return '毛毛雨';
+      if (code <= 69) return '小雨';
+      if (code <= 79) return '下雪';
+      if (code <= 84) return '阵雨';
+      if (code <= 99) return '雷雨';
+      return '多云';
     }
+    const weather = wmoToWeather(code);
+    const wType = mapWeatherType(weather, temp);
+
+    liveWeatherData = { city: cityName, weather, temp, wType };
+    if (el) el.textContent = `今天 · ${cityName} · ${weather} ${temp}°`;
+    updateWeatherUI();
+
   } catch (e) {
     if (el) el.textContent = '今天 · 新加坡 · 实时天气不可用';
   }
