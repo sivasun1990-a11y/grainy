@@ -19,15 +19,14 @@
       navigator.serviceWorker.register('sw.js').catch(() => {});
     });
   }
-  // Fix 100vh in Safari PWA standalone mode
-  function setVh() {
-    const vh = window.innerHeight;
-    document.documentElement.style.setProperty('--real-vh', vh + 'px');
-    const phone = document.querySelector('.phone');
-    if (phone) phone.style.height = vh + 'px';
+  // Fix viewport height in PWA/bookmark mode
+  function fixHeight(){
+    const h = window.innerHeight;
+    document.querySelector('.phone').style.height = h + 'px';
   }
-  setVh();
-  window.addEventListener('resize', setVh);
+  fixHeight();
+  window.addEventListener('resize', fixHeight);
+  window.addEventListener('orientationchange', function(){ setTimeout(fixHeight, 200); });
 </script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&display=swap');
@@ -161,7 +160,7 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
 .theme-grid{display:flex;flex-wrap:wrap;gap:6px;padding:12px 15px}
 .ttheme{padding:7px 14px;border-radius:50px;border:.5px solid rgba(255,255,255,.1);font-size:12px;color:var(--t3);cursor:pointer;transition:all .18s;user-select:none}
 .ttheme.on{background:rgba(245,166,35,.12);border-color:rgba(245,166,35,.35);color:var(--amb)}
-.confirm-btn{margin:20px 24px 0;padding:14px 32px;background:var(--amb);border-radius:50px;text-align:center;font-size:14px;font-weight:600;color:var(--adk);cursor:pointer;transition:opacity .2s;letter-spacing:.03em}
+.confirm-btn{margin:20px 24px 0;padding:14px 32px;background:var(--amb);border-radius:50px;text-align:center;font-size:14px;font-weight:600;color:var(--adk);cursor:pointer;transition:background .2s,color .2s;letter-spacing:.03em;position:relative;z-index:200}
 .rfc-radio{width:18px;height:18px;border-radius:5px;border:1.5px solid rgba(255,255,255,.2);flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .15s;margin-top:2px}
 .rfc-radio.on{border-color:var(--amb);background:var(--amb)}
 .rfc-radio.on::after{content:'✓';font-size:11px;font-weight:700;color:#000;line-height:1}
@@ -381,7 +380,7 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
         <div class="slbl">拍摄主题</div>
         <div class="card" style="padding:6px 7px"><div class="theme-grid" id="themeGrid"></div></div>
         <div class="confirm-btn" onclick="confirmPlan()">确认拍摄计划</div>
-        <div style="height:40px"></div>
+        <div style="height:120px"></div>
       </div>
     </div>
 
@@ -2381,8 +2380,16 @@ function confirmPlan(){
   refreshFilmList();renderAdvice(getWeather(selDate));renderThemes();
   renderAllPlanCards();
   updateNotifDot();
-  const btn=document.querySelector('.confirm-btn');btn.textContent='✓ 计划已保存！';btn.style.opacity='.7';
-  setTimeout(()=>{btn.textContent='确认拍摄计划';btn.style.opacity='1';back();},900);
+  const btn=document.querySelector('.confirm-btn');
+  btn.textContent='✓ 计划已保存！';
+  btn.style.background='rgba(29,158,117,.9)';
+  btn.style.color='white';
+  setTimeout(()=>{
+    btn.textContent='确认拍摄计划';
+    btn.style.background='var(--amb)';
+    btn.style.color='var(--adk)';
+    back();
+  },900);
 }
 
 function renderAllPlanCards(){
