@@ -19,6 +19,15 @@
       navigator.serviceWorker.register('sw.js').catch(() => {});
     });
   }
+  // Fix 100vh in Safari PWA standalone mode
+  function setVh() {
+    const vh = window.innerHeight;
+    document.documentElement.style.setProperty('--real-vh', vh + 'px');
+    const phone = document.querySelector('.phone');
+    if (phone) phone.style.height = vh + 'px';
+  }
+  setVh();
+  window.addEventListener('resize', setVh);
 </script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&display=swap');
