@@ -79,9 +79,11 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
 .ps-v{font-size:13px;font-weight:400;color:var(--t2)}
 .home-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;position:relative;background:transparent}
 .home-scroll::-webkit-scrollbar{display:none}
-.home-bg{position:fixed;top:0;left:0;right:0;bottom:0;z-index:0;pointer-events:none}
+.home-bg{position:absolute;top:0;left:0;right:0;height:70dvh;z-index:0;pointer-events:none}
 .home-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block}
-.sm{position:fixed;top:0;left:0;right:0;bottom:0;z-index:1;pointer-events:none;background:rgba(6,4,4,.32)}
+.home-bg::after{content:'';position:absolute;bottom:0;left:0;right:0;height:220px;background:linear-gradient(to bottom,transparent 0%,rgba(14,14,14,1) 100%);pointer-events:none}
+.sb{display:none}
+.sm{position:fixed;top:0;left:0;right:0;bottom:0;z-index:1;pointer-events:none;background:rgba(6,4,4,.25)}
 /* 顶部渐变：让状态栏和 topbar 区域清晰 */
 .st{position:absolute;top:0;left:0;right:0;height:135px;z-index:1;pointer-events:none;background:linear-gradient(to bottom,rgba(14,14,14,1) 0%,transparent 100%)}
 /* 底部渐变：混入漏光的暗红色调，与 leak 背景自然衔接 */
