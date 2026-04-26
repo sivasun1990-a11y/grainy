@@ -30,6 +30,20 @@
     });
   }
 
+  // DEBUG - remove after testing
+  document.addEventListener('DOMContentLoaded', function(){
+    const dbg = document.createElement('div');
+    dbg.style.cssText = 'position:fixed;top:60px;left:16px;right:16px;background:rgba(0,0,0,.85);color:white;font-size:11px;padding:10px;border-radius:8px;z-index:9999;font-family:monospace;line-height:1.8';
+    dbg.innerHTML =
+      'standalone: ' + isStandalone + '<br>' +
+      'navigator.standalone: ' + window.navigator.standalone + '<br>' +
+      'innerHeight: ' + window.innerHeight + '<br>' +
+      'screen.height: ' + screen.height + '<br>' +
+      'display-mode: ' + (window.matchMedia('(display-mode: standalone)').matches ? 'standalone' : 'browser');
+    document.body.appendChild(dbg);
+    setTimeout(() => dbg.remove(), 10000);
+  });
+
 </script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&display=swap');
