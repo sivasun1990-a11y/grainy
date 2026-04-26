@@ -19,7 +19,16 @@
       navigator.serviceWorker.register('sw.js').catch(() => {});
     });
   }
-  // Remove height override - CSS top:0 bottom:0 handles full screen
+  // Detect standalone mode and adjust for browser UI gap
+  const isStandalone = window.navigator.standalone === true ||
+    window.matchMedia('(display-mode: standalone)').matches;
+  if (!isStandalone) {
+    // Running in browser - browser UI bar causes gap, compensate
+    document.addEventListener('DOMContentLoaded', function(){
+      const nwrap = document.querySelector('.nwrap');
+      if(nwrap) nwrap.style.paddingBottom = '80px';
+    });
+  }
 
 </script>
 <style>
