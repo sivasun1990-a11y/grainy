@@ -19,14 +19,8 @@
       navigator.serviceWorker.register('sw.js').catch(() => {});
     });
   }
-  // Fix viewport height in PWA/bookmark mode
-  function fixHeight(){
-    const h = window.innerHeight;
-    document.querySelector('.phone').style.height = h + 'px';
-  }
-  fixHeight();
-  window.addEventListener('resize', fixHeight);
-  window.addEventListener('orientationchange', function(){ setTimeout(fixHeight, 200); });
+  // Remove height override - CSS top:0 bottom:0 handles full screen
+
 </script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&display=swap');
