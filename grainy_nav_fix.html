@@ -19,30 +19,7 @@
       navigator.serviceWorker.register('sw.js').catch(() => {});
     });
   }
-  // Detect standalone mode and adjust for browser UI gap
-  const isStandalone = window.navigator.standalone === true ||
-    window.matchMedia('(display-mode: standalone)').matches;
-  if (!isStandalone) {
-    // Running in browser - browser UI bar causes gap, compensate
-    document.addEventListener('DOMContentLoaded', function(){
-      const nwrap = document.querySelector('.nwrap');
-      if(nwrap) nwrap.style.paddingBottom = '80px';
-    });
-  }
-
-  // DEBUG - remove after testing
-  document.addEventListener('DOMContentLoaded', function(){
-    const dbg = document.createElement('div');
-    dbg.style.cssText = 'position:fixed;top:60px;left:16px;right:16px;background:rgba(0,0,0,.85);color:white;font-size:11px;padding:10px;border-radius:8px;z-index:9999;font-family:monospace;line-height:1.8';
-    dbg.innerHTML =
-      'standalone: ' + isStandalone + '<br>' +
-      'navigator.standalone: ' + window.navigator.standalone + '<br>' +
-      'innerHeight: ' + window.innerHeight + '<br>' +
-      'screen.height: ' + screen.height + '<br>' +
-      'display-mode: ' + (window.matchMedia('(display-mode: standalone)').matches ? 'standalone' : 'browser');
-    document.body.appendChild(dbg);
-    setTimeout(() => dbg.remove(), 10000);
-  });
+  // Keep nwrap padding fixed at 36px
 
 </script>
 <style>
@@ -69,8 +46,8 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
 .scr{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .scr::-webkit-scrollbar{display:none}
 #modalCarousel::-webkit-scrollbar{display:none}
-.nwrap{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:center;padding:50px 0 36px;z-index:50;pointer-events:none;background:linear-gradient(to bottom,transparent 0%,rgba(8,6,6,.92) 100%)}
-.npill{display:flex;align-items:center;gap:3px;background:rgba(16,12,12,.6);border:.5px solid rgba(255,255,255,.13);border-radius:60px;padding:6px 8px;box-shadow:0 8px 32px rgba(0,0,0,.5);pointer-events:all;backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px)}
+.nwrap{position:fixed;bottom:0;left:0;right:0;display:flex;justify-content:center;padding:50px 0 36px;z-index:50;pointer-events:none;background:linear-gradient(to bottom,transparent 0%,rgba(8,6,6,.92) 50%,rgba(8,6,6,1) 100%)}
+.npill{display:flex;align-items:center;gap:3px;background:rgba(255,255,255,.08);border:.5px solid rgba(255,255,255,.15);border-radius:60px;padding:6px 8px;box-shadow:0 8px 32px rgba(0,0,0,.5);pointer-events:all;backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .ni{display:flex;align-items:center;gap:5px;padding:8px 14px;border-radius:50px;cursor:pointer;transition:background .2s;user-select:none;-webkit-tap-highlight-color:transparent}
 .ni.on{background:var(--amb)}
 .ni-i{font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center;opacity:.45;transition:opacity .2s}
