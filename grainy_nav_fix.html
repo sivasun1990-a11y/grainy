@@ -70,7 +70,7 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
 .ps-v{font-size:13px;font-weight:400;color:var(--t2)}
 .home-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;position:relative;background:transparent}
 .home-scroll::-webkit-scrollbar{display:none}
-.home-bg{position:absolute;top:0;left:0;right:0;height:70dvh;z-index:0;pointer-events:none}
+.home-bg{position:absolute;top:0;left:0;right:0;height:65dvh;z-index:0;pointer-events:none}
 .home-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block}
 .home-bg::after{content:'';position:absolute;bottom:0;left:0;right:0;height:220px;background:linear-gradient(to bottom,transparent 0%,rgba(14,14,14,1) 100%);pointer-events:none}
 .sb{display:none}
@@ -313,23 +313,23 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
         <div style="height:280px"></div>
         <div class="home-ui" style="padding:0 24px">
           <div id="homeShotCredit" style="font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:8px">SHOT BY SUNDAY FILMS · KODAK ULTRA MAX 400</div>
-          <div id="liveWeather" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:6px">今天 · 定位中…</div>
-          <div style="font-size:32px;font-weight:200;color:var(--t);letter-spacing:-.03em;line-height:1.15;margin-bottom:14px">今天带<br>哪卷出门？</div>
+          <div id="liveWeather" style="font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.8);margin-bottom:6px" data-i18n="weather.locating">今天 · 定位中…</div>
+          <div style="font-size:32px;font-weight:200;color:var(--t);letter-spacing:-.03em;line-height:1.15;margin-bottom:14px" data-i18n="home.title">今天带<br>哪卷出门？</div>
           <div class="rec-wrap">
             <div style="padding:14px 15px 14px">
               <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
                 <div style="font-size:15px;font-weight:500;color:var(--t)">Kodak Portra 400</div>
-                <div class="bdg">今日推荐</div>
+                <div class="bdg" data-i18n="home.rec.label">今日推荐</div>
               </div>
-              <div style="font-size:11px;color:var(--t3);margin-bottom:12px">彩色负片 · 多云最适合人像</div>
+              <div style="font-size:11px;color:var(--t3);margin-bottom:12px" data-i18n="home.rec.desc">彩色负片 · 多云最适合人像</div>
               <div class="pills">
-                <div class="ps"><div class="ps-l">光圈</div><div class="ps-v">f/8</div></div>
-                <div class="ps"><div class="ps-l">快门</div><div class="ps-v">1/500</div></div>
+                <div class="ps"><div class="ps-l" data-i18n="label.aperture">光圈</div><div class="ps-v">f/8</div></div>
+                <div class="ps"><div class="ps-l" data-i18n="label.shutter">快门</div><div class="ps-v">1/500</div></div>
                 <div class="ps"><div class="ps-l">S16</div><div class="ps-v" style="font-size:11px;color:var(--t3)">✓</div></div>
               </div>
             </div>
             <div class="plan-cta" onclick="go('plan')">
-              <span style="font-size:11px;font-weight:500;color:var(--t2)">制定拍摄计划</span>
+              <span style="font-size:11px;font-weight:500;color:var(--t2)" data-i18n="plan.title" data-i18n="plan.title">制定拍摄计划</span>
               <div class="pcta-i">→</div>
             </div>
           </div>
@@ -338,9 +338,9 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
         <div style="height:120px"></div>
       </div>
       <div class="nwrap"><div class="npill">
-        <div class="ni on" onclick="go('home')"><span class="ni-i"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg></span><span class="ni-t">首页</span></div>
-        <div class="ni" onclick="go('diag')"><span class="ni-i"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span><span class="ni-t">底片诊断</span></div>
-        <div class="ni" onclick="go('archive')"><span class="ni-i"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span><span class="ni-t">照片记录</span></div>
+        <div class="ni on" onclick="go('home')"><span class="ni-i"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg></span><span class="ni-t" data-i18n="nav.home">首页</span></div>
+        <div class="ni" onclick="go('diag')"><span class="ni-i"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span><span class="ni-t" data-i18n="nav.diag">底片诊断</span></div>
+        <div class="ni" onclick="go('archive')"><span class="ni-i"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span><span class="ni-t" data-i18n="nav.archive">照片记录</span></div>
       </div></div>
     </div>
 
@@ -348,8 +348,8 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
     <div class="page" id="pg-plan">
       <div class="scr">
         <div class="backr"><div class="backb" onclick="back()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></div></div>
-        <div class="pgh" style="margin-bottom:4px"><div class="pgt">拍摄计划</div><div class="pgs"><span>选择日期，天气推荐自动更新</span></div></div>
-        <div class="slbl">选择日期</div>
+        <div class="pgh" style="margin-bottom:4px"><div class="pgt" data-i18n="plan.header">拍摄计划</div><div class="pgs"><span data-i18n="plan.subtitle">选择日期，天气推荐自动更新</span></div></div>
+        <div class="slbl" data-i18n="plan.date.label">选择日期</div>
         <div class="date-picker">
           <div class="dp-header"><div class="dp-sel" id="dpSel">今天</div><div class="dp-nav"><div class="dp-arr" onclick="chgMo(-1)">‹</div><div class="dp-mo" id="dpMo"></div><div class="dp-arr" onclick="chgMo(1)">›</div></div></div>
           <div class="dp-grid" id="dpGrid"></div>
@@ -359,18 +359,20 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
           <div class="wc-eyebrow" id="wcEyebrow"></div>
           <div class="wc-main-row"><div class="wc-icon-name" id="wcMain"></div><div class="wc-badge" id="wcBadge"></div></div>
           <div class="wc-detail" id="wcDetail"></div>
-          <div id="forecastNote" style="display:none;margin-top:10px;padding-top:10px;border-top:.5px solid rgba(255,255,255,.08);font-size:10px;color:rgba(255,255,255,.35);line-height:1.5">📅 未来天气基于 <span id="forecastCity">当前位置</span> 季节性气候规律估算，出发前建议确认最新预报。</div>
+          <div id="forecastNote" style="display:none;margin-top:10px;padding-top:10px;border-top:.5px solid rgba(255,255,255,.08);font-size:10px;color:rgba(255,255,255,.35);line-height:1.5">
+            <span id="forecastNoteText">📅 未来天气基于 </span><span id="forecastCity">当前位置</span><span id="forecastNoteSuffix"> 季节性气候规律估算，出发前建议确认最新预报。</span>
+          </div>
         </div>
-        <div class="slbl">根据天气推荐的胶卷</div>
+        <div class="slbl" data-i18n="plan.film.rec">根据天气推荐的胶卷</div>
         <div id="filmRecContainer"></div>
-        <div class="slbl">自定义添加胶卷</div>
-        <div class="film-add-section"><div id="filmAddedList"></div><div class="film-add-btn" onclick="openModal()"><div class="fab-ico">+</div><div style="font-size:13px;color:var(--t3)">添加其他胶卷…</div></div></div>
-        <div id="adviceWrap" style="display:none"><div class="slbl">天气建议</div><div class="film-advice-wrap"><div class="fa-label" id="adviceLabel">你添加的胶卷在这天的表现</div><div id="adviceContent"></div></div></div>
-        <div class="slbl">拍摄信息</div>
+        <div class="slbl" data-i18n="plan.film.custom">自定义添加胶卷</div>
+        <div class="film-add-section"><div id="filmAddedList"></div><div class="film-add-btn" onclick="openModal()"><div class="fab-ico">+</div><div style="font-size:13px;color:var(--t3)" data-i18n="plan.film.add.more">添加其他胶卷…</div></div></div>
+        <div id="adviceWrap" style="display:none"><div class="slbl" data-i18n="plan.advice">天气建议</div><div class="film-advice-wrap"><div class="fa-label" id="adviceLabel">你添加的胶卷在这天的表现</div><div id="adviceContent"></div></div></div>
+        <div class="slbl" data-i18n="rd.info">拍摄信息</div>
         <div class="input-card"><div class="input-row"><span class="ir-ico">&#x1F4CD;</span><input class="ir-inp" id="planLoc" placeholder="拍摄地点（外滩、咖啡馆…）"></div><div class="input-row"><span class="ir-ico">&#x1F464;</span><input class="ir-inp" id="planSubj" placeholder="拍摄对象（朋友、自拍…）"></div></div>
-        <div class="slbl">拍摄主题</div>
+        <div class="slbl" data-i18n="plan.theme.label">拍摄主题</div>
         <div class="card" style="padding:6px 7px"><div class="theme-grid" id="themeGrid"></div></div>
-        <div class="confirm-btn" onclick="confirmPlan()">确认拍摄计划</div>
+        <div class="confirm-btn" onclick="confirmPlan()" data-i18n="plan.confirm">确认拍摄计划</div>
         <div style="height:120px"></div>
       </div>
     </div>
@@ -379,7 +381,7 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
     <div class="page" id="pg-diag">
       <div class="scr">
         <div style="padding:56px 24px 0">
-          <div style="font-size:28px;font-weight:200;color:var(--t);letter-spacing:-.03em;margin-bottom:3px">底片诊断</div>
+          <div style="font-size:28px;font-weight:200;color:var(--t);letter-spacing:-.03em;margin-bottom:3px" data-i18n="diag.title">底片诊断</div>
           <div style="font-size:12px;color:var(--t3);padding-bottom:14px;border-bottom:.5px solid var(--div)"><span>拍下问题底片，AI 告诉你原因</span></div>
         </div>
         <div style="height:14px"></div>
@@ -416,7 +418,7 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
         <div id="diagActions" style="display:none;padding:0 24px;margin-bottom:16px">
           <div style="display:flex;gap:8px">
             <div onclick="startDiag()" style="flex:1;padding:12px;background:var(--amb);border-radius:12px;text-align:center;font-size:13px;font-weight:500;color:var(--adk);cursor:pointer;transition:opacity .15s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
-              开始诊断
+              <span data-i18n="diag.start">开始诊断</span>
             </div>
             <div onclick="resetDiag()" style="padding:12px 16px;background:rgba(255,255,255,.06);border:.5px solid rgba(255,255,255,.1);border-radius:12px;font-size:13px;color:var(--t3);cursor:pointer">
               重选
@@ -433,7 +435,7 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
 
         <!-- 诊断结果 -->
         <div id="diagResult" style="display:none">
-          <div class="slbl">诊断结果</div>
+          <div class="slbl" data-i18n="diag.result">诊断结果</div>
           <div id="diagResultCard" style="margin:0 24px 10px;background:rgba(224,82,82,.07);border:.5px solid rgba(224,82,82,.25);border-radius:14px;overflow:hidden">
             <div style="padding:14px 15px 10px">
               <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
@@ -443,13 +445,13 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
               <div style="font-size:11px;color:var(--t3);line-height:1.7;margin-bottom:12px" id="diagResultDesc">检测到画面边缘出现橙红色条状光斑，特征符合机身背盖漏光。常见于背盖密封海绵老化的相机。</div>
               <div id="diagSecondary" style="display:none;font-size:10px;color:rgba(255,255,255,.35);margin-bottom:10px;padding:6px 10px;background:rgba(255,255,255,.04);border-radius:7px;line-height:1.6"></div>
               <div style="background:rgba(255,255,255,.04);border-radius:9px;padding:10px 12px">
-                <div style="font-size:9px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--t4);margin-bottom:6px">预防与处理</div>
+                <div style="font-size:9px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--t4);margin-bottom:6px" data-i18n="diag.fix">预防与处理</div>
                 <div style="font-size:11px;color:var(--t3);line-height:1.7" id="diagResultFix">检查机身背盖密封海绵是否老化脱落，可更换新海绵条。装卸胶卷时务必在阴影处进行，避免直射阳光。</div>
               </div>
             </div>
             <!-- 置信度 -->
             <div style="border-top:.5px solid rgba(255,255,255,.07);padding:10px 15px;display:flex;align-items:center;justify-content:space-between">
-              <div style="font-size:10px;color:var(--t4)">AI 置信度</div>
+              <div style="font-size:10px;color:var(--t4)" data-i18n="diag.confidence">AI 置信度</div>
               <div style="display:flex;align-items:center;gap:8px">
                 <div style="width:80px;height:4px;background:rgba(255,255,255,.07);border-radius:2px;overflow:hidden">
                   <div id="diagConfBar" style="height:100%;border-radius:2px;background:var(--amb);width:82%"></div>
@@ -466,7 +468,7 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
 
           <!-- 操作按钮 -->
           <div style="margin:0 24px 16px;display:flex;gap:8px">
-            <div onclick="resetDiag()" style="flex:1;padding:11px;background:rgba(255,255,255,.05);border:.5px solid rgba(255,255,255,.1);border-radius:12px;text-align:center;font-size:12px;color:var(--t3);cursor:pointer">重新上传</div>
+            <div onclick="resetDiag()" style="flex:1;padding:11px;background:rgba(255,255,255,.05);border:.5px solid rgba(255,255,255,.1);border-radius:12px;text-align:center;font-size:12px;color:var(--t3);cursor:pointer" data-i18n="diag.reupload">重新上传</div>
             <div onclick="saveDiagRecord(this)" id="diagSaveBtn" style="flex:1;padding:11px;background:var(--amb);border-radius:12px;text-align:center;font-size:12px;font-weight:600;color:#000;cursor:pointer">保存记录</div>
           </div>
         </div>
@@ -543,9 +545,9 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
         <div style="height:120px"></div>
       </div>
       <div class="nwrap"><div class="npill">
-        <div class="ni" onclick="go('home')"><span class="ni-i"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg></span><span class="ni-t">首页</span></div>
-        <div class="ni on" onclick="go('diag')"><span class="ni-i"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span><span class="ni-t">底片诊断</span></div>
-        <div class="ni" onclick="go('archive')"><span class="ni-i"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span><span class="ni-t">照片记录</span></div>
+        <div class="ni" onclick="go('home')"><span class="ni-i"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg></span><span class="ni-t" data-i18n="nav.home">首页</span></div>
+        <div class="ni on" onclick="go('diag')"><span class="ni-i"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span><span class="ni-t" data-i18n="nav.diag">底片诊断</span></div>
+        <div class="ni" onclick="go('archive')"><span class="ni-i"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span><span class="ni-t" data-i18n="nav.archive">照片记录</span></div>
       </div></div>
     </div>
 
@@ -556,12 +558,12 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
         <!-- 顶栏 -->
         <div style="padding:56px 24px 0;display:flex;align-items:flex-start;justify-content:space-between">
           <div>
-            <div style="font-size:28px;font-weight:200;color:var(--t);letter-spacing:-.03em;margin-bottom:3px">照片记录</div>
+            <div style="font-size:28px;font-weight:200;color:var(--t);letter-spacing:-.03em;margin-bottom:3px" data-i18n="archive.title">照片记录</div>
             <div style="font-size:12px;color:var(--t3)" id="archiveSubtitle">6 卷 · 127 张</div>
           </div>
           <div onclick="openNewRoll()" style="display:flex;align-items:center;gap:5px;background:rgba(255,255,255,.12);border:.5px solid rgba(255,255,255,.2);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:rgba(255,255,255,.8);font-size:11px;font-weight:500;padding:7px 14px;border-radius:20px;cursor:pointer;white-space:nowrap;flex-shrink:0;margin-top:6px">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            新建一卷
+            <span data-i18n="archive.new">新建一卷</span>
           </div>
         </div>
         <div style="height:14px;border-bottom:.5px solid var(--div)"></div>
@@ -569,8 +571,8 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
 
         <!-- Tab 切换 -->
         <div class="sub-tabs">
-          <div class="stab on" id="tabTimeline" onclick="archiveTab('timeline')">按时间</div>
-          <div class="stab" id="tabFilm" onclick="archiveTab('film')">按胶卷</div>
+          <div class="stab on" id="tabTimeline" onclick="archiveTab('timeline')" data-i18n="archive.tab.time">按时间</div>
+          <div class="stab" id="tabFilm" onclick="archiveTab('film')" data-i18n="archive.tab.film">按胶卷</div>
         </div>
 
         <!-- ── 按时间 ── -->
@@ -614,7 +616,7 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
             <!-- 上传更多 -->
             <div onclick="rdAddPhoto()" style="margin-top:6px;border:.5px dashed rgba(255,255,255,.13);border-radius:9px;padding:11px;display:flex;align-items:center;justify-content:center;gap:7px;cursor:pointer;transition:background .15s" onmouseover="this.style.background='rgba(255,255,255,.03)'" onmouseout="this.style.background=''">
               <span style="font-size:16px;color:rgba(255,255,255,.2)">+</span>
-              <span style="font-size:12px;color:var(--t3)">添加照片</span>
+              <span style="font-size:12px;color:var(--t3)" data-i18n="rd.add.photo">添加照片</span>
             </div>
             <input type="file" id="rdFileInput" accept="image/*" multiple style="display:none" onchange="rdOnFiles(this)">
           </div>
@@ -622,27 +624,27 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
           <!-- 拍摄信息 -->
           <div style="margin:18px 20px 0;font-size:9px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--t4)">拍摄信息</div>
           <div style="margin:8px 20px 0;background:var(--card);border:.5px solid var(--cb);border-radius:13px;overflow:hidden">
-            <div class="rd-row"><span class="rd-lbl">胶卷型号</span><span class="rd-val rd-editable" id="rdFilmName" onclick="editField('rdFilmName','胶卷型号')"></span></div>
-            <div class="rd-row"><span class="rd-lbl">相机型号</span><span class="rd-val rd-editable" id="rdCamera" onclick="editField('rdCamera','相机型号')"></span></div>
-            <div class="rd-row"><span class="rd-lbl">拍摄日期</span><span class="rd-val rd-editable" id="rdDate" onclick="editField('rdDate','拍摄日期')"></span></div>
-            <div class="rd-row"><span class="rd-lbl">地点</span><span class="rd-val rd-editable" id="rdLocation" onclick="editField('rdLocation','地点')"></span></div>
-            <div class="rd-row"><span class="rd-lbl">光线</span><span class="rd-val rd-editable" id="rdLight" onclick="editField('rdLight','光线')"></span></div>
-            <div class="rd-row"><span class="rd-lbl">主题</span><span class="rd-val rd-editable" id="rdTheme" onclick="editField('rdTheme','主题')"></span></div>
+            <div class="rd-row"><span class="rd-lbl" data-i18n="rd.film">胶卷型号</span><span class="rd-val rd-editable" id="rdFilmName" onclick="editField('rdFilmName','胶卷型号')"></span></div>
+            <div class="rd-row"><span class="rd-lbl" data-i18n="rd.camera">相机型号</span><span class="rd-val rd-editable" id="rdCamera" onclick="editField('rdCamera','相机型号')"></span></div>
+            <div class="rd-row"><span class="rd-lbl" data-i18n="rd.date">拍摄日期</span><span class="rd-val rd-editable" id="rdDate" onclick="editField('rdDate','拍摄日期')"></span></div>
+            <div class="rd-row"><span class="rd-lbl" data-i18n="rd.location">地点</span><span class="rd-val rd-editable" id="rdLocation" onclick="editField('rdLocation','地点')"></span></div>
+            <div class="rd-row"><span class="rd-lbl" data-i18n="rd.light">光线</span><span class="rd-val rd-editable" id="rdLight" onclick="editField('rdLight','光线')"></span></div>
+            <div class="rd-row"><span class="rd-lbl" data-i18n="rd.theme">主题</span><span class="rd-val rd-editable" id="rdTheme" onclick="editField('rdTheme','主题')"></span></div>
             <div class="rd-row" style="border:none;align-items:center">
-              <span class="rd-lbl">推荐</span>
+              <span class="rd-lbl" data-i18n="rd.rating">推荐</span>
               <div id="rdStars" style="display:flex;gap:4px"></div>
             </div>
           </div>
 
           <!-- 拍摄心得 -->
-          <div style="margin:14px 20px 0;font-size:9px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--t4)">拍摄心得</div>
+          <div style="margin:14px 20px 0;font-size:9px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--t4)" data-i18n="rd.notes">拍摄心得</div>
           <div style="margin:8px 20px 0;background:var(--card);border:.5px solid var(--cb);border-radius:13px;padding:12px 14px">
             <textarea id="rdNotes" placeholder="这卷拍得怎么样？记录你的想法…" style="width:100%;background:transparent;border:none;outline:none;color:var(--t2);font-family:var(--font);font-size:12px;line-height:1.7;resize:none;min-height:80px" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
           </div>
 
           <!-- 保存按钮 -->
           <div style="padding:20px 20px 48px;margin:0 0">
-            <div onclick="saveRollDetail(this)" class="save-btn" style="width:100%;box-sizing:border-box;padding:13px;background:var(--amb);border-radius:50px;font-size:14px;font-weight:600;color:#000;cursor:pointer;letter-spacing:.03em;transition:background .2s;text-align:center">保存</div>
+            <div onclick="saveRollDetail(this)" class="save-btn" style="width:100%;box-sizing:border-box;padding:13px;background:var(--amb);border-radius:50px;font-size:14px;font-weight:600;color:#000;cursor:pointer;letter-spacing:.03em;transition:background .2s;text-align:center" data-i18n="rd.save">保存</div>
           </div>
         </div>
 
@@ -692,9 +694,9 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
       </div>
 
       <div class="nwrap"><div class="npill">
-        <div class="ni" onclick="go('home')"><span class="ni-i"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg></span><span class="ni-t">首页</span></div>
-        <div class="ni" onclick="go('diag')"><span class="ni-i"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span><span class="ni-t">底片诊断</span></div>
-        <div class="ni on" onclick="go('archive')"><span class="ni-i"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span><span class="ni-t">照片记录</span></div>
+        <div class="ni" onclick="go('home')"><span class="ni-i"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9.5z"/><path d="M9 21V12h6v9"/></svg></span><span class="ni-t" data-i18n="nav.home">首页</span></div>
+        <div class="ni" onclick="go('diag')"><span class="ni-i"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span><span class="ni-t" data-i18n="nav.diag">底片诊断</span></div>
+        <div class="ni on" onclick="go('archive')"><span class="ni-i"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></span><span class="ni-t" data-i18n="nav.archive">照片记录</span></div>
       </div></div>
     </div>
 
@@ -709,14 +711,14 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
             <div id="notifDotProfile" style="display:none;position:absolute;top:1px;right:1px;width:8px;height:8px;border-radius:50%;background:#FF3B30;border:1.5px solid #0e0e0e;pointer-events:none"></div>
           </div>
         </div>
-        <div style="padding:4px 24px 0"><div style="font-size:28px;font-weight:200;color:var(--t);letter-spacing:-.03em;margin-bottom:14px">我的</div></div>
-        <div class="ucrd"><div class="uav" style="background:#5B3FA8;border-color:#7B5BC8;font-size:18px;font-weight:600;color:white;letter-spacing:.01em">S</div><div style="flex:1"><div style="font-size:16px;font-weight:500;color:var(--t);margin-bottom:3px">Sun</div><div style="font-size:11px;color:var(--t3)">加入 3 个月 · 6 卷 · 127 张</div></div></div>
-        <div class="sgrid"><div class="scell"><div class="sn">6</div><div class="sl">已拍卷数</div></div><div class="scell"><div class="sn">127</div><div class="sl">归档张数</div></div><div class="scell"><div class="sn" style="color:var(--amb)">4</div><div class="sl">诊断次数</div></div></div>
-        <div class="slbl">设置</div>
+        <div style="padding:4px 24px 0"><div style="font-size:28px;font-weight:200;color:var(--t);letter-spacing:-.03em;margin-bottom:14px" data-i18n="profile.title">我的</div></div>
+        <div class="ucrd"><div class="uav" style="background:#5B3FA8;border-color:#7B5BC8;font-size:18px;font-weight:600;color:white;letter-spacing:.01em">S</div><div style="flex:1"><div style="font-size:16px;font-weight:500;color:var(--t);margin-bottom:3px">Sun</div><div style="font-size:11px;color:var(--t3)" data-i18n="profile.stats">加入 3 个月 · 6 卷 · 127 张</div></div></div>
+        <div class="sgrid"><div class="scell"><div class="sn">6</div><div class="sl" data-i18n="profile.rolls">已拍卷数</div></div><div class="scell"><div class="sn">127</div><div class="sl" data-i18n="profile.photos">归档张数</div></div><div class="scell"><div class="sn" style="color:var(--amb)">4</div><div class="sl" data-i18n="profile.diags">诊断次数</div></div></div>
+        <div class="slbl" data-i18n="profile.settings">设置</div>
         <div class="slist">
-          <div class="srow" onclick="push('gallery')"><span style="font-size:13px;color:var(--t2)">首屏照片</span><div style="display:flex;align-items:center;gap:7px"><span style="font-size:11px;color:var(--t3)">精选图库</span><span style="font-size:14px;color:rgba(255,255,255,.2)">›</span></div></div>
-          <div class="srow" onclick="push('lang')"><span style="font-size:13px;color:var(--t2)">语言设置</span><div style="display:flex;align-items:center;gap:7px"><span style="font-size:11px;color:var(--t3)" id="curLangLabel">简体中文</span><span style="font-size:14px;color:rgba(255,255,255,.2)">›</span></div></div>
-          <div class="srow" style="border-bottom:none"><span style="font-size:13px;color:var(--t2)">升级 Pro</span><div class="bdg" style="font-size:9px;background:rgba(255,255,255,.1);color:var(--t3)">即将推出</div></div>
+          <div class="srow" onclick="push('gallery')"><span style="font-size:13px;color:var(--t2)" data-i18n="profile.gallery">首屏照片</span><div style="display:flex;align-items:center;gap:7px"><span style="font-size:11px;color:var(--t3)" data-i18n="profile.gallery.sub">精选图库</span><span style="font-size:14px;color:rgba(255,255,255,.2)">›</span></div></div>
+          <div class="srow" onclick="push('lang')"><span style="font-size:13px;color:var(--t2)" data-i18n="profile.lang">语言设置</span><div style="display:flex;align-items:center;gap:7px"><span style="font-size:11px;color:var(--t3)" id="curLangLabel">简体中文</span><span style="font-size:14px;color:rgba(255,255,255,.2)">›</span></div></div>
+          <div class="srow" style="border-bottom:none"><span style="font-size:13px;color:var(--t2)" data-i18n="profile.pro">升级 Pro</span><div class="bdg" style="font-size:9px;background:rgba(255,255,255,.1);color:var(--t3)" data-i18n="profile.pro.badge">即将推出</div></div>
         </div>
         <div style="height:40px"></div>
       </div>
@@ -727,30 +729,30 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
       <div class="scr">
         <div class="backr"><div class="backb" onclick="back()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></div></div>
         <div style="padding:4px 24px 0;margin-bottom:6px">
-          <div style="font-size:28px;font-weight:200;color:var(--t);letter-spacing:-.03em">诊断反馈</div>
-          <div style="font-size:11px;color:var(--t3);margin-top:4px"><span>帮助我们改进 AI 诊断模型</span></div>
+          <div style="font-size:28px;font-weight:200;color:var(--t);letter-spacing:-.03em" data-i18n="feedback.title">诊断反馈</div>
+          <div style="font-size:11px;color:var(--t3);margin-top:4px"><span data-i18n="feedback.subtitle">帮助我们改进 AI 诊断模型</span></div>
         </div>
 
         <!-- 当前诊断结果预览 -->
-        <div class="slbl">AI 的诊断结果</div>
+        <div class="slbl" data-i18n="feedback.ai.label">AI 的诊断结果</div>
         <div style="margin:0 24px 4px;background:rgba(255,255,255,.04);border:.5px solid rgba(255,255,255,.09);border-radius:13px;padding:12px 14px;display:flex;align-items:center;gap:10px">
           <div id="fbAiDot" style="width:8px;height:8px;border-radius:50%;background:#e05252;flex-shrink:0"></div>
           <div id="fbAiTitle" style="font-size:13px;color:var(--t2)">漏光（Light Leak）</div>
         </div>
 
         <!-- 用户认为的真实问题 -->
-        <div class="slbl">你认为实际问题是？</div>
+        <div class="slbl" data-i18n="feedback.user.label">你认为实际问题是？</div>
         <div id="fbOptionList" style="margin:0 24px;background:var(--card);border:.5px solid var(--cb);border-radius:13px;overflow:hidden"></div>
 
         <!-- 补充说明 -->
-        <div class="slbl">补充说明（可选）</div>
+        <div class="slbl" data-i18n="feedback.note.label">补充说明（可选）</div>
         <div style="margin:0 24px;background:var(--card);border:.5px solid var(--cb);border-radius:13px;padding:12px 14px">
           <textarea id="fbNote" placeholder="描述你在照片中看到的问题，越具体越有帮助…" style="width:100%;background:transparent;border:none;outline:none;color:var(--t2);font-family:var(--font);font-size:12px;line-height:1.7;resize:none;min-height:72px;box-sizing:border-box" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
         </div>
 
         <!-- 提交 -->
         <div style="padding:20px 24px 48px">
-          <div onclick="submitFeedback(this)" class="submit-btn" style="width:100%;box-sizing:border-box;padding:13px;background:var(--amb);border-radius:50px;font-size:14px;font-weight:600;color:#000;cursor:pointer;text-align:center;letter-spacing:.03em;transition:background .2s">提交反馈</div>
+          <div onclick="submitFeedback(this)" class="submit-btn" style="width:100%;box-sizing:border-box;padding:13px;background:var(--amb);border-radius:50px;font-size:14px;font-weight:600;color:#000;cursor:pointer;text-align:center;letter-spacing:.03em;transition:background .2s" data-i18n="feedback.submit">提交反馈</div>
         </div>
       </div>
     </div>
@@ -759,8 +761,8 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
     <div class="page" id="pg-new-roll">
       <div class="scr">
         <div class="backr"><div class="backb" onclick="back()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></div></div>
-        <div style="padding:4px 24px 0;margin-bottom:6px"><div style="font-size:28px;font-weight:200;color:var(--t);letter-spacing:-.03em">新建一卷</div></div>
-        <div class="slbl">基本信息</div>
+        <div style="padding:4px 24px 0;margin-bottom:6px"><div style="font-size:28px;font-weight:200;color:var(--t);letter-spacing:-.03em" data-i18n="newroll.title">新建一卷</div></div>
+        <div class="slbl" data-i18n="newroll.info">基本信息</div>
         <div class="slist" style="margin:0 24px">
           <div class="srow" style="border-bottom:.5px solid var(--div)"><span style="font-size:12px;color:var(--t3);flex-shrink:0;width:64px">胶卷型号</span><input id="nrFilm" placeholder="如 Kodak Gold 200" style="flex:1;background:transparent;border:none;outline:none;color:var(--t2);font-size:13px;font-family:var(--font);text-align:right" /></div>
           <div class="srow" style="border-bottom:.5px solid var(--div)"><span style="font-size:12px;color:var(--t3);flex-shrink:0;width:64px">相机型号</span><input id="nrCamera" placeholder="如 Contax G1" style="flex:1;background:transparent;border:none;outline:none;color:var(--t2);font-size:13px;font-family:var(--font);text-align:right" /></div>
@@ -774,7 +776,7 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
           <div id="nrPhotoGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;border-radius:10px;overflow:hidden;margin-bottom:6px"></div>
           <div onclick="document.getElementById('nrFileInput').click()" style="border:.5px dashed rgba(255,255,255,.13);border-radius:9px;padding:14px;display:flex;align-items:center;justify-content:center;gap:7px;cursor:pointer">
             <span style="font-size:16px;color:rgba(255,255,255,.2)">+</span>
-            <span style="font-size:12px;color:var(--t3)">上传照片</span>
+            <span style="font-size:12px;color:var(--t3)" data-i18n="newroll.upload">上传照片</span>
           </div>
           <input type="file" id="nrFileInput" accept="image/*" multiple style="display:none" onchange="nrOnFiles(this)">
           <!-- loading -->
@@ -786,7 +788,7 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
           </div>
         </div>
         <div style="padding:24px 0 48px;display:flex;justify-content:center;margin:0 24px">
-          <div onclick="createNewRoll()" style="width:100%;padding:13px;background:var(--amb);border-radius:50px;font-size:14px;font-weight:600;color:#000;cursor:pointer;letter-spacing:.03em;transition:opacity .2s;text-align:center" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">创建</div>
+          <div onclick="createNewRoll()" style="width:100%;padding:13px;background:var(--amb);border-radius:50px;font-size:14px;font-weight:600;color:#000;cursor:pointer;letter-spacing:.03em;transition:opacity .2s;text-align:center" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'" data-i18n="newroll.create">创建</div>
         </div>
       </div>
     </div>
@@ -795,8 +797,8 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
         <div class="backr"><div class="backb" onclick="back()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></div></div>
         <div style="padding:4px 24px 12px;display:flex;align-items:flex-start;justify-content:space-between">
           <div>
-            <div style="font-size:28px;font-weight:200;color:var(--t);letter-spacing:-.03em">首屏照片</div>
-            <div style="font-size:11px;color:var(--t3);margin-top:4px">点击任意照片设为首页背景</div>
+            <div style="font-size:28px;font-weight:200;color:var(--t);letter-spacing:-.03em" data-i18n="gallery.title">首屏照片</div>
+            <div style="font-size:11px;color:var(--t3);margin-top:4px" data-i18n="gallery.subtitle">点击任意照片设为首页背景</div>
           </div>
           <label for="galleryUpload" style="display:flex;align-items:center;gap:5px;background:rgba(255,255,255,.12);border:.5px solid rgba(255,255,255,.2);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:rgba(255,255,255,.8);font-size:11px;font-weight:500;padding:6px 13px;border-radius:20px;cursor:pointer;letter-spacing:.02em;white-space:nowrap;margin-top:6px;flex-shrink:0">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
@@ -835,7 +837,7 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
             <!-- 设为首屏 -->
             <div id="gallerySetBtn" onclick="gallerySetFromViewer()" style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.14);border:.5px solid rgba(255,255,255,.3);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:white;font-size:13px;font-weight:500;padding:12px 28px;border-radius:30px;cursor:pointer;letter-spacing:.02em;justify-content:center">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>
-              设为首屏照片
+              <span data-i18n="gallery.set">设为首屏照片</span>
             </div>
           </div>
         </div>
@@ -846,10 +848,10 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
     <div class="page" id="pg-notifs">
       <div class="scr">
         <div class="backr"><div class="backb" onclick="back()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></div></div>
-        <div style="padding:4px 24px 0;margin-bottom:6px"><div style="font-size:28px;font-weight:200;color:var(--t);letter-spacing:-.03em">通知</div></div>
-        <div class="slbl">即将开始的计划</div>
+        <div style="padding:4px 24px 0;margin-bottom:6px"><div style="font-size:28px;font-weight:200;color:var(--t);letter-spacing:-.03em" data-i18n="notifs.title">通知</div></div>
+        <div class="slbl" data-i18n="notifs.upcoming">即将开始的计划</div>
         <div id="notifPlanList" style="padding:0 24px;display:flex;flex-direction:column;gap:8px"></div>
-        <div class="slbl">待完成</div>
+        <div class="slbl" data-i18n="notifs.pending">待完成</div>
         <div style="margin:0 24px;background:var(--card);border:.5px solid var(--cb);border-radius:13px;overflow:hidden">
           <div style="padding:14px 15px;border-bottom:.5px solid var(--div)">
             <div style="font-size:12px;font-weight:500;color:var(--t);margin-bottom:4px" id="notifFinishText">📷 记得结束拍摄并上传照片</div>
@@ -862,10 +864,10 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
             <div style="margin-top:10px" onclick="go('archive')"><span style="font-size:11px;font-weight:600;color:var(--amb);cursor:pointer" id="notifScanLink">前往照片记录 →</span></div>
           </div>
         </div>
-        <div class="slbl">通知设置</div>
+        <div class="slbl" data-i18n="notifs.settings">通知设置</div>
         <div class="slist" style="margin:0 24px">
-          <div class="srow"><span style="font-size:13px;color:var(--t2)">拍摄计划提醒</span><div style="width:38px;height:22px;background:var(--amb);border-radius:11px;position:relative;cursor:pointer"><div style="position:absolute;right:3px;top:3px;width:16px;height:16px;background:#000;border-radius:50%"></div></div></div>
-          <div class="srow" style="border-bottom:none"><span style="font-size:13px;color:var(--t2)">结束拍摄提醒</span><div style="width:38px;height:22px;background:var(--amb);border-radius:11px;position:relative;cursor:pointer"><div style="position:absolute;right:3px;top:3px;width:16px;height:16px;background:#000;border-radius:50%"></div></div></div>
+          <div class="srow"><span style="font-size:13px;color:var(--t2)" data-i18n="notifs.toggle1">拍摄计划提醒</span><div style="width:38px;height:22px;background:var(--amb);border-radius:11px;position:relative;cursor:pointer"><div style="position:absolute;right:3px;top:3px;width:16px;height:16px;background:#000;border-radius:50%"></div></div></div>
+          <div class="srow" style="border-bottom:none"><span style="font-size:13px;color:var(--t2)" data-i18n="notifs.toggle2">结束拍摄提醒</span><div style="width:38px;height:22px;background:var(--amb);border-radius:11px;position:relative;cursor:pointer"><div style="position:absolute;right:3px;top:3px;width:16px;height:16px;background:#000;border-radius:50%"></div></div></div>
         </div>
         <div style="height:40px"></div>
       </div>
@@ -875,7 +877,7 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
     <div class="page" id="pg-lang">
       <div class="scr">
         <div class="backr"><div class="backb" onclick="back()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></div></div>
-        <div style="padding:4px 24px 0;margin-bottom:6px"><div style="font-size:28px;font-weight:200;color:var(--t);letter-spacing:-.03em">语言设置</div></div>
+        <div style="padding:4px 24px 0;margin-bottom:6px"><div style="font-size:28px;font-weight:200;color:var(--t);letter-spacing:-.03em" data-i18n="lang.title">语言设置</div></div>
         <div class="slbl">选择语言 · Language</div>
         <div class="slist" style="margin:0 24px">
           <div class="srow" id="langZH" onclick="setLang('zh')" style="border-bottom:.5px solid var(--div)">
@@ -896,7 +898,7 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
     <div class="page" id="pg-calc">
       <div class="scr">
         <div class="backr"><div class="backb" onclick="back()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></div></div>
-        <div class="pgh" style="margin-bottom:4px"><div class="pgt">过期胶卷<br>计算器</div><div style="font-size:12px;color:var(--t3);padding-bottom:14px;border-bottom:.5px solid var(--div)">输入胶卷信息，获取精准补偿建议</div></div>
+        <div class="pgh" style="margin-bottom:4px"><div class="pgt" data-i18n="calc.title">过期胶卷<br>计算器</div><div style="font-size:12px;color:var(--t3);padding-bottom:14px;border-bottom:.5px solid var(--div)">输入胶卷信息，获取精准补偿建议</div></div>
         <div class="slbl">胶卷型号</div>
         <div class="ic2"><div class="fsw"><span class="si">&#x1F39E;</span><input class="fi" id="cFI" placeholder="搜索品牌或型号…" autocomplete="off" oninput="onCFI(this.value)" onfocus="onCFF()" onblur="onCFB()"><div class="cb2" id="cClr" onclick="clearCF()">×</div></div><div class="fdd" id="cDD"></div></div>
         <div class="slbl">过期年份</div>
@@ -906,7 +908,7 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
         <div class="ecalc" id="ecalc"><div style="font-size:36px;margin-bottom:14px;opacity:.25">&#x1F39E;</div><div style="font-size:13px;color:var(--t3);line-height:1.65">搜索并选择胶卷型号<br>调整年份和储存条件<br>获取精准的补偿建议</div></div>
         <div class="rwrap" id="cRwrap" style="padding:0 0 10px">
           <div style="border-top:.5px solid rgba(255,255,255,.1);margin:32px 0 32px"></div>
-          <div style="font-size:9px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--t4);margin-bottom:12px">使用建议</div>
+          <div style="font-size:9px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--t4);margin-bottom:12px" data-i18n="calc.result">使用建议</div>
           <div class="rhero"><div style="flex:1"><div class="rlbl">建议使用 ISO</div><div class="riso" id="cRiso">—</div><div class="rsub" id="cRsub">—</div></div><div style="text-align:right"><div style="font-size:9px;text-transform:uppercase;letter-spacing:.07em;color:rgba(245,166,35,.5);margin-bottom:3px">过曝补偿</div><div class="rcomp" id="cRcomp">— <span>档</span></div></div></div>
           <div class="rkw"><div style="font-size:9px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--t4)">胶卷状态评估</div><div class="rkt"><div class="rkf" id="cRkf" style="width:0%"></div></div><div class="rkticks"><span>良好</span><span>轻微衰减</span><span>明显衰减</span><span>高风险</span></div></div>
           <div class="dcrd"><div class="drow"><div class="dico" style="background:rgba(245,166,35,.12)">📊</div><div><div class="dtitle">曝光建议</div><div class="dtext" id="cRexp">—</div></div></div><div class="drow"><div class="dico" style="background:rgba(80,18,130,.15)">🎨</div><div><div class="dtitle">色彩预期</div><div class="dtext" id="cRcolor">—</div></div></div><div class="drow"><div class="dico" style="background:rgba(148,22,14,.15)">⚠️</div><div><div class="dtitle">注意事项</div><div class="dtext" id="cRwarn">—</div></div></div></div>
@@ -938,7 +940,9 @@ const FILMS=[
   {name:'Lomography 800',iso:800,type:'color'},
 ];
 const TC={color:'#F5A623',bw:'#9FE1CB',slide:'#ED93B1'};
-const TN={color:'彩色负片',bw:'黑白负片',slide:'反转片'};
+const TN_ZH={color:'彩色负片',bw:'黑白负片',slide:'反转片'};
+const TN_EN={color:'Color Negative',bw:'Black & White',slide:'Slide Film'};
+function TN(type){ return curLang==='en'?(TN_EN[type]||type):(TN_ZH[type]||type); }
 
 const CLIMATE=[
   ['cold','cloudy','cold','partly','cold','cold','cloudy','cold','partly','cold','cloudy','cold','cold','partly','cold','cold','cloudy','cold','partly','cold','cold','cloudy','cold','partly','cold','cold','cold','cloudy','cold','partly','cold'],
@@ -954,14 +958,38 @@ const CLIMATE=[
   ['partly','cloudy','cold','partly','cloudy','cold','cloudy','partly','cold','cloudy','cold','partly','cloudy','cold','partly','cloudy','cold','partly','cloudy','cold','partly','cold','cloudy','partly','cold','cloudy','partly','cold','cloudy','cold'],
   ['cold','cloudy','cold','partly','cold','cloudy','cold','partly','cold','cloudy','cold','partly','cold','cloudy','cold','partly','cold','cloudy','cold','partly','cold','cloudy','cold','cold','partly','cloudy','cold','cold','partly','cold','cold'],
 ];
-const WDATA={
-  sunny:{icon:'☀️',label:'晴天',temp:'26°C',humidity:'45%',desc:'强烈直射光，反差大，高光需要保护',badgeTxt:'注意高光',badgeBg:'#1D9E75',films:[{name:'Kodak Ektar 100',rank:'首选',tags:['彩色负片','强光首选','高饱和'],f:'f/16',s:'1/125',reason:'ISO 100 完美匹配 Sunny 16，Ektar 高饱和让晴日色彩极具张力。'},{name:'Ilford FP4 Plus 125',rank:'次选',tags:['黑白负片','细腻颗粒'],f:'f/16',s:'1/125',reason:'强光下黑白对比鲜明，细颗粒保留丰富高光层次。'}]},
-  partly:{icon:'⛅',label:'多云间晴',temp:'23°C',humidity:'60%',desc:'散射光柔和均匀，人像和街拍的最佳天气',badgeTxt:'最佳拍摄',badgeBg:'var(--amb)',films:[{name:'Kodak Portra 400',rank:'首选',tags:['彩色负片','人像首选','宽容度高'],f:'f/8',s:'1/500',reason:'多云柔光是 Portra 400 最出彩的环境，肤色还原自然，宽容度高。'},{name:'Ilford HP5 Plus 400',rank:'次选',tags:['黑白负片','百搭','高宽容度'],f:'f/8',s:'1/500',reason:'散射光下黑白阶调极为丰富，适合各类题材。'}]},
-  cloudy:{icon:'☁️',label:'阴天',temp:'20°C',humidity:'72%',desc:'均匀漫射光，色温偏冷，需要暖色调胶卷补偿',badgeTxt:'适合出片',badgeBg:'#7B9E5A',films:[{name:'Kodak Portra 400',rank:'首选',tags:['彩色负片','暖调补偿','宽容度高'],f:'f/8',s:'1/500',reason:'阴天色温偏冷，Portra 400 的暖色调正好补偿，人像肤色好看。'},{name:'Fujifilm Superia 400',rank:'次选',tags:['彩色负片','阴天发色'],f:'f/8',s:'1/500',reason:'富士的绿调在阴天城市场景中意外和谐，街拍质感独特。'}]},
-  rainy:{icon:'🌧️',label:'雨天',temp:'17°C',humidity:'90%',desc:'光线昏暗，雨水反光，低对比度场景',badgeTxt:'挑战拍摄',badgeBg:'#5B7EA8',films:[{name:'Ilford HP5 Plus 400',rank:'首选',tags:['黑白负片','雨天氛围','高宽容度'],f:'f/5.6',s:'1/250',reason:'雨天黑白处理水面反光最有张力，高宽容度应对极端光比。'},{name:'Kodak Tri-X 400',rank:'次选',tags:['黑白负片','高对比','街拍经典'],f:'f/5.6',s:'1/250',reason:'Tri-X 在低光下颗粒增强，搭配雨天场景营造强烈纪实感。'}]},
-  cold:{icon:'🌨️',label:'晴冷',temp:'8°C',humidity:'52%',desc:'冬季低角度阳光，冷蓝色调，需要暖色系胶卷',badgeTxt:'冬日拍摄',badgeBg:'#5B7EA8',films:[{name:'Kodak Portra 400',rank:'首选',tags:['彩色负片','暖色调','冬日人像'],f:'f/11',s:'1/250',reason:'冬季低色温下，Portra 400 的暖调为冷场景注入温暖感。'},{name:'Ilford Delta 400',rank:'次选',tags:['黑白负片','冬日质感'],f:'f/11',s:'1/250',reason:'冬日黑白强调极简与孤寂感，Delta 400 细腻颗粒极有质感。'}]},
-  hot:{icon:'🌞',label:'晴热',temp:'34°C',humidity:'78%',desc:'夏季强烈直射光，高温高湿，反差极大',badgeTxt:'注意防护',badgeBg:'#C05A1E',films:[{name:'Kodak Ektar 100',rank:'首选',tags:['彩色负片','低ISO','夏日饱和'],f:'f/16',s:'1/125',reason:'夏季强光下 ISO 100 最安全，Ektar 饱和度让夏日色彩格外鲜亮。'},{name:'Kodak Gold 200',rank:'次选',tags:['彩色负片','暖黄色调','夏日感'],f:'f/11',s:'1/250',reason:'Gold 200 的暖黄调天然契合夏日阳光感。'}]},
+const WDATA_ZH={
+  sunny:{icon:'☀️',label:'晴天',temp:'26°C',humidity:'45%',desc:'强烈直射光，反差大，高光需要保护',badgeTxt:'注意高光',badgeBg:'#1D9E75',
+    films:[{name:'Kodak Ektar 100',rank:'首选',tags:['彩色负片','强光首选','高饱和'],tagsEn:['Color','Bright Light','High Saturation'],f:'f/16',s:'1/125',reason:'ISO 100 完美匹配 Sunny 16，Ektar 高饱和让晴日色彩极具张力。',reasonEn:'ISO 100 perfectly matches Sunny 16. Ektar\'s high saturation makes sunny colors pop.'},{name:'Ilford FP4 Plus 125',rank:'次选',tags:['黑白负片','细腻颗粒'],tagsEn:['B&W','Fine Grain'],f:'f/16',s:'1/125',reason:'强光下黑白对比鲜明，细颗粒保留丰富高光层次。',reasonEn:'Crisp B&W contrast in bright light, fine grain preserves rich highlight detail.'}]},
+  partly:{icon:'⛅',label:'多云间晴',temp:'23°C',humidity:'60%',desc:'散射光柔和均匀，人像和街拍的最佳天气',badgeTxt:'最佳拍摄',badgeBg:'var(--amb)',
+    films:[{name:'Kodak Portra 400',rank:'首选',tags:['彩色负片','人像首选','宽容度高'],tagsEn:['Color','Portrait','High Latitude'],f:'f/8',s:'1/500',reason:'多云柔光是 Portra 400 最出彩的环境，肤色还原自然，宽容度高。',reasonEn:'Soft overcast light is where Portra 400 shines — natural skin tones, wide latitude.'},{name:'Ilford HP5 Plus 400',rank:'次选',tags:['黑白负片','百搭','高宽容度'],tagsEn:['B&W','Versatile','High Latitude'],f:'f/8',s:'1/500',reason:'散射光下黑白阶调极为丰富，适合各类题材。',reasonEn:'Diffused light brings out rich B&W tones, versatile across all subjects.'}]},
+  cloudy:{icon:'☁️',label:'阴天',temp:'20°C',humidity:'72%',desc:'均匀漫射光，色温偏冷，需要暖色调胶卷补偿',badgeTxt:'适合出片',badgeBg:'#7B9E5A',
+    films:[{name:'Kodak Portra 400',rank:'首选',tags:['彩色负片','暖调补偿','宽容度高'],tagsEn:['Color','Warm Tone','High Latitude'],f:'f/8',s:'1/500',reason:'阴天色温偏冷，Portra 400 的暖色调正好补偿，人像肤色好看。',reasonEn:'Overcast is cool-toned — Portra 400\'s warmth compensates perfectly for portraits.'},{name:'Fujifilm Superia 400',rank:'次选',tags:['彩色负片','阴天发色'],tagsEn:['Color','Overcast Tones'],f:'f/8',s:'1/500',reason:'富士的绿调在阴天城市场景中意外和谐，街拍质感独特。',reasonEn:'Fuji\'s green bias works surprisingly well in overcast urban scenes.'}]},
+  rainy:{icon:'🌧️',label:'雨天',temp:'17°C',humidity:'90%',desc:'光线昏暗，雨水反光，低对比度场景',badgeTxt:'挑战拍摄',badgeBg:'#5B7EA8',
+    films:[{name:'Ilford HP5 Plus 400',rank:'首选',tags:['黑白负片','雨天氛围','高宽容度'],tagsEn:['B&W','Rainy Mood','High Latitude'],f:'f/5.6',s:'1/250',reason:'雨天黑白处理水面反光最有张力，高宽容度应对极端光比。',reasonEn:'B&W handles rainy reflections beautifully, wide latitude manages extreme contrast.'},{name:'Kodak Tri-X 400',rank:'次选',tags:['黑白负片','高对比','街拍经典'],tagsEn:['B&W','High Contrast','Street Classic'],f:'f/5.6',s:'1/250',reason:'Tri-X 在低光下颗粒增强，搭配雨天场景营造强烈纪实感。',reasonEn:'Tri-X grain intensifies in low light, perfect for a gritty rainy-day feel.'}]},
+  cold:{icon:'🌨️',label:'晴冷',temp:'8°C',humidity:'52%',desc:'冬季低角度阳光，冷蓝色调，需要暖色系胶卷',badgeTxt:'冬日拍摄',badgeBg:'#5B7EA8',
+    films:[{name:'Kodak Portra 400',rank:'首选',tags:['彩色负片','暖色调','冬日人像'],tagsEn:['Color','Warm Tone','Winter Portrait'],f:'f/11',s:'1/250',reason:'冬季低色温下，Portra 400 的暖调为冷场景注入温暖感。',reasonEn:'In cold, low-colour-temperature light, Portra 400\'s warmth brings life to wintry scenes.'},{name:'Ilford Delta 400',rank:'次选',tags:['黑白负片','冬日质感'],tagsEn:['B&W','Winter Feel'],f:'f/11',s:'1/250',reason:'冬日黑白强调极简与孤寂感，Delta 400 细腻颗粒极有质感。',reasonEn:'Winter B&W emphasises minimalism and solitude — Delta 400\'s fine grain adds texture.'}]},
+  hot:{icon:'🌞',label:'晴热',temp:'34°C',humidity:'78%',desc:'夏季强烈直射光，高温高湿，反差极大',badgeTxt:'注意防护',badgeBg:'#C05A1E',
+    films:[{name:'Kodak Ektar 100',rank:'首选',tags:['彩色负片','低ISO','夏日饱和'],tagsEn:['Color','Low ISO','Summer Vivid'],f:'f/16',s:'1/125',reason:'夏季强光下 ISO 100 最安全，Ektar 饱和度让夏日色彩格外鲜亮。',reasonEn:'ISO 100 is safest in harsh summer sun, Ektar\'s saturation makes summer colours vivid.'},{name:'Kodak Gold 200',rank:'次选',tags:['彩色负片','暖黄色调','夏日感'],tagsEn:['Color','Warm Yellow','Summer Vibe'],f:'f/11',s:'1/250',reason:'Gold 200 的暖黄调天然契合夏日阳光感。',reasonEn:'Gold 200\'s warm yellow tone is a natural match for that sunny summer feel.'}]},
 };
+const WDATA_EN_META={
+  sunny:{label:'Sunny',desc:'Strong direct light, high contrast — protect your highlights.',badgeTxt:'Watch Highlights'},
+  partly:{label:'Partly Cloudy',desc:'Soft, even diffused light — perfect for portraits and street.',badgeTxt:'Best Conditions'},
+  cloudy:{label:'Overcast',desc:'Flat diffused light, cool tone — use warm film to compensate.',badgeTxt:'Great for Shots'},
+  rainy:{label:'Rainy',desc:'Low light, reflections, low contrast — a challenging but moody scene.',badgeTxt:'Challenge Mode'},
+  cold:{label:'Cold & Clear',desc:'Low winter sun, cool blue tones — warm film stocks recommended.',badgeTxt:'Winter Shoot'},
+  hot:{label:'Hot & Sunny',desc:'Harsh summer sun, high humidity, extreme contrast.',badgeTxt:'Stay Protected'},
+};
+function WDATA_get(type){
+  const base=WDATA_ZH[type];
+  if(curLang==='en'&&WDATA_EN_META[type]){
+    const meta=WDATA_EN_META[type];
+    return {...base, label:meta.label, desc:meta.desc, badgeTxt:meta.badgeTxt,
+      films:base.films.map(f=>({...f, reason:f.reasonEn||f.reason, tags:f.tagsEn||f.tags}))};
+  }
+  return base;
+}
+const WDATA=new Proxy({},{get:(t,k)=>WDATA_get(k)});
 function getWeather(date){const mo=date.getMonth(),d=Math.min(date.getDate()-1,CLIMATE[mo].length-1);const type=CLIMATE[mo][d];return{type,...WDATA[type]};}
 
 // NAV — key fix: go() handles all tab-to-tab navigation cleanly
@@ -1265,11 +1293,65 @@ const I18N = {
     // Lang
     'lang.title':'语言设置',
     'lang.subtitle':'选择语言 · Language',
-    'lang.note':'切换语言后界面将更新显示语言。多语言功能持续完善中。',
+    'label.aperture':'光圈',
+    'label.shutter':'快门',
+    'home.rec.desc':'彩色负片 · 多云最适合人像',
+    'profile.stats':'加入 3 个月 · 6 卷 · 127 张',
+    'plan.date.label':'选择日期',
+    'plan.theme.label':'拍摄主题',
+    'plan.subtitle':'选择日期，天气推荐自动更新',
+    'plan.header':'拍摄计划',
+    'plan.film.add.more':'添加其他胶卷…',
+    'plan.header':'Shooting Plan',
+    'plan.today':'今天',
+    'plan.weather.label':'今天天气',
+    'plan.info':'拍摄信息',
+    'plan.location.ph':'拍摄地点（外滩、咖啡馆…）',
+    'plan.subject.ph':'拍摄对象（朋友、自拍…）',
+    'plan.primary':'首选',
+    'plan.secondary':'次选',
+    'notifs.finish.title':'📷 记得结束拍摄并上传照片',
+    'notifs.finish.body':'完成拍摄后，回到首页的计划卡片，点击「结束拍摄」即可归档这卷照片。',
+    'notifs.finish.link':'前往首页 →',
+    'notifs.scan.title':'🗂️ 底片冲洗后别忘了上传扫描',
+    'notifs.scan.body':'底片拿回来扫描后，可以在「照片记录」里找到对应的卷，点进去添加照片。',
+    'notifs.scan.link':'前往照片记录 →',
+    'home.plan.cta':'制定拍摄计划',
+    'archive.tab.time':'按时间','archive.tab.film':'按胶卷',
+    'rd.film':'胶卷型号','rd.camera':'相机型号','rd.date':'拍摄日期',
+    'rd.location':'地点','rd.light':'光线','rd.theme':'主题',
+    'rd.rating':'推荐','rd.info':'拍摄信息','rd.notes':'拍摄心得',
+    'rd.save':'保存','rd.add.photo':'添加照片',
+    'profile.settings':'设置',
+    'diag.start':'开始诊断','diag.reupload':'重新上传',
+    'diag.result':'诊断结果','diag.fix':'预防与处理',
+    'diag.confidence':'AI 置信度','diag.history':'历史记录',
+    'feedback.ai.label':'AI 的诊断结果',
+    'feedback.user.label':'你认为实际问题是？',
+    'feedback.note.label':'补充说明（可选）',
+    'feedback.submit':'提交反馈',
+    'newroll.info':'基本信息','newroll.create':'创建','newroll.upload':'上传照片',
+    'plan.confirm':'确认拍摄计划',
+    'plan.film.rec':'根据天气推荐的胶卷','plan.film.custom':'自定义添加胶卷',
+    'calc.result':'使用建议',
+    // Dynamic
+    'dynamic.plan.of':'的拍摄计划',
+    'dynamic.finish':'✓ 结束拍摄，生成照片记录',
+    'dynamic.no.film':'未选胶卷',
+    'dynamic.generated':'✓ 已生成 {n} 卷记录，前往照片记录上传照片',
+    'dynamic.plan.saved':'✓ 计划已保存！',
+    'dynamic.camera.tbd':'相机待填写',
+    'dynamic.pending':'待上传',
+    'dynamic.from.plan':'计划',
+    'dynamic.tap.add':'点击添加…',
+    'dynamic.saved':'已保存 ✓',
+    'dynamic.no.plans':'暂无即将开始的拍摄计划',
+    'dynamic.unknown.date':'未知日期',
+    'weather.locating':'今天 · 定位中…',
   },
   en: {
     // Nav
-    'nav.home':'Home','nav.diag':'Film Diagnosis','nav.archive':'Archive',
+    'nav.home':'Home','nav.diag':'Film Diagnosis','nav.archive':'Photo Records',
     // Home
     'home.title':'Which roll are you taking out today?',
     'home.rec.label':'Today\'s Pick',
@@ -1286,6 +1368,7 @@ const I18N = {
     'home.plan.search':'Search films…',
     // Plan
     'plan.title':'Plan Your Shoot',
+    'plan.header':'Shooting Plan',
     'plan.date':'Select Shoot Date',
     'plan.weather':'Weather Forecast',
     'plan.film.rec':'Weather-based Film Picks',
@@ -1297,7 +1380,7 @@ const I18N = {
     'plan.film.label':'Weather-based Film Picks',
     'plan.advice':'Shooting Tips',
     // Archive
-    'archive.title':'Archive',
+    'archive.title':'Photo Records',
     'archive.new':'New Roll',
     'archive.tab.time':'By Date',
     'archive.tab.film':'By Film',
@@ -1417,6 +1500,65 @@ const I18N = {
     'lang.title':'Language',
     'lang.subtitle':'选择语言 · Language',
     'lang.note':'The interface will update after switching language.',
+    // Buttons & labels missing
+    'home.plan.cta':'Plan Your Shoot',
+    'archive.new':'New Roll',
+    'archive.tab.time':'By Date',
+    'archive.tab.film':'By Film',
+    'rd.film':'Film Stock','rd.camera':'Camera','rd.date':'Date',
+    'rd.location':'Location','rd.light':'Light','rd.theme':'Theme',
+    'rd.rating':'Rating','rd.info':'Shoot Info','rd.notes':'Notes',
+    'rd.save':'Save','rd.add.photo':'Add Photos',
+    'profile.settings':'Settings',
+    'diag.start':'Start Diagnosis','diag.reupload':'Re-upload',
+    'diag.result':'Diagnosis','diag.fix':'Prevention & Fix',
+    'diag.confidence':'AI Confidence','diag.history':'History',
+    'feedback.subtitle':'Help us improve the AI model',
+    'feedback.ai.label':'AI\'s Diagnosis',
+    'feedback.user.label':'What do you think the issue is?',
+    'feedback.note.label':'Additional Notes (optional)',
+    'feedback.submit':'Submit Feedback',
+    'newroll.info':'Basic Info','newroll.create':'Create','newroll.upload':'Upload Photos',
+    'label.aperture':'Aperture',
+    'label.shutter':'Shutter',
+    'home.rec.desc':'Color Negative · Best for portraits',
+    'profile.stats':'Member 3 months · 6 rolls · 127 shots',
+    'plan.date.label':'Select Date',
+    'plan.theme.label':'Shoot Themes',
+    'plan.subtitle':'Pick a date, weather picks auto-update',
+    'plan.header':'Shooting Plan',
+    'plan.film.add.more':'Add another film…',
+    'plan.today':'Today',
+    'plan.weather.label':'Today\'s Weather',
+    'plan.info':'Shoot Info',
+    'plan.location.ph':'Location (park, café…)',
+    'plan.subject.ph':'Subject (friends, self-portrait…)',
+    'plan.primary':'Primary',
+    'plan.secondary':'Secondary',
+    'notifs.finish.title':'📷 Remember to finish your shoot',
+    'notifs.finish.body':'After shooting, go back to the plan card and tap "Finish Shoot" to archive your roll.',
+    'notifs.finish.link':'Go to Home →',
+    'notifs.scan.title':'🗂️ Don\'t forget to upload scans',
+    'notifs.scan.body':'After developing, find the roll in Photo Records and tap to add photos.',
+    'notifs.scan.link':'Go to Photo Records →',
+    'notifs.toggle1':'Shoot Plan Reminders','notifs.toggle2':'Finish Shoot Reminders',
+    'plan.confirm':'Confirm Plan',
+    'plan.film.rec':'Weather-based Film Picks','plan.film.custom':'Add Custom Film',
+    'calc.result':'Recommendations',
+    // Dynamic
+    'dynamic.plan.of':' Shoot Plan',
+    'dynamic.finish':'✓ Finish Shoot & Archive',
+    'dynamic.no.film':'No film selected',
+    'dynamic.generated':'✓ {n} roll(s) created — go to Photo Records to upload',
+    'dynamic.plan.saved':'✓ Plan Saved!',
+    'dynamic.camera.tbd':'Camera TBD',
+    'dynamic.pending':'Pending upload',
+    'dynamic.from.plan':'Plan',
+    'dynamic.tap.add':'Tap to add…',
+    'dynamic.saved':'Saved ✓',
+    'dynamic.no.plans':'No upcoming shoot plans',
+    'dynamic.unknown.date':'Unknown date',
+    'weather.locating':'Today · Locating…',
   }
 };
 
@@ -1425,47 +1567,52 @@ function t(key){ return (I18N[curLang]||I18N.zh)[key] || (I18N.zh)[key] || key; 
 function applyLang(){
   document.querySelectorAll('[data-i18n]').forEach(el=>{
     const key=el.getAttribute('data-i18n');
-    const attr=el.getAttribute('data-i18n-attr');
-    if(attr) el.setAttribute(attr, t(key));
+    if(key==='home.title') el.innerHTML=curLang==='zh'?'今天带<br>哪卷出门？':'Which roll today?';
+    else if(key==='calc.title') el.innerHTML=curLang==='zh'?'过期胶卷<br>计算器':'Expired Film<br>Calculator';
     else el.textContent=t(key);
   });
-  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
-    el.placeholder=t(el.getAttribute('data-i18n-ph'));
+  document.querySelectorAll('.ni-t[data-i18n]').forEach(el=>{
+    el.textContent=t(el.getAttribute('data-i18n'));
   });
-  // nav pills
-  const navLabels=document.querySelectorAll('.nlbl');
-  if(navLabels[0])navLabels[0].textContent=t('nav.home');
-  if(navLabels[1])navLabels[1].textContent=t('nav.diag');
-  if(navLabels[2])navLabels[2].textContent=t('nav.archive');
-  // curLangLabel
   const lbl=document.getElementById('curLangLabel');
   if(lbl)lbl.textContent=curLang==='zh'?'简体中文':'English';
-  // weather slbl
+  // Plan page placeholders
+  const planLoc=document.getElementById('planLoc');
+  if(planLoc)planLoc.placeholder=t('plan.location.ph');
+  const planSubj=document.getElementById('planSubj');
+  if(planSubj)planSubj.placeholder=t('plan.subject.ph');
+  // Weather slbl
   const wslbl=document.getElementById('weatherSlbl');
-  if(wslbl)wslbl.textContent=t('home.weather.today');
-  // notifs fixed text
-  const nfu=document.getElementById('notifFinishText');if(nfu)nfu.textContent=t('notifs.finish');
-  const nfd=document.getElementById('notifFinishDesc');if(nfd)nfd.textContent=t('notifs.finish.desc');
+  if(wslbl)wslbl.textContent=t('plan.weather.label');
+  // Today label in date picker
+  const dpSel=document.getElementById('dpSel');
+  if(dpSel&&(dpSel.textContent==='今天'||dpSel.textContent==='Today'))
+    dpSel.textContent=t('plan.today');
+  // Notifications fixed content
+  const nft=document.getElementById('notifFinishText');if(nft)nft.textContent=t('notifs.finish.title');
+  const nfb=document.getElementById('notifFinishDesc');if(nfb)nfb.textContent=t('notifs.finish.body');
   const nfl=document.getElementById('notifFinishLink');if(nfl)nfl.textContent=t('notifs.finish.link');
-  const nsu=document.getElementById('notifScanText');if(nsu)nsu.textContent=t('notifs.scan');
-  const nsd=document.getElementById('notifScanDesc');if(nsd)nsd.textContent=t('notifs.scan.desc');
+  const nst=document.getElementById('notifScanText');if(nst)nst.textContent=t('notifs.scan.title');
+  const nsb=document.getElementById('notifScanDesc');if(nsb)nsb.textContent=t('notifs.scan.body');
   const nsl=document.getElementById('notifScanLink');if(nsl)nsl.textContent=t('notifs.scan.link');
-  // confirm button text
-  const cb=document.querySelector('.confirm-btn');
-  if(cb&&cb.textContent.trim()!==t('plan.saved'))cb.textContent=t('plan.confirm');
-  // save btn
-  const sb=document.querySelector('.save-btn');
-  if(sb)sb.textContent=t('archive.detail.save');
-  // diag save btn text
-  const diagSave=document.getElementById('diagSaveBtn');
-  if(diagSave)diagSave.textContent=t('diag.save');
+  // Forecast note
+  const fnt=document.getElementById('forecastNoteText');
+  const fns=document.getElementById('forecastNoteSuffix');
+  if(fnt)fnt.textContent=curLang==='en'?'📅 Future weather for ':'📅 未来天气基于 ';
+  if(fns)fns.textContent=curLang==='en'?' is based on seasonal climate patterns. Check the latest forecast before heading out.'
+    :' 季节性气候规律估算，出发前建议确认最新预报。';
+  const fcCity=document.getElementById('forecastCity');
+  if(fcCity&&!fcCity.textContent)fcCity.textContent=curLang==='en'?'current location':'当前位置';
+  if(rdNotes)rdNotes.placeholder=curLang==='en'?'How did this roll go? Write your thoughts…':'这卷拍得怎么样？记录你的想法…';
 }
 
 function setLang(lang){
   curLang=lang;
   document.getElementById('checkZH').style.opacity=lang==='zh'?'1':'0';
   document.getElementById('checkEN').style.opacity=lang==='en'?'1':'0';
-  // 重新渲染动态内容
+  applyLang();
+  renderCal();
+  renderThemes();
   renderRollList();renderFilmGroups();renderHistory();renderNotifPlans();renderAllPlanCards();
   updateWeatherUI();
 }
@@ -1475,7 +1622,7 @@ function renderNotifPlans(){
   const list=document.getElementById('notifPlanList');
   if(!list)return;
   if(!plans||plans.length===0){
-    list.innerHTML=`<div style="font-size:12px;color:var(--t3);padding:4px 0">暂无即将开始的拍摄计划</div>`;return;
+    list.innerHTML=`<div style="font-size:12px;color:var(--t3);padding:4px 0">${t('dynamic.no.plans')}</div>`;return;
   }
   list.innerHTML=plans.map(p=>{
     // 胶卷：推荐选中 + 自定义
@@ -1553,7 +1700,7 @@ function renderRollList() {
   // 按日期聚合，日期格式 YYYY.MM.DD，最新在前
   const dateMap = {};
   ROLLS.forEach(r => {
-    const d = r.date || '未知日期';
+    const d = r.date || t('dynamic.unknown.date');
     if (!dateMap[d]) dateMap[d] = [];
     dateMap[d].push(r);
   });
@@ -1587,7 +1734,7 @@ function renderRollList() {
           <div style="display:flex;align-items:center;gap:7px">
             <div style="font-size:14px;font-weight:${isOpen?'500':'400'};color:${isOpen?'var(--t)':'var(--t2)'};transition:all .2s">${dateLabel}</div>
             <div style="font-size:10px;color:var(--t4)">${yearLabel}</div>
-            ${hasFromPlan ? `<div style="font-size:8px;font-weight:500;padding:1px 5px;border-radius:3px;background:rgba(29,158,117,.15);color:#1D9E75;border:.5px solid rgba(29,158,117,.3)">计划</div>` : ''}
+            ${hasFromPlan ? `<div style="font-size:8px;font-weight:500;padding:1px 5px;border-radius:3px;background:rgba(29,158,117,.15);color:#1D9E75;border:.5px solid rgba(29,158,117,.3)"><span data-i18n='dynamic.from.plan'>计划</span></div>` : ''}
           </div>
           <div style="font-size:10px;color:var(--t4);margin-top:2px">${rolls.length} 卷${totalPhotos ? ' · ' + totalPhotos + ' 张照片' : ''}</div>
         </div>
@@ -1638,13 +1785,13 @@ function rollMiniCard(r) {
         <div style="width:3px;min-height:30px;margin-top:2px;border-radius:2px;background:${typeColor};flex-shrink:0"></div>
         <div style="flex:1;min-width:0">
           <div style="font-size:12px;font-weight:500;color:var(--t);margin-bottom:3px">${r.film}</div>
-          <div style="font-size:10px;color:var(--t3)">${r.camera || '相机待填写'}</div>
+          <div style="font-size:10px;color:var(--t3)">${r.camera || t('dynamic.camera.tbd')}</div>
           ${chips.length ? `<div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:5px">${chips.map(c=>`<span style="font-size:9px;padding:2px 6px;border-radius:4px;background:rgba(255,255,255,.05);color:var(--t4)">${c}</span>`).join('')}</div>` : ''}
         </div>
         <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0">
           ${r.fromPlan ? `<div style="font-size:8px;font-weight:500;padding:1px 5px;border-radius:3px;background:rgba(29,158,117,.15);color:#1D9E75;border:.5px solid rgba(29,158,117,.3)">计划</div>` : ''}
           ${stars ? `<div style="font-size:10px;color:var(--amb)">${stars}</div>` : ''}
-          <div style="font-size:10px;color:${photoCount?'var(--t4)':'rgba(255,255,255,.1)'}">${photoCount ? photoCount+' 张' : '待上传'}</div>
+          <div style="font-size:10px;color:${photoCount?'var(--t4)':'rgba(255,255,255,.1)'}">${photoCount ? photoCount+(curLang==='en'?' shots':' 张') : t('dynamic.pending')}</div>
         </div>
       </div>
       ${r.notes ? `<div style="padding:0 12px 10px 24px;font-size:10px;color:var(--t3);line-height:1.65">${r.notes}</div>` : ''}
@@ -1687,7 +1834,7 @@ function saveDiagRecord(btn){
   }
   renderHistory();
 
-  btn.textContent='已保存 ✓'; btn.style.background='rgba(29,158,117,.8)'; btn.style.color='white';
+  btn.textContent=t('dynamic.saved'); btn.style.background='rgba(29,158,117,.8)'; btn.style.color='white';
   setTimeout(()=>{
     btn.textContent='保存记录'; btn.style.background='var(--amb)'; btn.style.color='#000';
     resetDiag();
@@ -1870,7 +2017,7 @@ function renderFilmGroups() {
           </div>
           <div style="display:flex;align-items:center;gap:5px;margin-top:5px">
             <div style="width:5px;height:5px;border-radius:50%;background:${typeColor}"></div>
-            <span style="font-size:9px;color:var(--t4)">${g.filmType==='color'?'彩色负片':g.filmType==='bw'?'黑白负片':'反转片'}</span>
+            <span style="font-size:9px;color:var(--t4)">${TN(g.filmType)}</span>
           </div>
         </div>
         <div style="font-size:14px;color:rgba(255,255,255,.18);flex-shrink:0">›</div>
@@ -1909,7 +2056,7 @@ function renderFgdViewer() {
   document.getElementById('fgdViewerImg').src=p.src;
   document.getElementById('fgdViewerDate').textContent=p.date;
   document.getElementById('fgdViewerCamera').textContent=p.camera;
-  document.getElementById('fgdViewerRoll').textContent=p.camera?`${p.camera} · 第 ${p.rollNum} 卷`:`第 ${p.rollNum} 卷`;
+  document.getElementById('fgdViewerRoll').textContent=p.camera?`${p.camera} · ${curLang==='en'?'Roll':'第'} ${p.rollNum} ${curLang==='en'?'':'卷'}`:`${curLang==='en'?'Roll':'第'} ${p.rollNum} ${curLang==='en'?'':'卷'}`;
   const car=document.getElementById('fgdViewerCarousel');
   car.innerHTML=fgdAllPhotos.map((ph,i)=>
     `<img onclick="fgdViewerGo(${i})" src="${ph.src}" style="width:48px;height:48px;object-fit:cover;border-radius:5px;flex-shrink:0;cursor:pointer;${i===fgdViewerIdx?'outline:2px solid var(--amb)':'opacity:.35'};transition:opacity .15s">`
@@ -1998,7 +2145,7 @@ function openRollDetail(id) {
   currentRoll = ROLLS.find(r=>r.id===id);
   if (!currentRoll) return;
   const r = currentRoll;
-  document.getElementById('rdTitle').textContent = `${r.film} · 第 ${r.rollNum} 卷`;
+  document.getElementById('rdTitle').textContent = `${r.film} · ${curLang==='en'?'Roll':'第'} ${r.rollNum} ${curLang==='en'?'':'卷'}`;
   document.getElementById('rdMeta').textContent = `${r.camera||''} ${r.camera&&r.date?'·':''} ${r.date||''}`.trim();
   renderRdPhotoGrid();
   setRdField('rdFilmName', r.film);
@@ -2024,7 +2171,7 @@ function saveRollDetail(btn){
   if(!currentRoll)return;
   currentRoll.notes=document.getElementById('rdNotes').value;
   renderRollList();renderFilmGroups();
-  btn.textContent='已保存 ✓';btn.style.background='rgba(29,158,117,.8)';
+  btn.textContent=t('dynamic.saved');btn.style.background='rgba(29,158,117,.8)';
   setTimeout(function(){ closeRollDetail(); },800);
 }
 
@@ -2244,11 +2391,14 @@ renderRollList();
 let calDate=new Date(),selDate=new Date();
 function renderCal(){
   const yr=calDate.getFullYear(),mo=calDate.getMonth();
-  const mos=['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
-  document.getElementById('dpMo').textContent=yr+'年 '+mos[mo];
+  const mos_zh=['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
+  const mos_en=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  document.getElementById('dpMo').textContent=curLang==='en'?`${mos_en[mo]} ${yr}`:`${yr}年 ${mos_zh[mo]}`;
   const today=new Date();today.setHours(0,0,0,0);
   const first=new Date(yr,mo,1).getDay(),last=new Date(yr,mo+1,0).getDate();
-  const days=['日','一','二','三','四','五','六'];
+  const days_zh=['日','一','二','三','四','五','六'];
+  const days_en=['Su','Mo','Tu','We','Th','Fr','Sa'];
+  const days=curLang==='en'?days_en:days_zh;
   let h=days.map(d=>`<div class="dp-dh">${d}</div>`).join('');
   for(let i=0;i<first;i++)h+=`<div class="dp-d empty"></div>`;
   for(let d=1;d<=last;d++){
@@ -2258,9 +2408,11 @@ function renderCal(){
     h+=`<div class="${cls}" onclick="pickDay(${yr},${mo},${d})">${d}</div>`;
   }
   document.getElementById('dpGrid').innerHTML=h;
-  const s=new Date(selDate);s.setHours(0,0,0,0);const t=new Date();t.setHours(0,0,0,0);
-  const diff=Math.round((s-t)/(864e5));const m=s.getMonth()+1,dd=s.getDate();
-  const lbl=diff===0?'今天':diff===1?`明天 · ${m}月${dd}日`:diff===2?`后天 · ${m}月${dd}日`:`${m}月${dd}日`;
+  const s=new Date(selDate);s.setHours(0,0,0,0);const tnow=new Date();tnow.setHours(0,0,0,0);
+  const diff=Math.round((s-tnow)/(864e5));const m=s.getMonth()+1,dd=s.getDate();
+  const lbl=curLang==='en'
+    ?(diff===0?'Today':diff===1?`Tomorrow · ${m}/${dd}`:diff===2?`In 2 days · ${m}/${dd}`:`${mos_en[s.getMonth()]} ${dd}`)
+    :(diff===0?'今天':diff===1?`明天 · ${m}月${dd}日`:diff===2?`后天 · ${m}月${dd}日`:`${m}月${dd}日`);
   document.getElementById('dpSel').textContent=lbl;
 }
 function pickDay(y,m,d){const nd=new Date(y,m,d);nd.setHours(0,0,0,0);const today=new Date();today.setHours(0,0,0,0);if(nd<today)return;selDate=nd;renderCal();updateWeatherUI();}
@@ -2270,28 +2422,31 @@ function updateWeatherUI(){
   const today=new Date();today.setHours(0,0,0,0);const sd=new Date(selDate);sd.setHours(0,0,0,0);
   const isToday=sd.getTime()===today.getTime();const diff=Math.round((sd-today)/(864e5));
   const m=sd.getMonth()+1,d=sd.getDate();
-  const dateLabel=isToday?'今天':diff===1?'明天':diff===2?'后天':`${m}月${d}日`;
+  const dateLabel=isToday
+    ?(curLang==='en'?'Today':'今天')
+    :diff===1?(curLang==='en'?'Tomorrow':'明天')
+    :diff===2?(curLang==='en'?'Day after tomorrow':'后天')
+    :(curLang==='en'?`${m}/${d}`:` ${m}月${d}日`);
 
-  // 用实时天气（如已获取），否则 fallback 到 CLIMATE
   let w;
   if(liveWeatherData && isToday){
     w={type:liveWeatherData.wType,...WDATA[liveWeatherData.wType]};
-    // 用真实温度覆盖
     w={...w,temp:liveWeatherData.temp+'°C',label:liveWeatherData.weather};
   } else {
     w=getWeather(sd);
   }
-  const city=liveWeatherData?liveWeatherData.city:'当前位置';
+  const city=liveWeatherData?liveWeatherData.city:(curLang==='en'?'Current location':'当前位置');
 
   document.getElementById('wcEyebrow').textContent=`📍 ${city} · ${dateLabel}`;
-  document.getElementById('wcMain').textContent=`${w.icon} ${w.label} · ${w.temp} · 湿度 ${w.humidity}`;
+  document.getElementById('wcMain').textContent=`${w.icon} ${w.label} · ${w.temp} · ${curLang==='en'?'Humidity':'湿度'} ${w.humidity}`;
   document.getElementById('wcDetail').textContent=w.desc;
   const badge=document.getElementById('wcBadge');badge.textContent=w.badgeTxt;badge.style.background=w.badgeBg;badge.style.color='#fff';
-  document.getElementById('weatherSlbl').textContent=isToday?'今天天气':`${dateLabel}天气预报`;
+  document.getElementById('weatherSlbl').textContent=isToday
+    ?(curLang==='en'?"Today's Weather":'今天天气')
+    :(curLang==='en'?`${dateLabel} Forecast`:`${dateLabel}天气预报`);
   document.getElementById('forecastNote').style.display=isToday?'none':'block';
   const fcCity=document.getElementById('forecastCity');
-  if(fcCity)fcCity.textContent=liveWeatherData?liveWeatherData.city:'当前位置';
-  // 推荐胶卷多选状态: Set of indices
+  if(fcCity)fcCity.textContent=liveWeatherData?liveWeatherData.city:(curLang==='en'?'current location':'当前位置');
   window._recFilms = w.films;
   if(!window._recSelSet) window._recSelSet = new Set();
   document.getElementById('filmRecContainer').innerHTML=w.films.map((f,i)=>`
@@ -2302,20 +2457,36 @@ function updateWeatherUI(){
           <div style="flex:1">
             <div class="rfc-name">${f.name}</div>
             <div class="rfc-reason">${f.reason}</div>
-            <div class="rfc-tags">${f.tags.map(t=>`<span class="rfc-tag">${t}</span>`).join('')}</div>
-            <div class="pills"><div class="ps"><div class="ps-l">光圈</div><div class="ps-v">${f.f}</div></div><div class="ps"><div class="ps-l">快门</div><div class="ps-v">${f.s}</div></div><div class="ps"><div class="ps-l">天气</div><div class="ps-v" style="font-size:11px">${w.icon}</div></div></div>
+            <div class="rfc-tags">${(curLang==='en'&&f.tagsEn?f.tagsEn:f.tags).map(tag=>`<span class="rfc-tag">${tag}</span>`).join('')}</div>
+            <div class="pills"><div class="ps"><div class="ps-l">${t('label.aperture')}</div><div class="ps-v">${f.f}</div></div><div class="ps"><div class="ps-l">${t('label.shutter')}</div><div class="ps-v">${f.s}</div></div><div class="ps"><div class="ps-l">${curLang==='en'?'Weather':'天气'}</div><div class="ps-v" style="font-size:11px">${w.icon}</div></div></div>
           </div>
         </div>
-        <div class="${i===0?'bdg':'bdgo'}" style="margin-left:8px;flex-shrink:0">${f.rank}</div>
+        <div class="${i===0?'bdg':'bdgo'}" style="margin-left:8px;flex-shrink:0">${i===0?t('plan.primary'):t('plan.secondary')}</div>
       </div>
     </div>`).join('');
-  document.getElementById('adviceLabel').textContent=`'你添加的胶卷 · ${dateLabel} · ${w.label}`;
+  document.getElementById('adviceLabel').textContent=`${t('plan.advice.label')} · ${dateLabel} · ${w.label}`;
   if(planFilms.length>0)renderAdvice(w);
 }
 
 let planFilms=[];
-function filmAdv(film,w){const iso=film.iso,type=film.type,wt=w.type;if(type==='slide'){if(wt==='rainy')return`反转片在${w.label}宽容度几乎为零，<strong>高度不推荐</strong>。`;return`反转片需<strong>精准曝光</strong>，${w.label}下严格测光，绝不欠曝。`;}if(wt==='hot')return`${w.label}高温加速胶卷衰减，<strong>拍完尽快冲洗</strong>。`;if(wt==='rainy'){if(iso>=400)return`${w.label}光线昏暗，ISO ${iso} 合适，<strong>保护相机不被淋湿</strong>。`;return`${w.label}下 ISO ${iso} 较弱，建议曝光补偿 <strong>+1 档</strong>。`;}if(wt==='cold')return`${w.label}低温可能导致快门变慢，注意<strong>实测快门</strong>。`;if(iso<=200&&wt==='cloudy')return`ISO ${iso} 在${w.label}偏弱，建议光圈开至 f/5.6–f/8。`;if(iso>=800)return`ISO ${iso} 在${w.label}游刃有余，可缩小光圈增加景深。`;return`ISO ${iso} 是${w.label}的<strong>理想选择</strong>，参考 f/${wt==='partly'?11:8} @ 1/${iso}s。`;}
-function renderAdvice(w){const aw=document.getElementById('adviceWrap');if(planFilms.length===0){aw.style.display='none';return;}aw.style.display='block';document.getElementById('adviceContent').innerHTML=planFilms.map(f=>`<div class="fa-item"><div class="fa-film-name">${f.name} · ISO ${f.iso} · ${TN[f.type]}</div><div class="fa-text">${filmAdv(f,w)}</div></div>`).join('');}
+function filmAdv(film,w){
+  const iso=film.iso,type=film.type,wt=w.type;
+  const en=curLang==='en';
+  if(type==='slide'){
+    if(wt==='rainy') return en?`Slide film has almost zero latitude in ${w.label} — <strong>not recommended</strong>.`:`反转片在${w.label}宽容度几乎为零，<strong>高度不推荐</strong>。`;
+    return en?`Slide film demands <strong>precise exposure</strong> — meter carefully in ${w.label}, never underexpose.`:`反转片需<strong>精准曝光</strong>，${w.label}下严格测光，绝不欠曝。`;
+  }
+  if(wt==='hot') return en?`${w.label} heat accelerates film deterioration — <strong>develop promptly</strong>.`:`${w.label}高温加速胶卷衰减，<strong>拍完尽快冲洗</strong>。`;
+  if(wt==='rainy'){
+    if(iso>=400) return en?`Low light in ${w.label} — ISO ${iso} is suitable. <strong>Keep your camera dry</strong>.`:`${w.label}光线昏暗，ISO ${iso} 合适，<strong>保护相机不被淋湿</strong>。`;
+    return en?`ISO ${iso} is weak in ${w.label} — consider <strong>+1 stop</strong> exposure compensation.`:`${w.label}下 ISO ${iso} 较弱，建议曝光补偿 <strong>+1 档</strong>。`;
+  }
+  if(wt==='cold') return en?`Cold in ${w.label} may slow your shutter — always <strong>test your shutter speed</strong>.`:`${w.label}低温可能导致快门变慢，注意<strong>实测快门</strong>。`;
+  if(iso<=200&&wt==='cloudy') return en?`ISO ${iso} is a bit slow for ${w.label} — open up to f/5.6–f/8.`:`ISO ${iso} 在${w.label}偏弱，建议光圈开至 f/5.6–f/8。`;
+  if(iso>=800) return en?`ISO ${iso} handles ${w.label} with ease — stop down for extra depth of field.`:`ISO ${iso} 在${w.label}游刃有余，可缩小光圈增加景深。`;
+  return en?`ISO ${iso} is an <strong>ideal choice</strong> for ${w.label} — try f/${wt==='partly'?11:8} @ 1/${iso}s.`:`ISO ${iso} 是${w.label}的<strong>理想选择</strong>，参考 f/${wt==='partly'?11:8} @ 1/${iso}s。`;
+}
+function renderAdvice(w){const aw=document.getElementById('adviceWrap');if(planFilms.length===0){aw.style.display='none';return;}aw.style.display='block';document.getElementById('adviceContent').innerHTML=planFilms.map(f=>`<div class="fa-item"><div class="fa-film-name">${f.name} · ISO ${f.iso} · ${TN(f.type)}</div><div class="fa-text">${filmAdv(f,w)}</div></div>`).join('');}
 function toggleRecSel(i){
   if(!window._recSelSet)window._recSelSet=new Set();
   window._recSelSet.has(i)?window._recSelSet.delete(i):window._recSelSet.add(i);
@@ -2323,15 +2494,19 @@ function toggleRecSel(i){
 }
 function openModal(){document.getElementById('filmModal').classList.add('open');document.getElementById('msInp').value='';renderMS('');setTimeout(()=>document.getElementById('msInp').focus(),100);}
 function closeModal(e){if(e.target===document.getElementById('filmModal'))document.getElementById('filmModal').classList.remove('open');}
-function renderMS(q){const ql=q.toLowerCase();const hits=q?FILMS.filter(f=>f.name.toLowerCase().includes(ql)):FILMS;document.getElementById('msList').innerHTML=hits.slice(0,20).map(f=>`<div class="ms-item" onclick="addFilm('${f.name.replace(/'/g,"\\'")}')"><div style="width:8px;height:8px;border-radius:50%;background:${TC[f.type]};flex-shrink:0"></div><div style="flex:1;font-size:13px;color:var(--t2)">${f.name}</div><div style="font-size:11px;color:var(--t3)">ISO ${f.iso} · ${TN[f.type]}</div></div>`).join('');}
+function renderMS(q){const ql=q.toLowerCase();const hits=q?FILMS.filter(f=>f.name.toLowerCase().includes(ql)):FILMS;document.getElementById('msList').innerHTML=hits.slice(0,20).map(f=>`<div class="ms-item" onclick="addFilm('${f.name.replace(/'/g,"\\'")}')"><div style="width:8px;height:8px;border-radius:50%;background:${TC[f.type]};flex-shrink:0"></div><div style="flex:1;font-size:13px;color:var(--t2)">${f.name}</div><div style="font-size:11px;color:var(--t3)">ISO ${f.iso} · ${TN(f.type)}</div></div>`).join('');}
 function filterMS(v){renderMS(v);}
 function addFilm(name){if(planFilms.find(f=>f.name===name))return;const film=FILMS.find(f=>f.name===name);if(film){planFilms.push(film);refreshFilmList();renderAdvice(getWeather(selDate));}document.getElementById('filmModal').classList.remove('open');}
 function removeFilm(name){planFilms=planFilms.filter(f=>f.name!==name);refreshFilmList();renderAdvice(getWeather(selDate));}
-function refreshFilmList(){document.getElementById('filmAddedList').innerHTML=planFilms.map(f=>`<div class="film-added-row"><div class="far-dot" style="background:${TC[f.type]}"></div><div class="far-name">${f.name}<span style="font-size:10px;color:var(--t3);margin-left:6px">ISO ${f.iso} · ${TN[f.type]}</span></div><div class="far-rm" onclick="removeFilm('${f.name.replace(/'/g,"\\'")}')">×</div></div>`).join('');}
+function refreshFilmList(){document.getElementById('filmAddedList').innerHTML=planFilms.map(f=>`<div class="film-added-row"><div class="far-dot" style="background:${TC[f.type]}"></div><div class="far-name">${f.name}<span style="font-size:10px;color:var(--t3);margin-left:6px">ISO ${f.iso} · ${TN(f.type)}</span></div><div class="far-rm" onclick="removeFilm('${f.name.replace(/'/g,"\\'")}')">×</div></div>`).join('');}
 
 const THEMES=['情侣写真','生日派对','婚礼纪念','旅行记录','街头扫街','人像写真','风景记录','家庭聚会','毕业纪念','日常生活','美食探店','宠物拍摄'];
+const THEMES_EN=['Couple Portrait','Birthday Party','Wedding','Travel','Street Photo','Portrait','Landscape','Family','Graduation','Daily Life','Food','Pets'];
 let selThemes=new Set();
-function renderThemes(){document.getElementById('themeGrid').innerHTML=THEMES.map(t=>`<div class="ttheme${selThemes.has(t)?' on':''}" onclick="toggleTheme('${t}')">${t}</div>`).join('');}
+function renderThemes(){
+  const labels=curLang==='en'?THEMES_EN:THEMES;
+  document.getElementById('themeGrid').innerHTML=THEMES.map((zh,i)=>`<div class="ttheme${selThemes.has(zh)?' on':''}" onclick="toggleTheme('${zh}')">${labels[i]}</div>`).join('');
+}
 function toggleTheme(t){selThemes.has(t)?selThemes.delete(t):selThemes.add(t);renderThemes();}
 renderThemes();
 
@@ -2346,7 +2521,7 @@ function confirmPlan(){
   const recFilm=(window._recSelSet&&window._recFilms)?[...window._recSelSet].sort().map(i=>window._recFilms[i]):[];
   const newPlan={
     id: activePlan ? activePlan.id : 'plan-'+Date.now(),
-    dateTitle,weather:w,
+    dateTitle,selDate:new Date(selDate).getTime(),weather:w,
     recFilm: recFilm,    // 选中的推荐胶卷（0或1项）
     films:[...planFilms], // 自定义胶卷
     location:document.getElementById('planLoc').value||'',
@@ -2367,11 +2542,11 @@ function confirmPlan(){
   renderAllPlanCards();
   updateNotifDot();
   const btn=document.querySelector('.confirm-btn');
-  btn.textContent='✓ 计划已保存！';
+  btn.textContent=t('dynamic.plan.saved');
   btn.style.background='rgba(29,158,117,.9)';
   btn.style.color='white';
   setTimeout(()=>{
-    btn.textContent='确认拍摄计划';
+    btn.textContent=t('plan.confirm');
     btn.style.background='var(--amb)';
     btn.style.color='var(--adk)';
     back();
@@ -2385,31 +2560,45 @@ function renderAllPlanCards(){
 }
 
 function planCardHTML(plan){
-  // 显示：推荐选中 + 自定义，都没有就显示"未选胶卷"
   const recNames=(plan.recFilm||[]).map(f=>f.name);
   const customNames=plan.films.map(f=>f.name);
   const allFilms=[...recNames,...customNames];
   const unique=[...new Set(allFilms)];
   const displayFilms=unique.length>0?unique:[];
-  const tags=[plan.weather.icon+' '+plan.weather.label];
+
+  // Date title
+  const sd=new Date(plan.selDate||Date.now());
+  const m=sd.getMonth()+1, d=sd.getDate();
+  const dateTitle=curLang==='en'
+    ?(plan.dateTitle==='今天'?`Today's Plan`:plan.dateTitle==='明天'?`Tomorrow's Plan`:`${m}/${d} Plan`)
+    :plan.dateTitle+t('dynamic.plan.of');
+
+  // Tags: weather, location, subject, themes (translated)
+  const tags=[plan.weather.icon+' '+(curLang==='en'&&WDATA_EN_META[plan.weather.type]?WDATA_EN_META[plan.weather.type].label:plan.weather.label)];
   if(plan.location)tags.push('📍 '+plan.location);
   if(plan.subject)tags.push('👤 '+plan.subject);
-  plan.themes.slice(0,2).forEach(t=>tags.push(t));
+  // Translate themes
+  plan.themes.slice(0,2).forEach(zh=>{
+    const idx=THEMES.indexOf(zh);
+    const label=(curLang==='en'&&idx>=0)?THEMES_EN[idx]:zh;
+    tags.push(label);
+  });
+
   return `<div class="plan-card" id="pc-${plan.id}">
     <div style="position:absolute;top:10px;right:10px;display:flex;gap:4px;z-index:1">
-      <div class="pc-icon-btn" onclick="editPlan('${plan.id}')" title="编辑">
+      <div class="pc-icon-btn" onclick="editPlan('${plan.id}')" title="${curLang==='en'?'Edit':'编辑'}">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(245,166,35,.7)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
       </div>
-      <div class="pc-icon-btn" onclick="deletePlan('${plan.id}')" title="删除">
+      <div class="pc-icon-btn" onclick="deletePlan('${plan.id}')" title="${curLang==='en'?'Delete':'删除'}">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,100,100,.6)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
       </div>
     </div>
     <div class="pc-pulse"></div>
-    <div class="pc-date-title">${plan.dateTitle}的拍摄计划</div>
-    <div class="pc-film-sub">${displayFilms.length?displayFilms.join(' · '):'未选胶卷'}</div>
-    ${tags.length?`<div class="pc-tags">${tags.map(t=>`<span class="pc-tag">${t}</span>`).join('')}</div>`:''}
+    <div class="pc-date-title">${dateTitle}</div>
+    <div class="pc-film-sub">${displayFilms.length?displayFilms.join(' · '):t('dynamic.no.film')}</div>
+    ${tags.length?`<div class="pc-tags">${tags.map(tag=>`<span class="pc-tag">${tag}</span>`).join('')}</div>`:''}
     <div onclick="finishShoot('${plan.id}')" style="margin-top:12px;padding:9px;background:rgba(29,158,117,.15);border:.5px solid rgba(29,158,117,.4);border-radius:8px;text-align:center;font-size:12px;font-weight:500;color:#1D9E75;cursor:pointer;transition:background .15s;-webkit-tap-highlight-color:transparent" onmouseover="this.style.background='rgba(29,158,117,.22)'" onmouseout="this.style.background='rgba(29,158,117,.15)'">
-      ✓ 结束拍摄，生成照片记录
+      ${t('dynamic.finish')}
     </div>
   </div>`;
 }
@@ -2497,7 +2686,7 @@ function finishShoot(id){
   const slot=document.getElementById('planCardSlot');
   const notice=document.createElement('div');
   notice.style.cssText='margin:10px 0 0;padding:12px 15px;background:rgba(29,158,117,.1);border:.5px solid rgba(29,158,117,.3);border-radius:12px;font-size:12px;color:#1D9E75;text-align:center';
-  notice.textContent=`✓ 已生成 ${uniqueFilmNames.length} 卷记录，前往照片记录上传照片`;
+  notice.textContent=`${t('dynamic.generated').replace('{n}', uniqueFilmNames.length)}`;
   slot.appendChild(notice);
   setTimeout(()=>{
     notice.remove();
