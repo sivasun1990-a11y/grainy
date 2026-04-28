@@ -382,18 +382,18 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
       <div class="scr">
         <div style="padding:56px 24px 0">
           <div style="font-size:28px;font-weight:200;color:var(--t);letter-spacing:-.03em;margin-bottom:3px" data-i18n="diag.title">底片诊断</div>
-          <div style="font-size:12px;color:var(--t3);padding-bottom:14px;border-bottom:.5px solid var(--div)"><span>拍下问题底片，AI 告诉你原因</span></div>
+          <div style="font-size:12px;color:var(--t3);padding-bottom:14px;border-bottom:.5px solid var(--div)"><span data-i18n="diag.subtitle2">拍下问题底片，AI 告诉你原因</span></div>
         </div>
         <div style="height:14px"></div>
 
         <!-- 剩余次数 -->
         <div style="display:flex;align-items:center;justify-content:space-between;padding:0 24px;margin-bottom:12px">
-          <div style="font-size:11px;color:var(--t3)">本月免费诊断</div>
+          <div style="font-size:11px;color:var(--t3)" data-i18n="diag.free">本月免费诊断</div>
           <div style="display:flex;gap:5px;align-items:center">
             <div style="width:7px;height:7px;border-radius:50%;background:var(--amb)"></div>
             <div style="width:7px;height:7px;border-radius:50%;background:var(--amb)"></div>
             <div style="width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.12)"></div>
-            <div style="font-size:11px;color:var(--t3);margin-left:4px"><span>还剩 </span><span style="color:var(--amb);font-weight:500">2</span> 次</div>
+            <div style="font-size:11px;color:var(--t3);margin-left:4px" id="diagRemainWrap"><span id="diagRemainPre">还剩 </span><span style="color:var(--amb);font-weight:500">2</span><span id="diagRemainSuf"> 次</span></div>
           </div>
         </div>
 
@@ -404,8 +404,8 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
         <div class="upload-zone" id="diagUploadZone" onclick="document.getElementById('diagFileInput').click()">
           <div id="diagUploadDefault">
             <div style="width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.06);border:.5px solid rgba(255,255,255,.12);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:20px">📷</div>
-            <div style="font-size:13px;color:rgba(255,255,255,.55);margin-bottom:5px;font-weight:500">拍下或上传底片</div>
-            <div style="font-size:11px;color:var(--t3);line-height:1.6"><span>支持 JPG、PNG、HEIC 格式<br>扫描件或直接拍摄均可</span></div>
+            <div style="font-size:13px;color:rgba(255,255,255,.55);margin-bottom:5px;font-weight:500" data-i18n="diag.upload.title">拍下或上传底片</div>
+            <div style="font-size:11px;color:var(--t3);line-height:1.6"><span data-i18n="diag.upload.hint">支持 JPG、PNG、HEIC 格式<br>扫描件或直接拍摄均可</span></div>
           </div>
           <!-- 预览状态（上传后显示） -->
           <div id="diagPreview" style="display:none">
@@ -420,7 +420,7 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
             <div onclick="startDiag()" style="flex:1;padding:12px;background:var(--amb);border-radius:12px;text-align:center;font-size:13px;font-weight:500;color:var(--adk);cursor:pointer;transition:opacity .15s" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
               <span data-i18n="diag.start">开始诊断</span>
             </div>
-            <div onclick="resetDiag()" style="padding:12px 16px;background:rgba(255,255,255,.06);border:.5px solid rgba(255,255,255,.1);border-radius:12px;font-size:13px;color:var(--t3);cursor:pointer">
+            <div onclick="resetDiag()" style="padding:12px 16px;background:rgba(255,255,255,.06);border:.5px solid rgba(255,255,255,.1);border-radius:12px;font-size:13px;color:var(--t3);cursor:pointer" data-i18n="diag.reselect">
               重选
             </div>
           </div>
@@ -429,8 +429,8 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
         <!-- 诊断中状态 -->
         <div id="diagLoading" style="display:none;padding:28px 24px;text-align:center">
           <div id="diagSpinner" style="width:36px;height:36px;border-radius:50%;border:2px solid rgba(255,255,255,.08);border-top-color:var(--amb);margin:0 auto 14px;animation:spin 1s linear infinite"></div>
-          <div style="font-size:13px;color:var(--t3)">正在分析底片…</div>
-          <div style="font-size:11px;color:var(--t4);margin-top:4px"><span>通常需要 5–10 秒</span></div>
+          <div style="font-size:13px;color:var(--t3)" data-i18n="diag.analyzing">正在分析底片…</div>
+          <div style="font-size:11px;color:var(--t4);margin-top:4px"><span data-i18n="diag.analyzing.sub">通常需要 5–10 秒</span></div>
         </div>
 
         <!-- 诊断结果 -->
@@ -462,20 +462,20 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
             <!-- 我要反馈 — 卡片内底部 -->
             <div onclick="push('diag-feedback')" style="border-top:.5px solid rgba(255,255,255,.1);padding:11px 15px;display:flex;align-items:center;justify-content:center;gap:6px;cursor:pointer;background:rgba(255,255,255,.05);transition:background .15s" onmouseover="this.style.background='rgba(255,255,255,.1)'" onmouseout="this.style.background='rgba(255,255,255,.05)'">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.65)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              <span style="font-size:11px;color:rgba(255,255,255,.65);font-weight:500"><span>AI 诊断有误？提交反馈帮助改进</span></span>
+              <span style="font-size:11px;color:rgba(255,255,255,.65);font-weight:500" data-i18n="diag.feedback">AI 诊断有误？提交反馈帮助改进</span>
             </div>
           </div>
 
           <!-- 操作按钮 -->
           <div style="margin:0 24px 16px;display:flex;gap:8px">
             <div onclick="resetDiag()" style="flex:1;padding:11px;background:rgba(255,255,255,.05);border:.5px solid rgba(255,255,255,.1);border-radius:12px;text-align:center;font-size:12px;color:var(--t3);cursor:pointer" data-i18n="diag.reupload">重新上传</div>
-            <div onclick="saveDiagRecord(this)" id="diagSaveBtn" style="flex:1;padding:11px;background:var(--amb);border-radius:12px;text-align:center;font-size:12px;font-weight:600;color:#000;cursor:pointer">保存记录</div>
+            <div onclick="saveDiagRecord(this)" id="diagSaveBtn" style="flex:1;padding:11px;background:var(--amb);border-radius:12px;text-align:center;font-size:12px;font-weight:600;color:#000;cursor:pointer" data-i18n="diag.save">保存记录</div>
           </div>
         </div>
 
         <!-- 历史诊断 -->
         <div id="diagHistory">
-          <div class="slbl">诊断历史</div>
+          <div class="slbl" data-i18n="diag.history.label">诊断历史</div>
 
           <!-- 历史记录列表 — 每条可点击展开 -->
           <div id="historyList" style="padding:0 24px"></div>
@@ -502,7 +502,7 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
 
           <!-- 状态A：Grid 模式（未选中任何照片） -->
           <div id="modalGridView" style="flex:1;overflow-y:auto;padding:14px 16px 100px">
-            <div style="font-size:9px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--t4);margin-bottom:10px">点击任意照片查看详情</div>
+            <div style="font-size:9px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--t4);margin-bottom:10px" data-i18n="diag.tap.detail">点击任意照片查看详情</div>
             <div id="modalGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:3px;"></div>
           </div>
 
@@ -531,7 +531,7 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
 
             <!-- Carousel：其他照片小图横排 -->
             <div style="flex-shrink:0;padding:12px 14px 100px">
-              <div style="font-size:9px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--t4);margin-bottom:9px">其他照片</div>
+              <div style="font-size:9px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--t4);margin-bottom:9px" data-i18n="diag.other.photos">其他照片</div>
               <div id="modalCarousel" style="display:flex;gap:6px;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;overscroll-behavior-x:contain;touch-action:pan-x">
                 <!-- filled by JS -->
               </div>
@@ -539,7 +539,7 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
           </div>
 
           <!-- 返回 grid 按钮（单张模式时显示） -->
-          <div id="modalBackToGrid" onclick="backToGrid()" style="display:none;position:absolute;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(20,18,18,.9);border:.5px solid rgba(255,255,255,.15);border-radius:50px;padding:7px 18px;font-size:11px;color:var(--t2);cursor:pointer;white-space:nowrap">← 返回全部</div>
+          <div id="modalBackToGrid" onclick="backToGrid()" style="display:none;position:absolute;bottom:80px;left:50%;transform:translateX(-50%);background:rgba(20,18,18,.9);border:.5px solid rgba(255,255,255,.15);border-radius:50px;padding:7px 18px;font-size:11px;color:var(--t2);cursor:pointer;white-space:nowrap" data-i18n="diag.back.all">← 返回全部</div>
         </div>
 
         <div style="height:120px"></div>
@@ -644,7 +644,7 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
 
           <!-- 保存按钮 -->
           <div style="padding:20px 20px 48px;margin:0 0">
-            <div onclick="saveRollDetail(this)" class="save-btn" style="width:100%;box-sizing:border-box;padding:13px;background:var(--amb);border-radius:50px;font-size:14px;font-weight:600;color:#000;cursor:pointer;letter-spacing:.03em;transition:background .2s;text-align:center" data-i18n="rd.save">保存</div>
+            <div onclick="saveRollDetail(this)" class="save-btn" data-i18n="rd.save" style="width:100%;box-sizing:border-box;padding:13px;background:var(--amb);border-radius:50px;font-size:14px;font-weight:600;color:#000;cursor:pointer;letter-spacing:.03em;transition:background .2s;text-align:center" data-i18n="rd.save">保存</div>
           </div>
         </div>
 
@@ -672,7 +672,7 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
         <!-- 照片 grid -->
         <div style="flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:12px">
           <div id="fgdGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px"></div>
-          <div id="fgdEmpty" style="display:none;padding:48px 20px;text-align:center;font-size:12px;color:var(--t4)">这个胶卷还没有上传照片</div>
+          <div id="fgdEmpty" style="display:none;padding:48px 20px;text-align:center;font-size:12px;color:var(--t4)" data-i18n="archive.no.photos">这个相册还没有上传照片</div>
         </div>
         <!-- 大图查看器（overlay in filmGroupDetail） -->
         <div id="fgdViewer" style="display:none;position:absolute;inset:0;background:rgba(0,0,0,.97);z-index:10;flex-direction:column;align-items:center;justify-content:center">
@@ -747,7 +747,7 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
         <!-- 补充说明 -->
         <div class="slbl" data-i18n="feedback.note.label">补充说明（可选）</div>
         <div style="margin:0 24px;background:var(--card);border:.5px solid var(--cb);border-radius:13px;padding:12px 14px">
-          <textarea id="fbNote" placeholder="描述你在照片中看到的问题，越具体越有帮助…" style="width:100%;background:transparent;border:none;outline:none;color:var(--t2);font-family:var(--font);font-size:12px;line-height:1.7;resize:none;min-height:72px;box-sizing:border-box" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
+          <textarea id="fbNote" placeholder="描述你在照片中看到的问题，越具体越有帮助…" data-i18n-ph="feedback.note.ph" style="width:100%;background:transparent;border:none;outline:none;color:var(--t2);font-family:var(--font);font-size:12px;line-height:1.7;resize:none;min-height:72px;box-sizing:border-box" oninput="this.style.height='auto';this.style.height=this.scrollHeight+'px'"></textarea>
         </div>
 
         <!-- 提交 -->
@@ -764,14 +764,14 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
         <div style="padding:4px 24px 0;margin-bottom:6px"><div style="font-size:28px;font-weight:200;color:var(--t);letter-spacing:-.03em" data-i18n="newroll.title">新建一卷</div></div>
         <div class="slbl" data-i18n="newroll.info">基本信息</div>
         <div class="slist" style="margin:0 24px">
-          <div class="srow" style="border-bottom:.5px solid var(--div)"><span style="font-size:12px;color:var(--t3);flex-shrink:0;width:64px">胶卷型号</span><input id="nrFilm" placeholder="如 Kodak Gold 200" style="flex:1;background:transparent;border:none;outline:none;color:var(--t2);font-size:13px;font-family:var(--font);text-align:right" /></div>
-          <div class="srow" style="border-bottom:.5px solid var(--div)"><span style="font-size:12px;color:var(--t3);flex-shrink:0;width:64px">相机型号</span><input id="nrCamera" placeholder="如 Contax G1" style="flex:1;background:transparent;border:none;outline:none;color:var(--t2);font-size:13px;font-family:var(--font);text-align:right" /></div>
-          <div class="srow" style="border-bottom:.5px solid var(--div)"><span style="font-size:12px;color:var(--t3);flex-shrink:0;width:64px">拍摄日期</span><input id="nrDate" type="date" style="flex:1;background:transparent;border:none;outline:none;color:var(--t2);font-size:13px;font-family:var(--font);text-align:right;color-scheme:dark" /></div>
-          <div class="srow" style="border-bottom:.5px solid var(--div)"><span style="font-size:12px;color:var(--t3);flex-shrink:0;width:64px">地点</span><input id="nrLocation" placeholder="可选" style="flex:1;background:transparent;border:none;outline:none;color:var(--t2);font-size:13px;font-family:var(--font);text-align:right" /></div>
-          <div class="srow" style="border-bottom:.5px solid var(--div)"><span style="font-size:12px;color:var(--t3);flex-shrink:0;width:64px">光线</span><input id="nrLight" placeholder="自然光 / 人工光 等" style="flex:1;background:transparent;border:none;outline:none;color:var(--t2);font-size:13px;font-family:var(--font);text-align:right" /></div>
-          <div class="srow" style="border-bottom:none"><span style="font-size:12px;color:var(--t3);flex-shrink:0;width:64px">主题</span><input id="nrTheme" placeholder="旅行 / 人像 等" style="flex:1;background:transparent;border:none;outline:none;color:var(--t2);font-size:13px;font-family:var(--font);text-align:right" /></div>
+          <div class="srow" style="border-bottom:.5px solid var(--div)"><span style="font-size:12px;color:var(--t3);flex-shrink:0;width:64px" data-i18n="rd.film">胶卷型号</span><input id="nrFilm" placeholder="如 Kodak Gold 200" data-i18n-ph="newroll.film.ph" style="flex:1;background:transparent;border:none;outline:none;color:var(--t2);font-size:13px;font-family:var(--font);text-align:right" /></div>
+          <div class="srow" style="border-bottom:.5px solid var(--div)"><span style="font-size:12px;color:var(--t3);flex-shrink:0;width:64px" data-i18n="rd.camera">相机型号</span><input id="nrCamera" placeholder="如 Contax G1" data-i18n-ph="newroll.camera.ph" style="flex:1;background:transparent;border:none;outline:none;color:var(--t2);font-size:13px;font-family:var(--font);text-align:right" /></div>
+          <div class="srow" style="border-bottom:.5px solid var(--div)"><span style="font-size:12px;color:var(--t3);flex-shrink:0;width:64px" data-i18n="rd.date">拍摄日期</span><input id="nrDate" type="date" style="flex:1;background:transparent;border:none;outline:none;color:var(--t2);font-size:13px;font-family:var(--font);text-align:right;color-scheme:dark" /></div>
+          <div class="srow" style="border-bottom:.5px solid var(--div)"><span style="font-size:12px;color:var(--t3);flex-shrink:0;width:64px" data-i18n="rd.location">地点</span><input id="nrLocation" placeholder="可选" data-i18n-ph="newroll.location.ph" style="flex:1;background:transparent;border:none;outline:none;color:var(--t2);font-size:13px;font-family:var(--font);text-align:right" /></div>
+          <div class="srow" style="border-bottom:.5px solid var(--div)"><span style="font-size:12px;color:var(--t3);flex-shrink:0;width:64px" data-i18n="rd.light">光线</span><input id="nrLight" placeholder="自然光 / 人工光 等" data-i18n-ph="newroll.light.ph" style="flex:1;background:transparent;border:none;outline:none;color:var(--t2);font-size:13px;font-family:var(--font);text-align:right" /></div>
+          <div class="srow" style="border-bottom:none"><span style="font-size:12px;color:var(--t3);flex-shrink:0;width:64px" data-i18n="rd.theme">主题</span><input id="nrTheme" placeholder="旅行 / 人像 等" data-i18n-ph="newroll.theme.ph" style="flex:1;background:transparent;border:none;outline:none;color:var(--t2);font-size:13px;font-family:var(--font);text-align:right" /></div>
         </div>
-        <div class="slbl">照片</div>
+        <div class="slbl" data-i18n="newroll.photos">照片</div>
         <div style="margin:0 24px">
           <div id="nrPhotoGrid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;border-radius:10px;overflow:hidden;margin-bottom:6px"></div>
           <div onclick="document.getElementById('nrFileInput').click()" style="border:.5px dashed rgba(255,255,255,.13);border-radius:9px;padding:14px;display:flex;align-items:center;justify-content:center;gap:7px;cursor:pointer">
@@ -802,7 +802,7 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
           </div>
           <label for="galleryUpload" style="display:flex;align-items:center;gap:5px;background:rgba(255,255,255,.12);border:.5px solid rgba(255,255,255,.2);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);color:rgba(255,255,255,.8);font-size:11px;font-weight:500;padding:6px 13px;border-radius:20px;cursor:pointer;letter-spacing:.02em;white-space:nowrap;margin-top:6px;flex-shrink:0">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-            上传
+            <span data-i18n="gallery.upload">上传</span>
           </label>
           <input type="file" id="galleryUpload" accept="image/*" multiple style="display:none" onchange="onGalleryUpload(this)">
         </div>
@@ -817,7 +817,7 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
             </div>
             <div id="galleryViewerBadge" style="display:none;align-items:center;gap:5px;background:rgba(255,255,255,.12);border:.5px solid rgba(255,255,255,.25);padding:5px 12px;border-radius:20px;font-size:11px;color:rgba(255,255,255,.8);font-weight:500">
               <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              使用中
+              <span data-i18n="gallery.active">使用中</span>
             </div>
             <div style="width:36px"></div>
           </div>
@@ -826,12 +826,12 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
             <!-- Shot info 编辑区（仅自定义照片显示） -->
             <div id="galleryViewerEdit" style="display:none;background:rgba(0,0,0,.5);backdrop-filter:blur(8px);border-radius:12px;overflow:hidden">
               <div style="display:flex;align-items:center;border-bottom:.5px solid rgba(255,255,255,.1)">
-                <span style="font-size:10px;color:rgba(255,255,255,.4);padding:10px 12px;white-space:nowrap;flex-shrink:0">Shot by</span>
+                <span style="font-size:10px;color:rgba(255,255,255,.4);padding:10px 12px;white-space:nowrap;flex-shrink:0" id="gvShotByLabel">Shot by</span>
                 <input id="gvShotBy" placeholder="摄影师名字" style="flex:1;background:transparent;border:none;outline:none;color:white;font-size:11px;font-family:var(--font);padding:10px 12px 10px 0">
               </div>
               <div style="display:flex;align-items:center">
-                <span style="font-size:10px;color:rgba(255,255,255,.4);padding:10px 12px;white-space:nowrap;flex-shrink:0">胶卷</span>
-                <input id="gvFilm" placeholder="如 Kodak Gold 200" style="flex:1;background:transparent;border:none;outline:none;color:white;font-size:11px;font-family:var(--font);padding:10px 12px 10px 0">
+                <span style="font-size:10px;color:rgba(255,255,255,.4);padding:10px 12px;white-space:nowrap;flex-shrink:0" id="gvFilmLabel">胶卷</span>
+                <input id="gvFilm" placeholder="如 Kodak Gold 200" data-i18n-ph="newroll.film.ph" style="flex:1;background:transparent;border:none;outline:none;color:white;font-size:11px;font-family:var(--font);padding:10px 12px 10px 0">
               </div>
             </div>
             <!-- 设为首屏 -->
@@ -898,21 +898,21 @@ body{font-family:var(--font);background:var(--bg);margin:0;padding:0;overflow:hi
     <div class="page" id="pg-calc">
       <div class="scr">
         <div class="backr"><div class="backb" onclick="back()"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></div></div>
-        <div class="pgh" style="margin-bottom:4px"><div class="pgt" data-i18n="calc.title">过期胶卷<br>计算器</div><div style="font-size:12px;color:var(--t3);padding-bottom:14px;border-bottom:.5px solid var(--div)">输入胶卷信息，获取精准补偿建议</div></div>
-        <div class="slbl">胶卷型号</div>
-        <div class="ic2"><div class="fsw"><span class="si">&#x1F39E;</span><input class="fi" id="cFI" placeholder="搜索品牌或型号…" autocomplete="off" oninput="onCFI(this.value)" onfocus="onCFF()" onblur="onCFB()"><div class="cb2" id="cClr" onclick="clearCF()">×</div></div><div class="fdd" id="cDD"></div></div>
-        <div class="slbl">过期年份</div>
-        <div class="ic2"><div class="yrrow"><div style="font-size:13px;color:var(--t2)">过期于</div><div class="yrctrls"><div class="yrb" onclick="chgYr(-1)">−</div><div class="yrv" id="cYr">2018</div><div class="yrb" onclick="chgYr(1)">+</div></div></div></div>
-        <div class="slbl">储存条件</div>
-        <div class="ic2"><div class="stor-r" style="border-top:none;padding-top:14px"><div style="font-size:11px;color:var(--t3)">胶卷如何保存的？</div><div class="sopts"><div class="sopt2" onclick="setStor('freeze',this)">🧊 冷冻</div><div class="sopt2 on" onclick="setStor('fridge',this)">❄️ 冷藏</div><div class="sopt2" onclick="setStor('room',this)">🌡 室温</div><div class="sopt2" onclick="setStor('hot',this)">☀️ 高温</div></div></div></div>
-        <div class="ecalc" id="ecalc"><div style="font-size:36px;margin-bottom:14px;opacity:.25">&#x1F39E;</div><div style="font-size:13px;color:var(--t3);line-height:1.65">搜索并选择胶卷型号<br>调整年份和储存条件<br>获取精准的补偿建议</div></div>
+        <div class="pgh" style="margin-bottom:4px"><div class="pgt" data-i18n="calc.title">过期胶卷<br>计算器</div><div style="font-size:12px;color:var(--t3);padding-bottom:14px;border-bottom:.5px solid var(--div)" data-i18n="calc.subtitle">输入胶卷信息，获取精准补偿建议</div></div>
+        <div class="slbl" data-i18n="calc.film">胶卷型号</div>
+        <div class="ic2"><div class="fsw"><span class="si">&#x1F39E;</span><input class="fi" id="cFI" id="cFIInput" placeholder="搜索品牌或型号…" autocomplete="off" oninput="onCFI(this.value)" onfocus="onCFF()" onblur="onCFB()"><div class="cb2" id="cClr" onclick="clearCF()">×</div></div><div class="fdd" id="cDD"></div></div>
+        <div class="slbl" data-i18n="calc.year">过期年份</div>
+        <div class="ic2"><div class="yrrow"><div style="font-size:13px;color:var(--t2)" data-i18n="calc.expired.label">过期于</div><div class="yrctrls"><div class="yrb" onclick="chgYr(-1)">−</div><div class="yrv" id="cYr">2018</div><div class="yrb" onclick="chgYr(1)">+</div></div></div></div>
+        <div class="slbl" data-i18n="calc.storage">储存条件</div>
+        <div class="ic2"><div class="stor-r" style="border-top:none;padding-top:14px"><div style="font-size:11px;color:var(--t3)" data-i18n="calc.storage.q">胶卷如何保存的？</div><div class="sopts"><div class="sopt2" onclick="setStor('freeze',this)" data-i18n="calc.freeze">🧊 冷冻</div><div class="sopt2 on" onclick="setStor('fridge',this)" data-i18n="calc.fridge">❄️ 冷藏</div><div class="sopt2" onclick="setStor('room',this)" data-i18n="calc.room">🌡 室温</div><div class="sopt2" onclick="setStor('hot',this)" data-i18n="calc.hot">☀️ 高温</div></div></div></div>
+        <div class="ecalc" id="ecalc"><div style="font-size:36px;margin-bottom:14px;opacity:.25">&#x1F39E;</div><div style="font-size:13px;color:var(--t3);line-height:1.65" data-i18n="calc.empty">搜索并选择胶卷型号<br>调整年份和储存条件<br>获取精准的补偿建议</div></div>
         <div class="rwrap" id="cRwrap" style="padding:0 0 10px">
           <div style="border-top:.5px solid rgba(255,255,255,.1);margin:32px 0 32px"></div>
           <div style="font-size:9px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--t4);margin-bottom:12px" data-i18n="calc.result">使用建议</div>
-          <div class="rhero"><div style="flex:1"><div class="rlbl">建议使用 ISO</div><div class="riso" id="cRiso">—</div><div class="rsub" id="cRsub">—</div></div><div style="text-align:right"><div style="font-size:9px;text-transform:uppercase;letter-spacing:.07em;color:rgba(245,166,35,.5);margin-bottom:3px">过曝补偿</div><div class="rcomp" id="cRcomp">— <span>档</span></div></div></div>
-          <div class="rkw"><div style="font-size:9px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--t4)">胶卷状态评估</div><div class="rkt"><div class="rkf" id="cRkf" style="width:0%"></div></div><div class="rkticks"><span>良好</span><span>轻微衰减</span><span>明显衰减</span><span>高风险</span></div></div>
-          <div class="dcrd"><div class="drow"><div class="dico" style="background:rgba(245,166,35,.12)">📊</div><div><div class="dtitle">曝光建议</div><div class="dtext" id="cRexp">—</div></div></div><div class="drow"><div class="dico" style="background:rgba(80,18,130,.15)">🎨</div><div><div class="dtitle">色彩预期</div><div class="dtext" id="cRcolor">—</div></div></div><div class="drow"><div class="dico" style="background:rgba(148,22,14,.15)">⚠️</div><div><div class="dtitle">注意事项</div><div class="dtext" id="cRwarn">—</div></div></div></div>
-          <div class="tipbox"><div style="font-size:12px;font-weight:500;color:var(--t2);margin-bottom:8px">&#x1F39E; 拍摄小贴士</div><div id="cRtips"></div></div>
+          <div class="rhero"><div style="flex:1"><div class="rlbl" data-i18n="calc.rec.iso">建议使用 ISO</div><div class="riso" id="cRiso">—</div><div class="rsub" id="cRsub">—</div></div><div style="text-align:right"><div style="font-size:9px;text-transform:uppercase;letter-spacing:.07em;color:rgba(245,166,35,.5);margin-bottom:3px" data-i18n="calc.comp.label">过曝补偿</div><div class="rcomp" id="cRcomp">— <span>档</span></div></div></div>
+          <div class="rkw"><div style="font-size:9px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--t4)" data-i18n="calc.status">胶卷状态评估</div><div class="rkt"><div class="rkf" id="cRkf" style="width:0%"></div></div><div class="rkticks"><span data-i18n="calc.risk.good">良好</span><span data-i18n="calc.risk.mild">轻微衰减</span><span data-i18n="calc.risk.mod">明显衰减</span><span data-i18n="calc.risk.high">高风险</span></div></div>
+          <div class="dcrd"><div class="drow"><div class="dico" style="background:rgba(245,166,35,.12)">📊</div><div><div class="dtitle" data-i18n="calc.exp.label">曝光建议</div><div class="dtext" id="cRexp">—</div></div></div><div class="drow"><div class="dico" style="background:rgba(80,18,130,.15)">🎨</div><div><div class="dtitle" data-i18n="calc.color.label">色彩预期</div><div class="dtext" id="cRcolor">—</div></div></div><div class="drow"><div class="dico" style="background:rgba(148,22,14,.15)">⚠️</div><div><div class="dtitle" data-i18n="calc.warn.label">注意事项</div><div class="dtext" id="cRwarn">—</div></div></div></div>
+          <div class="tipbox"><div style="font-size:12px;font-weight:500;color:var(--t2);margin-bottom:8px" data-i18n="calc.tips.title">🎞 拍摄小贴士</div><div id="cRtips"></div></div>
         </div>
         <div style="height:40px"></div>
       </div>
@@ -940,6 +940,8 @@ const FILMS=[
   {name:'Lomography 800',iso:800,type:'color'},
 ];
 const TC={color:'#F5A623',bw:'#9FE1CB',slide:'#ED93B1'};
+const THEMES=['情侣写真','生日派对','婚礼纪念','旅行记录','街头扫街','人像写真','风景记录','家庭聚会','毕业纪念','日常生活','美食探店','宠物拍摄'];
+const THEMES_EN=['Couple Portrait','Birthday Party','Wedding','Travel','Street Photo','Portrait','Landscape','Family','Graduation','Daily Life','Food','Pets'];
 const TN_ZH={color:'彩色负片',bw:'黑白负片',slide:'反转片'};
 const TN_EN={color:'Color Negative',bw:'Black & White',slide:'Slide Film'};
 function TN(type){ return curLang==='en'?(TN_EN[type]||type):(TN_ZH[type]||type); }
@@ -1076,7 +1078,7 @@ function renderGallery(){
   grid.innerHTML=galleryThumbs.map((src,i)=>`
     <div style="aspect-ratio:3/4;position:relative;overflow:hidden;cursor:pointer" onclick="openGalleryViewer(${i})">
       <img src="${src}" style="width:100%;height:100%;object-fit:cover;display:block">
-      ${i===activeIndex?`<div style="position:absolute;bottom:0;left:0;right:0;padding:5px 6px 4px;background:linear-gradient(transparent,rgba(0,0,0,.6));font-size:8px;font-weight:600;color:rgba(255,255,255,.9);letter-spacing:.07em;text-transform:uppercase">使用中</div>`:''}
+      ${i===activeIndex?`<div style="position:absolute;bottom:0;left:0;right:0;padding:5px 6px 4px;background:linear-gradient(transparent,rgba(0,0,0,.6));font-size:8px;font-weight:600;color:rgba(255,255,255,.9);letter-spacing:.07em;text-transform:uppercase">${t('gallery.active')}</div>`:''}
     </div>`).join('');
 }
 function setHomeBg(i){
@@ -1175,6 +1177,8 @@ const I18N = {
     'plan.advice':'拍摄建议',
     // Archive
     'archive.title':'照片记录',
+    'archive.no.photos':'这个相册还没有上传照片',
+    'archive.loading':'正在处理照片…',
     'archive.new':'新建一卷',
     'archive.tab.time':'按时间',
     'archive.tab.film':'按胶卷',
@@ -1253,15 +1257,34 @@ const I18N = {
     'feedback.submitted':'已提交，谢谢！',
     // Calc
     'calc.title':'过期胶卷计算器',
+    'calc.subtitle':'输入胶卷信息，获取精准补偿建议',
     'calc.film':'胶卷型号',
+    'calc.film.ph':'搜索品牌或型号…',
     'calc.year':'过期年份',
-    'calc.storage':'存储条件',
+    'calc.expired.label':'过期于',
+    'calc.storage':'储存条件',
+    'calc.storage.q':'胶卷如何保存的？',
+    'calc.freeze':'🧊 冷冻',
+    'calc.fridge':'❄️ 冷藏',
+    'calc.room':'🌡 室温',
+    'calc.hot':'☀️ 高温',
+    'calc.empty':'搜索并选择胶卷型号<br>调整年份和储存条件<br>获取精准的补偿建议',
+    'calc.rec.iso':'建议使用 ISO',
+    'calc.comp.label':'过曝补偿',
+    'calc.status':'胶卷状态评估',
+    'calc.risk.good':'良好',
+    'calc.risk.mild':'轻微衰减',
+    'calc.risk.mod':'明显衰减',
+    'calc.risk.high':'高风险',
+    'calc.exp.label':'曝光建议',
+    'calc.color.label':'色彩预期',
+    'calc.warn.label':'注意事项',
+    'calc.tips.title':'🎞 拍摄小贴士',
     'calc.result':'使用建议',
-    // Profile
     'profile.title':'我的',
     'profile.settings':'设置',
-    'profile.gallery':'首屏照片',
-    'profile.gallery.sub':'精选图库',
+    'profile.gallery':'封面照片',
+    'profile.gallery.sub':'照片图库',
     'profile.lang':'语言设置',
     'profile.pro':'升级 Pro',
     'profile.pro.badge':'即将推出',
@@ -1269,13 +1292,15 @@ const I18N = {
     'profile.photos':'归档张数',
     'profile.diags':'诊断次数',
     // Gallery
-    'gallery.title':'首屏照片',
-    'gallery.subtitle':'点击任意照片设为首页背景',
+    'gallery.title':'封面照片',
+    'gallery.subtitle':'点击任意照片设为首页封面',
     'gallery.upload':'上传',
     'gallery.active':'使用中',
-    'gallery.set':'设为首屏照片',
-    'gallery.shotby':'Shot by',
+    'gallery.set':'设为封面照片',
+    'gallery.shotby':'摄影师',
     'gallery.film':'胶卷',
+    'gallery.shotby.ph':'摄影师名字',
+    'gallery.film.ph':'如 Kodak Gold 200',
     // Notifs
     'notifs.title':'通知',
     'notifs.upcoming':'即将开始的计划',
@@ -1321,8 +1346,21 @@ const I18N = {
     'rd.film':'胶卷型号','rd.camera':'相机型号','rd.date':'拍摄日期',
     'rd.location':'地点','rd.light':'光线','rd.theme':'主题',
     'rd.rating':'推荐','rd.info':'拍摄信息','rd.notes':'拍摄心得',
-    'rd.save':'保存','rd.add.photo':'添加照片',
+    'rd.save':'保存','rd.add.photo':'添加照片','rd.no.photos':'还没有照片，点击下方添加',
     'profile.settings':'设置',
+    'diag.subtitle2':'拍下问题底片，AI 告诉你原因',
+    'diag.free':'本月免费诊断',
+    'diag.remain.pre':'还剩 ',
+    'diag.remain.suf':' 次',
+    'diag.upload.title':'拍下或上传底片',
+    'diag.upload.hint':'支持 JPG、PNG、HEIC 格式\n扫描件或直接拍摄均可',
+    'diag.reselect':'重选',
+    'diag.analyzing':'正在分析底片…',
+    'diag.analyzing.sub':'通常需要 5–10 秒',
+    'diag.history.label':'诊断历史',
+    'diag.tap.detail':'点击任意照片查看详情',
+    'diag.other.photos':'其他照片',
+    'diag.back.all':'← 返回全部',
     'diag.start':'开始诊断','diag.reupload':'重新上传',
     'diag.result':'诊断结果','diag.fix':'预防与处理',
     'diag.confidence':'AI 置信度','diag.history':'历史记录',
@@ -1382,6 +1420,8 @@ const I18N = {
     // Archive
     'archive.title':'Photo Records',
     'archive.new':'New Roll',
+    'archive.no.photos':'No photos uploaded yet',
+    'archive.loading':'Processing photos…',
     'archive.tab.time':'By Date',
     'archive.tab.film':'By Film',
     'archive.roll.pending':'Pending Upload',
@@ -1442,7 +1482,7 @@ const I18N = {
     'diag.subtitle2':'Upload a problem frame, AI tells you why',
     'diag.free':'Free diagnoses this month',
     'diag.upload.title':'Take or upload a film photo',
-    'diag.upload.hint':'Supports JPG, PNG, HEIC\nScans or direct photos welcome',
+    'diag.upload.hint':'Supports JPG, PNG, HEIC\nScans or directly take a photo',
     'diag.start':'Start Diagnosis',
     'diag.reselect':'Reselect',
     'diag.analyzing.sub':'Usually takes 5–10 seconds',
@@ -1459,14 +1499,33 @@ const I18N = {
     'feedback.submitted':'Submitted, thank you!',
     // Calc
     'calc.title':'Expired Film Calculator',
+    'calc.subtitle':'Enter film info to get compensation recommendations',
     'calc.film':'Film Stock',
+    'calc.film.ph':'Search brand or model…',
     'calc.year':'Expiry Year',
+    'calc.expired.label':'Expired in',
     'calc.storage':'Storage Conditions',
+    'calc.storage.q':'How was the film stored?',
+    'calc.freeze':'🧊 Frozen',
+    'calc.fridge':'❄️ Refrigerated',
+    'calc.room':'🌡 Room Temp',
+    'calc.hot':'☀️ Hot/Humid',
+    'calc.empty':'Search and select a film stock<br>Adjust year and storage conditions<br>Get precise compensation advice',
+    'calc.rec.iso':'Recommended ISO',
+    'calc.comp.label':'Overexposure Comp.',
+    'calc.status':'Film Condition',
+    'calc.risk.good':'Good',
+    'calc.risk.mild':'Mild Decay',
+    'calc.risk.mod':'Notable Decay',
+    'calc.risk.high':'High Risk',
+    'calc.exp.label':'Exposure Advice',
+    'calc.color.label':'Colour Expectation',
+    'calc.warn.label':'Notes',
+    'calc.tips.title':'🎞 Shooting Tips',
     'calc.result':'Recommendations',
-    // Profile
     'profile.title':'Profile',
     'profile.settings':'Settings',
-    'profile.gallery':'Home Photo',
+    'profile.gallery':'Cover Image',
     'profile.gallery.sub':'Photo Library',
     'profile.lang':'Language',
     'profile.pro':'Upgrade to Pro',
@@ -1475,13 +1534,15 @@ const I18N = {
     'profile.photos':'Photos Archived',
     'profile.diags':'Diagnoses',
     // Gallery
-    'gallery.title':'Home Photo',
-    'gallery.subtitle':'Tap any photo to set as home background',
+    'gallery.title':'Cover Image',
+    'gallery.subtitle':'Tap any photo to set as your cover',
     'gallery.upload':'Upload',
     'gallery.active':'In Use',
-    'gallery.set':'Set as Home Photo',
-    'gallery.shotby':'Shot by',
+    'gallery.set':'Set as Cover',
+    'gallery.shotby':'Photographer',
     'gallery.film':'Film',
+    'gallery.shotby.ph':'Photographer name',
+    'gallery.film.ph':'e.g. Kodak Gold 200',
     // Notifs
     'notifs.title':'Notifications',
     'notifs.upcoming':'Upcoming Shoots',
@@ -1507,9 +1568,22 @@ const I18N = {
     'archive.tab.film':'By Film',
     'rd.film':'Film Stock','rd.camera':'Camera','rd.date':'Date',
     'rd.location':'Location','rd.light':'Light','rd.theme':'Theme',
-    'rd.rating':'Rating','rd.info':'Shoot Info','rd.notes':'Notes',
-    'rd.save':'Save','rd.add.photo':'Add Photos',
+    'rd.rating':'Rating','rd.info':'Basic Info','rd.notes':'Notes',
+    'rd.save':'Save','rd.add.photo':'Add Photos','rd.no.photos':'No photos yet — tap below to add',
     'profile.settings':'Settings',
+    'diag.subtitle2':'Upload a film photo — AI tells you what went wrong',
+    'diag.free':'Free diagnoses this month',
+    'diag.remain.pre':'',
+    'diag.remain.suf':' times left',
+    'diag.upload.title':'Take or upload a film photo',
+    'diag.upload.hint':'Supports JPG, PNG, HEIC\nScans or directly take a photo',
+    'diag.reselect':'Reselect',
+    'diag.analyzing':'Analysing film…',
+    'diag.analyzing.sub':'Usually takes 5–10 seconds',
+    'diag.history.label':'History',
+    'diag.tap.detail':'Tap any photo to view details',
+    'diag.other.photos':'Other Photos',
+    'diag.back.all':'← Back to all',
     'diag.start':'Start Diagnosis','diag.reupload':'Re-upload',
     'diag.result':'Diagnosis','diag.fix':'Prevention & Fix',
     'diag.confidence':'AI Confidence','diag.history':'History',
@@ -1604,6 +1678,43 @@ function applyLang(){
   const fcCity=document.getElementById('forecastCity');
   if(fcCity&&!fcCity.textContent)fcCity.textContent=curLang==='en'?'current location':'当前位置';
   if(rdNotes)rdNotes.placeholder=curLang==='en'?'How did this roll go? Write your thoughts…':'这卷拍得怎么样？记录你的想法…';
+  // Diag remain count
+  const rPre=document.getElementById('diagRemainPre');
+  const rSuf=document.getElementById('diagRemainSuf');
+  if(rPre)rPre.textContent=curLang==='en'?'':'还剩 ';
+  if(rSuf)rSuf.textContent=curLang==='en'?' times left':' 次';
+  // Switch diag result language if result is shown
+  ['diagResultTitle','diagResultDesc','diagResultFix'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(el&&(el.dataset.zh||el.dataset.en)){
+      el.textContent=curLang==='en'?(el.dataset.en||el.dataset.zh):(el.dataset.zh||el.dataset.en);
+    }
+  });
+  // Handle data-i18n-ph placeholders
+  document.querySelectorAll('[data-i18n-ph]').forEach(el=>{
+    el.placeholder=t(el.getAttribute('data-i18n-ph'));
+  });
+  // New roll loading text
+  const nrLT=document.getElementById('nrLoadingText');
+  if(nrLT)nrLT.textContent=t('archive.loading');
+  const rdLT=document.getElementById('rdLoadingText');
+  if(rdLT)rdLT.textContent=t('archive.loading');
+  // New roll date locale
+  const nrDateEl=document.getElementById('nrDate');
+  if(nrDateEl){nrDateEl.setAttribute('lang',curLang==='en'?'en':'zh');}
+  const ecalcEl=document.getElementById('ecalc');
+  if(ecalcEl){const txt=ecalcEl.querySelector('div:last-child');if(txt)txt.innerHTML=t('calc.empty');}
+  const cFIEl=document.getElementById('cFI');
+  if(cFIEl)cFIEl.placeholder=t('calc.film.ph');
+  // Gallery viewer shot info
+  const gvLabel=document.getElementById('gvShotByLabel');
+  if(gvLabel)gvLabel.textContent=t('gallery.shotby');
+  const gvFilmLabel=document.getElementById('gvFilmLabel');
+  if(gvFilmLabel)gvFilmLabel.textContent=t('gallery.film');
+  const gvShotBy=document.getElementById('gvShotBy');
+  if(gvShotBy)gvShotBy.placeholder=t('gallery.shotby.ph');
+  const gvFilmInp=document.getElementById('gvFilm');
+  if(gvFilmInp)gvFilmInp.placeholder=t('gallery.film.ph');
 }
 
 function setLang(lang){
@@ -1625,26 +1736,45 @@ function renderNotifPlans(){
     list.innerHTML=`<div style="font-size:12px;color:var(--t3);padding:4px 0">${t('dynamic.no.plans')}</div>`;return;
   }
   list.innerHTML=plans.map(p=>{
-    // 胶卷：推荐选中 + 自定义
+    // 胶卷
     const recNames=(p.recFilm||[]).map(f=>f.name);
     const customNames=(p.films||[]).map(f=>f.name);
     const allFilms=[...new Set([...recNames,...customNames])];
-    const filmStr=allFilms.length?allFilms.join(' · '):'未选胶卷';
+    const filmStr=allFilms.length?allFilms.join(' · '):t('dynamic.no.film');
 
-    // 天气：取 icon + label，避免 [object Object]
+    // 天气 label（双语）
     const w=p.weather;
-    const weatherStr=w?(w.icon||'')+(w.label?' '+w.label:''):'';
+    const wLabel=curLang==='en'&&w&&WDATA_EN_META[w.type]?WDATA_EN_META[w.type].label:(w?.label||'');
+    const weatherStr=w?(w.icon||'')+(wLabel?' '+wLabel:''):'';
 
-    // 地点 / 拍摄对象 / 主题
+    // 日期（双语）
+    let dateLabel=p.dateTitle;
+    if(curLang==='en'){
+      if(p.selDate){
+        const sd=new Date(p.selDate);
+        const mos=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        const diff=Math.round((sd-new Date().setHours(0,0,0,0))/(864e5));
+        dateLabel=diff===0?'Today':diff===1?'Tomorrow':`${mos[sd.getMonth()]} ${sd.getDate()}`;
+      } else {
+        dateLabel=p.dateTitle==='今天'?'Today':p.dateTitle==='明天'?'Tomorrow':p.dateTitle;
+      }
+    }
+
+    // 地点 / 主题（翻译主题）
     const meta=[];
     if(p.location)meta.push('📍 '+p.location);
     if(p.subject)meta.push('👤 '+p.subject);
-    if(p.themes&&p.themes.length)meta.push(...p.themes.slice(0,2));
+    if(p.themes&&p.themes.length){
+      p.themes.slice(0,2).forEach(zh=>{
+        const idx=THEMES.indexOf(zh);
+        meta.push(curLang==='en'&&idx>=0?THEMES_EN[idx]:zh);
+      });
+    }
     const metaStr=meta.join(' · ');
 
     return `
     <div style="background:var(--card);border:.5px solid var(--cb);border-radius:13px;padding:14px 15px">
-      <div style="font-size:12px;font-weight:500;color:var(--t);margin-bottom:4px">📅 ${p.dateTitle}</div>
+      <div style="font-size:12px;font-weight:500;color:var(--t);margin-bottom:4px">📅 ${dateLabel}</div>
       ${weatherStr||metaStr?`<div style="font-size:11px;color:var(--t3);line-height:1.5;margin-bottom:4px">${[weatherStr,metaStr].filter(Boolean).join(' · ')}</div>`:''}
       <div style="font-size:11px;color:var(--t4)">${filmStr}</div>
     </div>`;
@@ -1695,7 +1825,9 @@ function filterRolls(filter, el) {
 let expandedDates = new Set(); // 记录哪些日期是展开的
 
 function renderRollList() {
-  document.getElementById('archiveSubtitle').textContent = `${ROLLS.length} 卷`;
+  document.getElementById('archiveSubtitle').textContent = curLang==='en'
+    ? `${ROLLS.length} roll${ROLLS.length!==1?'s':''}`
+    : `${ROLLS.length} 卷`;
 
   // 按日期聚合，日期格式 YYYY.MM.DD，最新在前
   const dateMap = {};
@@ -1713,12 +1845,17 @@ function renderRollList() {
     const totalPhotos = rolls.reduce((s, r) => s + (r.photos||[]).length, 0);
     const hasFromPlan = rolls.some(r => r.fromPlan);
 
-    // 日期标签格式化：2024.10.15 → 10月15日
+    // 日期标签格式化
     const parts = date.split('.');
     const dateLabel = parts.length === 3
-      ? `${parseInt(parts[1])}月${parseInt(parts[2])}日`
+      ? (curLang==='en'
+          ? `${['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][parseInt(parts[1])-1]} ${parseInt(parts[2])}`
+          : `${parseInt(parts[1])}月${parseInt(parts[2])}日`)
       : date;
     const yearLabel = parts[0] || '';
+    const rollCountLabel = curLang==='en'
+      ? `${rolls.length} roll${rolls.length!==1?'s':''}`+( totalPhotos ? ` · ${totalPhotos} photos` : '')
+      : `${rolls.length} 卷`+(totalPhotos ? ' · ' + totalPhotos + ' 张照片' : '');
 
     return `
     <!-- 日期 folder -->
@@ -1734,9 +1871,9 @@ function renderRollList() {
           <div style="display:flex;align-items:center;gap:7px">
             <div style="font-size:14px;font-weight:${isOpen?'500':'400'};color:${isOpen?'var(--t)':'var(--t2)'};transition:all .2s">${dateLabel}</div>
             <div style="font-size:10px;color:var(--t4)">${yearLabel}</div>
-            ${hasFromPlan ? `<div style="font-size:8px;font-weight:500;padding:1px 5px;border-radius:3px;background:rgba(29,158,117,.15);color:#1D9E75;border:.5px solid rgba(29,158,117,.3)"><span data-i18n='dynamic.from.plan'>计划</span></div>` : ''}
+            ${hasFromPlan ? `<div style="font-size:8px;font-weight:500;padding:1px 5px;border-radius:3px;background:rgba(29,158,117,.15);color:#1D9E75;border:.5px solid rgba(29,158,117,.3)">${t('dynamic.from.plan')}</div>` : ''}
           </div>
-          <div style="font-size:10px;color:var(--t4);margin-top:2px">${rolls.length} 卷${totalPhotos ? ' · ' + totalPhotos + ' 张照片' : ''}</div>
+          <div style="font-size:10px;color:var(--t4);margin-top:2px">${rollCountLabel}</div>
         </div>
         <!-- 展开箭头 -->
         <div style="font-size:13px;color:rgba(255,255,255,.2);transform:${isOpen?'rotate(90deg)':'rotate(0)'};transition:transform .2s">›</div>
@@ -1768,8 +1905,11 @@ function rollMiniCard(r) {
   const photoCount = (r.photos||[]).length;
   const chips = [];
   if(r.location) chips.push(r.location);
-  if(r.theme)    chips.push(r.theme);
-  if(r.light)    chips.push(r.light);
+  if(r.theme){
+    const idx=THEMES.indexOf(r.theme);
+    chips.push(curLang==='en'&&idx>=0?THEMES_EN[idx]:r.theme);
+  }
+  if(r.light) chips.push(r.light);
 
   return `<div style="position:relative;margin-bottom:6px;border-radius:11px" id="swipe-wrap-${r.id}">
     <!-- 删除底层：默认隐藏，不被overflow裁剪 -->
@@ -1789,7 +1929,7 @@ function rollMiniCard(r) {
           ${chips.length ? `<div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:5px">${chips.map(c=>`<span style="font-size:9px;padding:2px 6px;border-radius:4px;background:rgba(255,255,255,.05);color:var(--t4)">${c}</span>`).join('')}</div>` : ''}
         </div>
         <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px;flex-shrink:0">
-          ${r.fromPlan ? `<div style="font-size:8px;font-weight:500;padding:1px 5px;border-radius:3px;background:rgba(29,158,117,.15);color:#1D9E75;border:.5px solid rgba(29,158,117,.3)">计划</div>` : ''}
+          ${r.fromPlan ? `<div style="font-size:8px;font-weight:500;padding:1px 5px;border-radius:3px;background:rgba(29,158,117,.15);color:#1D9E75;border:.5px solid rgba(29,158,117,.3)">${t('dynamic.from.plan')}</div>` : ''}
           ${stars ? `<div style="font-size:10px;color:var(--amb)">${stars}</div>` : ''}
           <div style="font-size:10px;color:${photoCount?'var(--t4)':'rgba(255,255,255,.1)'}">${photoCount ? photoCount+(curLang==='en'?' shots':' 张') : t('dynamic.pending')}</div>
         </div>
@@ -1801,8 +1941,12 @@ function rollMiniCard(r) {
 
 // ── 保存诊断记录 ──
 function saveDiagRecord(btn){
-  const title=document.getElementById('diagResultTitle').textContent;
-  const desc=document.getElementById('diagResultDesc').textContent;
+  const titleEl=document.getElementById('diagResultTitle');
+  const descEl=document.getElementById('diagResultDesc');
+  const title=titleEl.dataset.zh||titleEl.textContent;
+  const titleEn=titleEl.dataset.en||title;
+  const desc=descEl.dataset.zh||descEl.textContent;
+  const descEn=descEl.dataset.en||desc;
   const fix=document.getElementById('diagResultFix').textContent;
   const colorDot=document.getElementById('diagResultTitle').previousElementSibling.style.background;
   const imgSrc=document.getElementById('diagPreviewImg').src; // 真实照片 base64
@@ -1816,7 +1960,7 @@ function saveDiagRecord(btn){
     session.photos.unshift({
       bg:'rgba(30,30,30,1)', tint:'none',
       label:'新增', imgSrc,
-      problem:{dot:colorDot, title, desc}
+      problem:{dot:colorDot, title, titleEn, desc, descEn}
     });
     session.summary=`共 ${session.photos.length} 张，最新于 ${dateStr}`;
   } else {
@@ -1828,7 +1972,7 @@ function saveDiagRecord(btn){
       photos:[{
         bg:'rgba(30,30,30,1)', tint:'none',
         label:'新增', imgSrc,
-        problem:{dot:colorDot, title, desc}
+        problem:{dot:colorDot, title, titleEn, desc, descEn}
       }]
     });
   }
@@ -1836,7 +1980,7 @@ function saveDiagRecord(btn){
 
   btn.textContent=t('dynamic.saved'); btn.style.background='rgba(29,158,117,.8)'; btn.style.color='white';
   setTimeout(()=>{
-    btn.textContent='保存记录'; btn.style.background='var(--amb)'; btn.style.color='#000';
+    btn.textContent=t('diag.save'); btn.style.background='var(--amb)'; btn.style.color='#000';
     resetDiag();
   },900);
 }
@@ -1850,6 +1994,14 @@ const FB_ISSUE_LIST=[
   '对焦模糊（Out of Focus）','运动模糊（Motion Blur）',
   '化学/显影问题（Development Issues）','画面正常，无问题'
 ];
+const FB_ISSUE_LIST_EN=[
+  'Light Leak','Underexposure','Overexposure',
+  'Multiple Exposures','Frame Overlap',
+  'Half / Blank Frame','Shutter Problems',
+  'Expired Film','Heat Damage',
+  'Out of Focus','Motion Blur',
+  'Development Issues','No Issues — Image is Normal'
+];
 let _fbSelected=null;
 
 function initFeedbackPage(){
@@ -1861,15 +2013,16 @@ function initFeedbackPage(){
   document.getElementById('fbNote').value='';
   // 重置提交按钮
   const submitBtn=document.querySelector('#pg-diag-feedback .submit-btn');
-  if(submitBtn){submitBtn.textContent='提交反馈';submitBtn.style.background='var(--amb)';submitBtn.style.color='#000';}
-  // 渲染选项列表
+  if(submitBtn){submitBtn.textContent=t('feedback.submit');submitBtn.style.background='var(--amb)';submitBtn.style.color='#000';}
+  // 渲染选项列表（双语）
+  const labels=curLang==='en'?FB_ISSUE_LIST_EN:FB_ISSUE_LIST;
   const list=document.getElementById('fbOptionList');
   list.innerHTML=FB_ISSUE_LIST.map((issue,i)=>`
     <div id="fb-opt-${i}" onclick="selectFbOption(${i},'${issue.replace(/'/g,"\\'")}')"
       style="display:flex;align-items:center;gap:10px;padding:12px 14px;border-bottom:${i<FB_ISSUE_LIST.length-1?'.5px solid var(--div)':'none'};cursor:pointer;transition:background .15s"
       onmouseover="this.style.background='rgba(255,255,255,.04)'" onmouseout="this.style.background=''">
       <div id="fb-radio-${i}" style="width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(255,255,255,.2);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s"></div>
-      <span style="font-size:12px;color:var(--t2)">${issue}</span>
+      <span style="font-size:12px;color:var(--t2)">${labels[i]}</span>
     </div>`).join('');
 }
 
@@ -1909,7 +2062,7 @@ function submitFeedback(btn){
   window._feedbacks.push(feedback);
   console.log('[Feedback]',feedback);
 
-  btn.textContent='已提交，谢谢！';btn.style.background='rgba(29,158,117,.8)';btn.style.color='white';
+  btn.textContent=t('feedback.submitted');btn.style.background='rgba(29,158,117,.8)';btn.style.color='white';
   setTimeout(()=>back(),900);
 }
 let _swipeX=0,_swipeStartY=0,_swipeOpen=null,_swipeMoved=false;
@@ -1986,7 +2139,7 @@ function deleteRoll(id){
   if(idx>-1)ROLLS.splice(idx,1);
   _swipeOpen=null;
   renderRollList();renderFilmGroups();
-  document.getElementById('archiveSubtitle').textContent=`${ROLLS.length} 卷`;
+  document.getElementById('archiveSubtitle').textContent=curLang==='en'?`${ROLLS.length} roll${ROLLS.length!==1?'s':''}`:`${ROLLS.length} 卷`;
 }
 function renderFilmGroups() {
   const groups = {};
@@ -2011,9 +2164,9 @@ function renderFilmGroups() {
         <div style="flex:1;min-width:0">
           <div style="font-size:13px;font-weight:500;color:var(--t);margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${g.film}</div>
           <div style="display:flex;gap:5px;align-items:center">
-            <span style="font-size:10px;color:var(--t3)">${g.rolls.length} 卷</span>
+            <span style="font-size:10px;color:var(--t3)">${g.rolls.length}${curLang==='en'?` roll${g.rolls.length!==1?'s':''}`:' 卷'}</span>
             <span style="font-size:10px;color:var(--t4)">·</span>
-            <span style="font-size:10px;color:${totalPhotos?'var(--t3)':'var(--t4)'}">${totalPhotos?totalPhotos+' 张照片':'暂无照片'}</span>
+            <span style="font-size:10px;color:${totalPhotos?'var(--t3)':'var(--t4)'}">${totalPhotos?(totalPhotos+(curLang==='en'?` photo${totalPhotos!==1?'s':''}`:' 张照片')):(curLang==='en'?'No photos':'暂无照片')}</span>
           </div>
           <div style="display:flex;align-items:center;gap:5px;margin-top:5px">
             <div style="width:5px;height:5px;border-radius:50%;background:${typeColor}"></div>
@@ -2036,8 +2189,8 @@ function openFilmGroup(filmNameEncoded) {
   fgdAllPhotos = group.flatMap(r=>(r.photos||[]).map(src=>({src,date:r.date||'',camera:r.camera||'',rollNum:r.rollNum})));
   document.getElementById('fgdTitle').textContent = filmName;
   document.getElementById('fgdMeta').innerHTML =
-    `<span style="font-size:10px;background:rgba(255,255,255,.07);padding:2px 7px;border-radius:4px;color:var(--t3)">${group.length} 卷</span>`+
-    (fgdAllPhotos.length?`<span style="font-size:10px;background:rgba(255,255,255,.07);padding:2px 7px;border-radius:4px;color:var(--t3)">${fgdAllPhotos.length} 张照片</span>`:'');
+    `<span style="font-size:10px;background:rgba(255,255,255,.07);padding:2px 7px;border-radius:4px;color:var(--t3)">${group.length}${curLang==='en'?` roll${group.length!==1?'s':''}`:' 卷'}</span>`+
+    (fgdAllPhotos.length?`<span style="font-size:10px;background:rgba(255,255,255,.07);padding:2px 7px;border-radius:4px;color:var(--t3)">${fgdAllPhotos.length}${curLang==='en'?` photo${fgdAllPhotos.length!==1?'s':''}`:' 张照片'}</span>`:'');
   const grid=document.getElementById('fgdGrid'), empty=document.getElementById('fgdEmpty');
   if (!fgdAllPhotos.length) { grid.innerHTML=''; empty.style.display='block'; }
   else {
@@ -2085,7 +2238,7 @@ function nrOnFiles(input){
   const bar=document.getElementById('nrLoadingBar');
   const txt=document.getElementById('nrLoadingText');
   loading.style.display='block'; bar.style.width='0%';
-  txt.textContent=`正在处理 ${files.length} 张照片…`;
+  txt.textContent=curLang==='en'?`Processing ${files.length} photo${files.length!==1?'s':''}…`:`正在处理 ${files.length} 张照片…`;
   let done=0;
   files.forEach(file=>{
     const r=new FileReader();
@@ -2136,7 +2289,7 @@ function createNewRoll(){
   ROLLS.sort((a,b)=>b.date.localeCompare(a.date));
   expandedDates.clear();expandedDates.add(dateStr);
   renderRollList();renderFilmGroups();
-  document.getElementById('archiveSubtitle').textContent=`${ROLLS.length} 卷`;
+  document.getElementById('archiveSubtitle').textContent=curLang==='en'?`${ROLLS.length} roll${ROLLS.length!==1?'s':''}`:`${ROLLS.length} 卷`;
   back();
 }
 
@@ -2153,7 +2306,9 @@ function openRollDetail(id) {
   setRdField('rdDate', r.date);
   setRdField('rdLocation', r.location);
   setRdField('rdLight', r.light);
-  setRdField('rdTheme', r.theme);
+  const themeIdx = THEMES.indexOf(r.theme);
+  const themeDisplay = (curLang==='en' && themeIdx>=0) ? THEMES_EN[themeIdx] : r.theme;
+  setRdField('rdTheme', themeDisplay);
   renderStars(r.rating);
   const ta = document.getElementById('rdNotes');
   ta.value = r.notes || '';
@@ -2164,7 +2319,8 @@ function openRollDetail(id) {
   document.getElementById('rollDetail').style.display = 'flex';
   // 重置保存按钮状态
   const saveBtn=document.querySelector('#rollDetail .save-btn');
-  if(saveBtn){saveBtn.textContent='保存';saveBtn.style.background='var(--amb)';saveBtn.style.opacity='1';}
+  if(saveBtn){saveBtn.textContent=t('rd.save');saveBtn.style.background='var(--amb)';saveBtn.style.opacity='1';}
+  applyLang();
 }
 
 function saveRollDetail(btn){
@@ -2180,7 +2336,7 @@ function setRdField(id, val) {
   if (!el) return;
   el.innerHTML = val
     ? `<span style="color:var(--t2)">${val}</span>`
-    : `<span style="color:var(--t4)">点击添加…</span>`;
+    : `<span style="color:var(--t4)">${t('dynamic.tap.add')}</span>`;
 }
 
 function closeRollDetail() {
@@ -2198,10 +2354,10 @@ function closeRollDetail() {
 // ── 照片 Grid ──
 function renderRdPhotoGrid() {
   const photos = currentRoll.photos || [];
-  document.getElementById('rdPhotoLabel').textContent = photos.length ? `照片 · ${photos.length} 张` : '照片';
+  document.getElementById('rdPhotoLabel').textContent = curLang==='en'?(photos.length?`Photos · ${photos.length}`:'Photos'):(photos.length?`照片 · ${photos.length} 张`:'照片');
   const grid = document.getElementById('rdPhotoGrid');
   if (!photos.length) {
-    grid.innerHTML = `<div style="grid-column:span 3;padding:22px;text-align:center;font-size:11px;color:var(--t4)">还没有照片，点击下方添加</div>`;
+    grid.innerHTML = `<div style="grid-column:span 3;padding:22px;text-align:center;font-size:11px;color:var(--t4)">${t('rd.no.photos')}</div>`;
     return;
   }
   grid.innerHTML = photos.map((src,i) =>
@@ -2222,7 +2378,7 @@ function rdOnFiles(input) {
   const bar=document.getElementById('rdLoadingBar');
   const txt=document.getElementById('rdLoadingText');
   loading.style.display='block'; bar.style.width='0%';
-  txt.textContent=`正在处理 ${files.length} 张照片…`;
+  txt.textContent=curLang==='en'?`Processing ${files.length} photo${files.length!==1?'s':''}…`:`正在处理 ${files.length} 张照片…`;
   let done=0;
   files.forEach(file => {
     const reader = new FileReader();
@@ -2285,7 +2441,7 @@ function editField(elId, label) {
 
   // 在 el 位置渲染一个 inline input
   el.innerHTML = `<input id="inlineInp-${elId}" value="${curVal.replace(/"/g,'&quot;')}"
-    placeholder="${label}…"
+    placeholder=""
     style="background:transparent;border:none;border-bottom:1px solid var(--amb);outline:none;color:var(--t);font-size:12px;font-family:var(--font);width:100%;text-align:right;padding:2px 0"
     onblur="commitField('${elId}','${key}','${label}')"
     onkeydown="if(event.key==='Enter')this.blur()">`;
@@ -2500,8 +2656,6 @@ function addFilm(name){if(planFilms.find(f=>f.name===name))return;const film=FIL
 function removeFilm(name){planFilms=planFilms.filter(f=>f.name!==name);refreshFilmList();renderAdvice(getWeather(selDate));}
 function refreshFilmList(){document.getElementById('filmAddedList').innerHTML=planFilms.map(f=>`<div class="film-added-row"><div class="far-dot" style="background:${TC[f.type]}"></div><div class="far-name">${f.name}<span style="font-size:10px;color:var(--t3);margin-left:6px">ISO ${f.iso} · ${TN(f.type)}</span></div><div class="far-rm" onclick="removeFilm('${f.name.replace(/'/g,"\\'")}')">×</div></div>`).join('');}
 
-const THEMES=['情侣写真','生日派对','婚礼纪念','旅行记录','街头扫街','人像写真','风景记录','家庭聚会','毕业纪念','日常生活','美食探店','宠物拍摄'];
-const THEMES_EN=['Couple Portrait','Birthday Party','Wedding','Travel','Street Photo','Portrait','Landscape','Family','Graduation','Daily Life','Food','Pets'];
 let selThemes=new Set();
 function renderThemes(){
   const labels=curLang==='en'?THEMES_EN:THEMES;
@@ -2566,11 +2720,14 @@ function planCardHTML(plan){
   const unique=[...new Set(allFilms)];
   const displayFilms=unique.length>0?unique:[];
 
-  // Date title
+  // Date title — use selDate for accurate comparison
   const sd=new Date(plan.selDate||Date.now());
-  const m=sd.getMonth()+1, d=sd.getDate();
+  sd.setHours(0,0,0,0);
+  const today=new Date();today.setHours(0,0,0,0);
+  const diff=Math.round((sd-today)/(864e5));
+  const mos=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   const dateTitle=curLang==='en'
-    ?(plan.dateTitle==='今天'?`Today's Plan`:plan.dateTitle==='明天'?`Tomorrow's Plan`:`${m}/${d} Plan`)
+    ?(diff===0?`Today's Plan`:`${mos[sd.getMonth()]} ${sd.getDate()} Plan`)
     :plan.dateTitle+t('dynamic.plan.of');
 
   // Tags: weather, location, subject, themes (translated)
@@ -2713,21 +2870,84 @@ function clearCF(){cFilm=null;document.getElementById('cFI').value='';document.g
 function chgYr(d){cYear=Math.max(1970,Math.min(new Date().getFullYear(),cYear+d));document.getElementById('cYr').textContent=cYear;if(cFilm)calcExp();}
 function setStor(v,el){cStor=v;document.querySelectorAll('.sopt2').forEach(s=>s.classList.remove('on'));el.classList.add('on');if(cFilm)calcExp();}
 function calcExp(){
-  if(!cFilm)return;const yr=new Date().getFullYear(),exp=Math.max(0,yr-cYear);
-  const isSlide=cFilm.type==='slide',isBW=cFilm.type==='bw';const mult={freeze:.2,fridge:.5,room:1,hot:1.8}[cStor];const effDec=(exp/10)*mult;
-  let stops=isSlide?Math.ceil(effDec*1.5):isBW?Math.round(effDec*.7):Math.round(effDec);stops=Math.max(0,Math.min(5,stops));
-  const recISO=Math.round(cFilm.iso/Math.pow(2,stops));let risk=Math.min(100,effDec*25);if(isSlide)risk=Math.min(100,risk*1.4);if(isBW)risk=Math.min(100,risk*.7);
-  const rc=risk<30?'#1D9E75':risk<60?'#F5A623':'#E24B4A';const sn={freeze:'冷冻保存',fridge:'冷藏保存',room:'室温保存',hot:'高温环境'}[cStor];
+  if(!cFilm)return;
+  const en=curLang==='en';
+  const yr=new Date().getFullYear(),exp=Math.max(0,yr-cYear);
+  const isSlide=cFilm.type==='slide',isBW=cFilm.type==='bw';
+  const mult={freeze:.2,fridge:.5,room:1,hot:1.8}[cStor];
+  const effDec=(exp/10)*mult;
+  let stops=isSlide?Math.ceil(effDec*1.5):isBW?Math.round(effDec*.7):Math.round(effDec);
+  stops=Math.max(0,Math.min(5,stops));
+  const recISO=Math.round(cFilm.iso/Math.pow(2,stops));
+  let risk=Math.min(100,effDec*25);if(isSlide)risk=Math.min(100,risk*1.4);if(isBW)risk=Math.min(100,risk*.7);
+  const rc=risk<30?'#1D9E75':risk<60?'#F5A623':'#E24B4A';
+
+  // Storage name
+  const sn=en
+    ?{freeze:'Frozen',fridge:'Refrigerated',room:'Room Temp',hot:'Hot/Humid'}[cStor]
+    :{freeze:'冷冻保存',fridge:'冷藏保存',room:'室温保存',hot:'高温环境'}[cStor];
+
+  // Recommended ISO card
   document.getElementById('cRiso').textContent='ISO '+(recISO<25?'≈':'')+recISO;
-  document.getElementById('cRsub').textContent=`原始 ISO ${cFilm.iso} · ${sn} · 约过期 ${exp} 年`;
-  document.getElementById('cRcomp').innerHTML=stops===0?'无需 <span>补偿</span>':`+${stops} <span>档</span>`;
-  document.getElementById('cRkf').style.width=risk+'%';document.getElementById('cRkf').style.background=rc;
-  document.getElementById('cRexp').innerHTML=stops===0?`按原始 ISO <strong>${cFilm.iso}</strong> 正常拍摄。`:stops===1?`将 ISO 设为 <strong>${recISO}</strong>，或曝光补偿 <strong>+1 档</strong>。`:`将 ISO 设为 <strong>${recISO}</strong>（+${stops} 档），建议包围曝光。`;
-  document.getElementById('cRcolor').innerHTML=isSlide?(exp<5?'年限较短，色彩仍相对准确。':'色偏明显，建议视为创意媒介。'):isBW?(stops<=1?'黑白耐久性佳，颗粒略增。':'颗粒增强，形成独特质感。'):(stops===0?'色彩与新卷基本一致。':stops<=2?'可能轻微暖色偏移。':'明显色偏，拥抱随机性。');
-  document.getElementById('cRwarn').innerHTML=cStor==='hot'?'<strong>高温储存风险极高</strong>。':isSlide&&exp>10?'<strong>不建议重要场合使用</strong>。':stops>=3?'建议<strong>包围曝光</strong>，告知冲洗店。':exp===0?'胶卷未过期，正常使用即可。':'冲洗时<strong>告知实验室</strong>是过期卷。';
-  const tips=[];if(stops>0)tips.push(`设置 ISO ${recISO}，或补偿 +${stops} 档`);if(!isSlide)tips.push('轻微过曝比欠曝安全');if(exp>5)tips.push('先拍测试张再正式拍');tips.push('告知冲洗店是过期卷，按原始 ISO 冲洗');
-  document.getElementById('cRtips').innerHTML=tips.map(t=>`<div class="tipitem"><div class="tipdot"></div><div>${t}</div></div>`).join('');
-  document.getElementById('ecalc').classList.add('hide');setTimeout(()=>document.getElementById('cRwrap').classList.add('show'),10);
+  document.getElementById('cRsub').textContent=en
+    ?`Original ISO ${cFilm.iso} · ${sn} · ~${exp} year${exp!==1?'s':''} expired`
+    :`原始 ISO ${cFilm.iso} · ${sn} · 约过期 ${exp} 年`;
+  document.getElementById('cRcomp').innerHTML=stops===0
+    ?(en?'No <span>compensation</span>':'无需 <span>补偿</span>')
+    :`+${stops} <span>${en?'stop'+(stops>1?'s':''):'档'}</span>`;
+
+  // Risk bar
+  document.getElementById('cRkf').style.width=risk+'%';
+  document.getElementById('cRkf').style.background=rc;
+
+  // Exposure advice
+  document.getElementById('cRexp').innerHTML=stops===0
+    ?(en?`Shoot at original ISO <strong>${cFilm.iso}</strong> as normal.`:`按原始 ISO <strong>${cFilm.iso}</strong> 正常拍摄。`)
+    :stops===1
+    ?(en?`Set ISO to <strong>${recISO}</strong>, or dial in <strong>+1 stop</strong> exposure compensation.`:`将 ISO 设为 <strong>${recISO}</strong>，或曝光补偿 <strong>+1 档</strong>。`)
+    :(en?`Set ISO to <strong>${recISO}</strong> (+${stops} stops). Bracket your exposures.`:`将 ISO 设为 <strong>${recISO}</strong>（+${stops} 档），建议包围曝光。`);
+
+  // Colour expectation
+  document.getElementById('cRcolor').innerHTML=isSlide
+    ?(exp<5
+      ?(en?'Relatively short lifespan — colours still fairly accurate.':'年限较短，色彩仍相对准确。')
+      :(en?'Noticeable colour shift — treat as a creative medium.':'色偏明显，建议视为创意媒介。'))
+    :isBW
+    ?(stops<=1
+      ?(en?'B&W holds up well — slight grain increase.':'黑白耐久性佳，颗粒略增。')
+      :(en?'Increased grain — forms a unique, textured look.':'颗粒增强，形成独特质感。'))
+    :(stops===0
+      ?(en?'Colours comparable to fresh film.':'色彩与新卷基本一致。')
+      :stops<=2
+      ?(en?'Possible mild warm colour shift.':'可能轻微暖色偏移。')
+      :(en?'Noticeable colour shift — embrace the randomness.':'明显色偏，拥抱随机性。'));
+
+  // Warning / notice
+  document.getElementById('cRwarn').innerHTML=cStor==='hot'
+    ?(en?'<strong>High risk from hot storage</strong>.':'<strong>高温储存风险极高</strong>。')
+    :isSlide&&exp>10
+    ?(en?'<strong>Not recommended for important occasions</strong>.':'<strong>不建议重要场合使用</strong>。')
+    :stops>=3
+    ?(en?'Bracket your exposures and <strong>inform the lab</strong>.':'建议<strong>包围曝光</strong>，告知冲洗店。')
+    :exp===0
+    ?(en?'Film is not expired — shoot normally.':'胶卷未过期，正常使用即可。')
+    :(en?'<strong>Tell the lab</strong> it\'s expired when developing.':'冲洗时<strong>告知实验室</strong>是过期卷。');
+
+  // Shooting tips
+  const tips=en?[
+    ...(stops>0?[`Set ISO ${recISO}, or compensate +${stops} stop${stops>1?'s':''}`]:[]),
+    ...(!isSlide?['Slight overexposure is safer than underexposure']:[]),
+    ...(exp>5?['Shoot a test frame before your main shots']:[]),
+    `Tell the lab it's expired — develop at box speed`,
+  ]:[
+    ...(stops>0?[`设置 ISO ${recISO}，或补偿 +${stops} 档`]:[]),
+    ...(!isSlide?['轻微过曝比欠曝安全']:[]),
+    ...(exp>5?['先拍测试张再正式拍']:[]),
+    '告知冲洗店是过期卷，按原始 ISO 冲洗',
+  ];
+  document.getElementById('cRtips').innerHTML=tips.map(tip=>`<div class="tipitem"><div class="tipdot"></div><div>${tip}</div></div>`).join('');
+  document.getElementById('ecalc').classList.add('hide');
+  setTimeout(()=>document.getElementById('cRwrap').classList.add('show'),10);
 }
 
 // ══ DIAGNOSIS HISTORY ══
@@ -2817,7 +3037,7 @@ function renderHistory() {
           <div style="display:flex;align-items:center;gap:8px">
             <!-- X 张有问题 badge -->
             ${problemCount > 0
-              ? `<div style="font-size:9px;font-weight:500;background:rgba(${s.issueColor==='#e05252'?'224,82,82':s.issueColor==='#F5A623'?'245,166,35':s.issueColor==='#5B7EA8'?'91,126,168':'159,225,203'},.15);border:.5px solid ${s.issueColor}40;color:${s.issueColor};padding:2px 7px;border-radius:4px">${problemCount} 张有问题</div>`
+              ? `<div style="font-size:9px;font-weight:500;background:rgba(${s.issueColor==='#e05252'?'224,82,82':s.issueColor==='#F5A623'?'245,166,35':s.issueColor==='#5B7EA8'?'91,126,168':'159,225,203'},.15);border:.5px solid ${s.issueColor}40;color:${s.issueColor};padding:2px 7px;border-radius:4px">${problemCount}${curLang==='en'?` problem${problemCount!==1?'s':''}`:' 张有问题'}</div>`
               : `<div style="font-size:9px;color:rgba(29,158,117,.8)">全部正常</div>`}
             <div style="font-size:16px;color:rgba(255,255,255,.18)">›</div>
           </div>
@@ -2838,13 +3058,13 @@ function openSession(id) {
   // Header
   document.getElementById('modalTitle').textContent = currentSession.issue;
   document.getElementById('modalMeta').textContent = `${currentSession.camera} · ${currentSession.film}`;
-  document.getElementById('modalStatTotal').textContent = `${total} 张`;
+  document.getElementById('modalStatTotal').textContent = curLang==='en'?`${total} photo${total!==1?'s':''}`:`${total} 张`;
   const probEl = document.getElementById('modalStatProb');
   if (problemCount > 0) {
-    probEl.textContent = `${problemCount} 张有问题`;
+    probEl.textContent = curLang==='en'?`${problemCount} problem${problemCount!==1?'s':''}`:`${problemCount} 张有问题`;
     probEl.style.cssText = `font-size:10px;background:${currentSession.issueColor}22;border:.5px solid ${currentSession.issueColor}55;color:${currentSession.issueColor};border-radius:4px;padding:2px 7px`;
   } else {
-    probEl.textContent = '全部正常';
+    probEl.textContent = curLang==='en'?'All clear':'全部正常';
     probEl.style.cssText = 'font-size:10px;color:rgba(29,158,117,.8)';
   }
 
@@ -2901,7 +3121,7 @@ function selectPhoto(idx) {
   }
   bigImg.src = photo.imgSrc || '';
   bigImg.style.display = photo.imgSrc ? 'block' : 'none';
-  document.getElementById('modalBigNum').textContent = `第 ${idx+1} 张`;
+  document.getElementById('modalBigNum').textContent = curLang==='en'?`${idx+1} / ${currentSession.photos.length}`:`第 ${idx+1} 张`;
 
   // 问题标注
   const border = document.getElementById('modalBigBorder');
@@ -2922,12 +3142,12 @@ function selectPhoto(idx) {
   // 详情（紧跟大图下方）
   if (photo.problem) {
     document.getElementById('modalDetailDot').style.background = photo.problem.dot;
-    document.getElementById('modalDetailTitle').textContent = photo.problem.title;
-    document.getElementById('modalDetailDesc').textContent = photo.problem.desc;
+    document.getElementById('modalDetailTitle').textContent = curLang==='en'?(photo.problem.titleEn||photo.problem.title):photo.problem.title;
+    document.getElementById('modalDetailDesc').textContent = curLang==='en'?(photo.problem.descEn||photo.problem.desc):photo.problem.desc;
   } else {
     document.getElementById('modalDetailDot').style.background = 'rgba(29,158,117,.8)';
-    document.getElementById('modalDetailTitle').textContent = '未发现异常';
-    document.getElementById('modalDetailDesc').textContent = '这张底片曝光、对焦、色彩均在正常范围内，无需处理。';
+    document.getElementById('modalDetailTitle').textContent = curLang==='en'?'No Issues Found':'未发现异常';
+    document.getElementById('modalDetailDesc').textContent = curLang==='en'?'Exposure, focus and colour all within normal range — no action needed.':'这张底片曝光、对焦、色彩均在正常范围内，无需处理。';
   }
 
   // Carousel：其他照片小图
@@ -3097,7 +3317,7 @@ async function startDiag() {
             },
             {
               type: 'text',
-              text: '请仔细分析这张胶片照片，识别问题，返回 JSON。'
+              text: '请仔细分析这张胶片照片，识别问题，必须返回如下 JSON 格式，所有字段都必须填写，英文字段必须是准确的英文翻译：{"title":"中文标题","titleEn":"English title","color":"十六进制颜色","desc":"中文原因描述","descEn":"English description of the issue","fix":"中文处理建议","fixEn":"English fix advice","conf":置信度0-100,"secondary":"次要问题中文（没有则省略）","secondaryEn":"secondary issue in English (omit if none)"}'
             }
           ]
         }]
@@ -3112,17 +3332,28 @@ async function startDiag() {
 
     if (match) {
       const r = JSON.parse(match[0]);
-      document.getElementById('diagResultTitle').textContent = r.title || '诊断完成';
+      // Store bilingual data on window for save
+      window._diagResult = r;
+      const title = (curLang==='en' ? r.titleEn||r.title : r.title) || (curLang==='en'?'Diagnosis complete':'诊断完成');
+      const desc  = (curLang==='en' ? r.descEn||r.desc   : r.desc)  || '';
+      const fix   = (curLang==='en' ? r.fixEn||r.fix     : r.fix)   || '';
+      document.getElementById('diagResultTitle').textContent = title;
+      document.getElementById('diagResultTitle').dataset.zh = r.title||'';
+      document.getElementById('diagResultTitle').dataset.en = r.titleEn||r.title||'';
       document.getElementById('diagResultTitle').previousElementSibling.style.background = r.color || '#9FE1CB';
-      document.getElementById('diagResultDesc').textContent = r.desc || '';
-      document.getElementById('diagResultFix').textContent = r.fix || '';
+      document.getElementById('diagResultDesc').textContent = desc;
+      document.getElementById('diagResultDesc').dataset.zh = r.desc||'';
+      document.getElementById('diagResultDesc').dataset.en = r.descEn||r.desc||'';
+      document.getElementById('diagResultFix').textContent = fix;
+      document.getElementById('diagResultFix').dataset.zh = r.fix||'';
+      document.getElementById('diagResultFix').dataset.en = r.fixEn||r.fix||'';
       document.getElementById('diagConfBar').style.width = (r.conf || 80) + '%';
       document.getElementById('diagConfVal').textContent = (r.conf || 80) + '%';
-      // 显示次要问题
       const secEl = document.getElementById('diagSecondary');
       if (secEl) {
-        if (r.secondary) {
-          secEl.textContent = '同时检测到：' + r.secondary;
+        const sec = curLang==='en'?(r.secondaryEn||r.secondary):r.secondary;
+        if (sec) {
+          secEl.textContent = (curLang==='en'?'Also detected: ':'同时检测到：') + sec;
           secEl.style.display = 'block';
         } else {
           secEl.style.display = 'none';
