@@ -2473,19 +2473,22 @@ let liveWeatherData = null; // {city, weather, temp, wType}
 // 把天气描述映射到 WDATA 类型
 function mapWeatherType(weather, temp) {
   const w = weather.toLowerCase();
-  if (w.includes('雨') || w.includes('rain') || w.includes('storm') || w.includes('雷')) return 'rainy';
-  if (w.includes('云') || w.includes('阴') || w.includes('cloud') || w.includes('overcast')) {
-    if (temp >= 28) return 'hot';
-    return 'cloudy';
+  if (w.includes('雨') || w.includes('rain') || w.includes('storm') || w.includes('雷') || w.includes('thunder') || w.includes('drizzle') || w.includes('毛毛')) return 'rainy';
+  if (w.includes('雪') || w.includes('snow')) return 'cold';
+  if (w.includes('阴') || w.includes('overcast')) return 'cloudy';
+  if (w.includes('云') || w.includes('cloud') || w.includes('fog') || w.includes('雾') || w.includes('partly')) {
+    if (temp >= 30) return 'hot';
+    return 'partly';
   }
   if (w.includes('晴') || w.includes('sun') || w.includes('clear')) {
-    if (temp >= 28) return 'hot';
+    if (temp >= 30) return 'hot';
     if (temp <= 12) return 'cold';
     return 'sunny';
   }
-  if (temp >= 28) return 'hot';
-  if (temp <= 12) return 'cold';
-  return 'cloudy';
+  // fallback by temperature
+  if (temp >= 32) return 'hot';
+  if (temp <= 10) return 'cold';
+  return 'partly';
 }
 
 async function fetchLiveWeather() {
