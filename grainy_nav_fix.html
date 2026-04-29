@@ -1677,6 +1677,12 @@ function applyLang(){
   const fcCity=document.getElementById('forecastCity');
   if(fcCity&&!fcCity.textContent)fcCity.textContent=curLang==='en'?'current location':'当前位置';
   if(rdNotes)rdNotes.placeholder=curLang==='en'?'How did this roll go? Write your thoughts…':'这卷拍得怎么样？记录你的想法…';
+  // Update live weather text if available
+  if(window._updateLiveWeatherText) window._updateLiveWeatherText();
+  else {
+    const lw=document.getElementById('liveWeather');
+    if(lw)lw.textContent=curLang==='en'?'Today · Locating…':'今天 · 定位中…';
+  }
   // Diag remain count
   const rPre=document.getElementById('diagRemainPre');
   const rSuf=document.getElementById('diagRemainSuf');
@@ -2486,7 +2492,7 @@ async function fetchLiveWeather() {
   const el = document.getElementById('liveWeather');
 
   // 1. 获取地理位置
-  let lat = 1.35, lon = 103.82, cityName = '新加坡';
+  let lat = 1.35, lon = 103.82, cityName = '新加坡', cityNameEn = 'Singapore';
   try {
     const pos = await new Promise((res, rej) =>
       navigator.geolocation.getCurrentPosition(res, rej, { timeout: 8000 })
@@ -2496,7 +2502,7 @@ async function fetchLiveWeather() {
   } catch (e) {}
 
   try {
-    // 2. Open-Meteo 免费天气 API（无需 key）
+    // 2. Open-Meteo 免费天气 API
     const weatherResp = await fetch(
       `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weathercode,windspeed_10m&timezone=auto`
     );
@@ -2504,37 +2510,57 @@ async function fetchLiveWeather() {
     const temp = Math.round(weatherData.current.temperature_2m);
     const code = weatherData.current.weathercode;
 
-    // 3. 用 Open-Meteo geocoding 获取城市名
+    // 3. 获取城市名（中英文各一次）
     try {
-      const geoResp = await fetch(
-        `https://geocoding-api.open-meteo.com/v1/reverse?latitude=${lat}&longitude=${lon}&language=zh`
-      );
-      const geoData = await geoResp.json();
-      cityName = geoData.name || geoData.admin1 || '当前位置';
+      const geoZh = await fetch(`https://geocoding-api.open-meteo.com/v1/reverse?latitude=${lat}&longitude=${lon}&language=zh`);
+      const geoDataZh = await geoZh.json();
+      cityName = geoDataZh.name || geoDataZh.admin1 || '当前位置';
+    } catch(e) {}
+    try {
+      const geoEn = await fetch(`https://geocoding-api.open-meteo.com/v1/reverse?latitude=${lat}&longitude=${lon}&language=en`);
+      const geoDataEn = await geoEn.json();
+      cityNameEn = geoDataEn.name || geoDataEn.admin1 || 'Current Location';
     } catch(e) {}
 
-    // 4. WMO 天气代码转中文描述
+    // 4. WMO 天气代码 → 中英文描述
     function wmoToWeather(code) {
-      if (code === 0) return '晴天';
-      if (code <= 2) return '多云';
-      if (code === 3) return '阴天';
-      if (code <= 49) return '有雾';
-      if (code <= 59) return '毛毛雨';
-      if (code <= 69) return '小雨';
-      if (code <= 79) return '下雪';
-      if (code <= 84) return '阵雨';
-      if (code <= 99) return '雷雨';
-      return '多云';
+      if (code === 0) return {zh:'晴天', en:'Sunny'};
+      if (code <= 2)  return {zh:'多云', en:'Partly Cloudy'};
+      if (code === 3) return {zh:'阴天', en:'Overcast'};
+      if (code <= 49) return {zh:'有雾', en:'Foggy'};
+      if (code <= 59) return {zh:'毛毛雨', en:'Drizzle'};
+      if (code <= 69) return {zh:'小雨', en:'Rainy'};
+      if (code <= 79) return {zh:'下雪', en:'Snowy'};
+      if (code <= 84) return {zh:'阵雨', en:'Showers'};
+      if (code <= 99) return {zh:'雷雨', en:'Thunderstorm'};
+      return {zh:'多云', en:'Cloudy'};
     }
-    const weather = wmoToWeather(code);
-    const wType = mapWeatherType(weather, temp);
+    const weatherObj = wmoToWeather(code);
+    const wType = mapWeatherType(weatherObj.zh, temp);
 
-    liveWeatherData = { city: cityName, weather, temp, wType };
-    if (el) el.textContent = `今天 · ${cityName} · ${weather} ${temp}°`;
+    liveWeatherData = {
+      city: cityName, cityEn: cityNameEn,
+      weather: weatherObj.zh, weatherEn: weatherObj.en,
+      temp, wType
+    };
+
+    // Update home weather line based on current lang
+    function updateLiveWeatherText() {
+      if (!el) return;
+      const city = curLang==='en' ? liveWeatherData.cityEn : liveWeatherData.city;
+      const wx = curLang==='en' ? liveWeatherData.weatherEn : liveWeatherData.weather;
+      const today = curLang==='en' ? 'Today' : '今天';
+      el.textContent = `${today} · ${city} · ${wx} ${temp}°`;
+    }
+    updateLiveWeatherText();
+    // Re-run when language switches
+    window._updateLiveWeatherText = updateLiveWeatherText;
     updateWeatherUI();
 
   } catch (e) {
-    if (el) el.textContent = '今天 · 新加坡 · 实时天气不可用';
+    if (el) el.textContent = curLang==='en'
+      ? 'Today · Singapore · Weather unavailable'
+      : '今天 · 新加坡 · 实时天气不可用';
   }
 }
 
@@ -2586,7 +2612,8 @@ function updateWeatherUI(){
   let w;
   if(liveWeatherData && isToday){
     w={type:liveWeatherData.wType,...WDATA[liveWeatherData.wType]};
-    w={...w,temp:liveWeatherData.temp+'°C',label:liveWeatherData.weather};
+    const wxLabel=curLang==='en'?(liveWeatherData.weatherEn||liveWeatherData.weather):liveWeatherData.weather;
+    w={...w,temp:liveWeatherData.temp+'°C',label:wxLabel};
   } else {
     w=getWeather(sd);
   }
