@@ -3254,9 +3254,9 @@ function onDiagFile(input) {
 // ── GEMINI FILM DIAGNOSIS ──
 // ⚠️ WARNING: Never expose API keys in production client-side code.
 // Use a backend proxy in production. This key is for prototype use only.
-// ── GPT-4o FILM DIAGNOSIS ──
+// ── GEMINI FILM DIAGNOSIS ──
 // ⚠️ WARNING: Never expose API keys in production. Use a backend proxy.
-const OPENAI_API_KEY = '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';
+const GEMINI_API_KEY = 'AIzaSyAe094wQEUaeK-DufmMqMio_c5IaSKUIB0';
 
 const DIAG_SYSTEM_PROMPT = `You are an elite Analog Film Lab Technician with 30 years of experience. Perform a forensic visual analysis on a film scan.
 
@@ -3293,33 +3293,39 @@ async function startDiag() {
   try {
     if (!window._diagBase64) throw new Error('No image data');
 
-    const resp = await fetch('https://api.openai.com/v1/chat/completions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${OPENAI_API_KEY}`
-      },
-      body: JSON.stringify({
-        model: 'gpt-4o',
-        max_tokens: 1000,
-        temperature: 0.1,
-        messages: [
-          { role: 'system', content: DIAG_SYSTEM_PROMPT },
-          { role: 'user', content: [
-            { type: 'image_url', image_url: {
-              url: `data:${window._diagMediaType||'image/jpeg'};base64,${window._diagBase64}`,
-              detail: 'high'
-            }},
-            { type: 'text', text: 'Analyze this film scan. Return ONLY the JSON object.' }
-          ]}
+    const GEMINI_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=' + GEMINI_API_KEY;
+    const PROXY_URL  = 'https://corsproxy.io/?' + encodeURIComponent(GEMINI_URL);
+
+    const body = JSON.stringify({
+      contents: [{
+        parts: [
+          { text: DIAG_SYSTEM_PROMPT + '\n\nAnalyze the following film scan. Return ONLY the JSON object, no markdown, no extra text.' },
+          { inline_data: { mime_type: window._diagMediaType || 'image/jpeg', data: window._diagBase64 } }
         ]
-      })
+      }],
+      generation_config: { temperature: 0.1, top_p: 0.85, max_output_tokens: 1000 }
     });
 
-    const data = await resp.json();
-    if (data.error) throw new Error(data.error.message || 'OpenAI API error');
+    // Try direct first, then proxy
+    let data = null;
+    let lastErr = '';
+    for (const url of [GEMINI_URL, PROXY_URL]) {
+      try {
+        const r = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          referrerPolicy: 'no-referrer',
+          body
+        });
+        const d = await r.json();
+        if (d.error) { lastErr = d.error.message; continue; }
+        data = d;
+        break;
+      } catch(e) { lastErr = e.message; }
+    }
+    if (!data) throw new Error(lastErr || 'All endpoints failed');
 
-    const rawText = data.choices?.[0]?.message?.content || '';
+    const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
     const cleaned = rawText.replace(/```json\n?/g,'').replace(/```\n?/g,'').trim();
     const match = cleaned.match(/\{[\s\S]*\}/);
 
