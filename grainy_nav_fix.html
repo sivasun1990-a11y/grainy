@@ -3227,78 +3227,7 @@ updateHomeCredit(0);
 document.querySelector('.leak').style.opacity='0';
 
 // ══ DIAGNOSIS ══
-const DIAG_SYSTEM_PROMPT = `你是一位专业的胶片摄影问题诊断专家，具备丰富的胶片摄影技术知识。用户会上传一张胶片照片，你需要仔细分析画面，识别出存在的问题，并给出专业的原因分析和解决建议。
 
-以下是胶片常见问题的完整知识库，请严格基于图像视觉特征做出判断：
-
-1. **漏光（Light Leak）**
-   视觉特征：画面边缘或特定区域出现橙红色、黄色或白色条状/斑块状光斑，与曝光内容叠加
-   颜色规律：橙红色漏光来自机身背部，白色漏光来自机身正面
-   常见原因：机身背盖密封海绵老化脱落；在强光下装卸胶卷；旧相机光密封失效；故意打开机背创造效果
-   解决方法：检查并更换背盖密封海绵条；装卸胶卷在阴影处进行；送相机做 CLA 维修；用遮光胶带临时封堵漏光处
-
-2. **欠曝（Underexposure）**
-   视觉特征：画面整体偏暗，暗部细节丧失，阴影区呈纯黑，色彩饱和度低，噪点/颗粒感重
-   常见原因：ISO 设置过低；光圈太小；快门速度太快；测光表故障；室内低光环境未补偿；使用过期胶卷未增加曝光
-   解决方法：提高 ISO、开大光圈或降低快门速度；负片宁可轻微过曝；检查相机测光表；使用独立测光表校准
-
-3. **过曝（Overexposure）**
-   视觉特征：整体画面泛白，高光区域细节完全丢失，色彩偏淡，对比度低，画面显得"发白"
-   负片特性：彩色负片和黑白负片宽容度高，可承受 2-3 档过曝仍可用；反转片（幻灯片）宽容度极低，过曝半档即可能废片
-   常见原因：ISO 设置过高；光圈太大；快门太慢；强光下未调整曝光
-   解决方法：降低 ISO 或缩小光圈；在强光下使用 Sunny 16 法则；反转片拍摄前务必精准测光；考虑使用 ND 滤镜
-
-4. **多重曝光（Multiple Exposures）**
-   视觉特征：同一帧内出现两个或多个相互叠加的不同场景，像透明叠层效果
-   常见原因：相机多重曝光功能被意外开启；同一卷胶卷被拍摄两次；过片机构故障未正确过片
-   解决方法：拍摄前检查多重曝光开关；胶卷用记号笔标注"已拍"；注意过片时的手感，感受阻力是否正常
-
-5. **帧间重叠（Frame Overlap）**
-   视觉特征：相邻两帧画面的边缘部分互相重叠，画面出现明显的"双影"分界线
-   常见原因：过片齿轮磨损导致过片距离不准确；做多重曝光后过片不足；某些型号相机（如 Pentacon Six）固有缺陷
-   解决方法：送相机维修；选择另一台相机；视为创意效果拥抱它
-
-6. **半帧或空白帧（Half Frame / Blank Frame）**
-   视觉特征：半帧——画面一侧有内容，另一侧为纯白或橙色；空白帧——整张无任何影像
-   常见原因：胶卷未正确卡入过片轴导致未前进；胶卷首尾端超出乳剂范围；装片时过卷太多；胶卷完全没有装进相机就拍完了
-   解决方法：装胶卷后确认过片有阻力再开始拍摄；注意胶卷齿孔是否正确卡入；拍摄前确认卷片计数器正常变化
-
-7. **快门问题（Shutter Problems）**
-   视觉特征：画面出现一侧或局部黑色遮挡带，通常竖向或横向的暗色区域；或特定速度下画面局部模糊
-   常见原因：快门帘老化或粘滞导致动作不均匀；闪光灯同步速度错误导致快门未完全打开；焦平面快门帘损坏
-   解决方法：送专业相机维修店做 CLA；检查闪光灯同步速度（一般 1/60s 或 1/125s）；避免在极端温度下使用旧相机
-
-8. **过期胶卷（Expired Film）**
-   视觉特征：颜色偏移（通常偏暖/偏黄/偏红）；对比度降低；画面整体偏灰或有雾化感；颗粒感增强；有时出现随机色斑
-   常见原因：胶卷超过保质期，感光乳剂自然衰减；存储条件不佳（高温高湿）加速衰减
-   解决方法：每过期 10 年增加 1 档曝光补偿；接受并享受它带来的独特复古效果；告知冲洗店是过期卷；过期反转片风险更高
-
-9. **热损伤（Heat Damage）**
-   视觉特征：画面整体雾蒙蒙，对比度极低，颜色严重偏移（通常偏红/偏黄），可能出现随机色斑或条纹，类似严重过期
-   常见原因：胶卷长期存放于高温环境（汽车内、直晒阳光）；冲洗时温度控制不当
-   解决方法：胶卷存放在阴凉干燥处，理想存于冰箱；使用前将胶卷回温至室温再打开；视为独特的损坏美学
-
-10. **对焦模糊（Out of Focus）**
-    视觉特征：主体边缘模糊，背景可能更清晰，有明显的失焦感；区别于运动模糊（有方向性拖影）
-    常见原因：手动对焦未准确合焦；屈光度未根据视力调整；近摄超出镜头最近对焦距离；测距仪偶合不准
-    解决方法：检查取景器对焦屏；调整屈光度补偿；了解所用镜头最近对焦距离；测距仪相机送维修
-
-11. **运动模糊（Motion Blur）**
-    视觉特征：主体或整体画面出现有方向性的拖影，可能是水平/垂直/弧形
-    常见原因：快门速度过慢；手持拍摄手抖；被摄主体移动速度快于快门速度
-    解决方法：提高快门速度（运动主体至少 1/500s）；使用三脚架；追焦拍摄移动主体
-
-12. **化学污染/显影问题（Chemical / Development Issues）**
-    视觉特征：画面出现不规则斑点、水渍、条纹、局部密度异常，不符合拍摄时的曝光逻辑
-    常见原因：自己冲洗时药水浓度/温度/时间不准确；胶卷在冲洗时受污染；显影罐漏光；定影不足
-    解决方法：严格控制药水温度（彩色 C-41 需 38°C）和时间；送可信赖的实验室冲洗；定期更新药水
-
-请分析上传的图片，判断最可能的一种问题（如有多种问题同时存在也可指出主要问题和次要问题）。
-
-必须严格以如下 JSON 格式返回，不要输出任何其他文字：
-{"title":"问题名称（中文+英文，如：漏光（Light Leak））","color":"#e05252","desc":"基于图像视觉特征的具体分析，100字以内","fix":"针对性解决建议，分1-2条，100字以内","conf":85,"secondary":"次要问题（如有，否则填null）"}
-
-color 根据问题类型选择：漏光=#e05252，欠曝=#5B7EA8，过曝=#F5A623，多重曝光=#9B59B6，帧间重叠=#E67E22，快门问题=#E74C3C，过期胶卷=#D4A017，热损伤=#C0392B，对焦模糊=#9FE1CB，运动模糊=#1ABC9C，化学问题=#95A5A6，正常=#27AE60。`;
 
 function onDiagFile(input) {
   const file = input.files[0];
@@ -3322,80 +3251,145 @@ function onDiagFile(input) {
   reader.readAsDataURL(file);
 }
 
+// ── GEMINI FILM DIAGNOSIS ──
+// ⚠️ WARNING: Never expose API keys in production client-side code.
+// Use a backend proxy in production. This key is for prototype use only.
+const GEMINI_API_KEY = 'AIzaSyAe094wQEUaeK-DufmMqMio_c5IaSKUIB0'; // ⚠️ Use a backend proxy in production.
+
+const GEMINI_SYSTEM_INSTRUCTION = `You are an elite Analog Film Lab Technician with 30 years of experience. Your task is to perform a forensic visual analysis on a film scan.
+
+ANALYSIS FRAMEWORK — follow these steps in order:
+
+1. ORIENTATION: Determine if the image is a "Positive" (color slide / already inverted scan) or a "Negative" (visible orange mask, or dark/inverted tones). This affects how you interpret density.
+
+2. ARTIFACT DETECTION — scan for NON-IMAGE artifacts:
+   - Orange/Red Streaks or blobs along edges → Light Leak (back-foam seal failure). issue_id: "light_leak"
+   - White/Blue flares, uniform wash on one side → Front Light Leak or Lens Flare. issue_id: "light_leak_front"
+   - Vertical black bar cutting across the frame → Shutter Capping (mechanical timing failure). issue_id: "shutter_capping"
+   - Repeating fine lines, dust patterns, newton rings → Scanning/Sensor Artifacts. issue_id: "scan_artifact"
+   - Double or ghost image of same subject → Multiple Exposure. issue_id: "multiple_exposure"
+   - Frames bleeding into each other → Frame Overlap (film advance issue). issue_id: "frame_overlap"
+
+3. CHEMISTRY CHECK:
+   - "Thin" areas (transparent on negative = dark on positive): Underexposure. issue_id: "underexposure"
+   - "Dense" areas (opaque on negative = blown highlights on positive): Overexposure. issue_id: "overexposure"
+   - Uneven development, tide marks, streaks from sprocket holes: Development Error. issue_id: "development_error"
+   - Overall color cast (magenta, cyan, yellow) not matching the scene: Chemistry / Expired Film issue. issue_id: "expired_film"
+
+4. FOCUS & MOTION:
+   - CRITICAL CONSTRAINT: You MUST distinguish between "Intentional Artistic Choice" (shallow depth of field bokeh, intentional motion blur for effect) and "Technical Failure" (missed focus on intended subject, unintentional camera shake).
+   - Only diagnose as technical failure if the PRIMARY subject is unsharp and there is no artistic intent.
+   - Missed focus on subject: issue_id: "out_of_focus"
+   - Unintentional camera shake or subject blur: issue_id: "motion_blur"
+
+5. NORMAL IMAGE: If the image has no technical issues and artifacts are intentional/artistic, use issue_id: "normal"
+
+COLOR CODES by issue:
+light_leak=#e05252, light_leak_front=#e07a52, shutter_capping=#E74C3C, scan_artifact=#95A5A6,
+multiple_exposure=#9B59B6, frame_overlap=#E67E22, underexposure=#5B7EA8, overexposure=#F5A623,
+development_error=#9FE1CB, expired_film=#D4A017, out_of_focus=#8B7EA8, motion_blur=#1ABC9C, normal=#1D9E75
+
+OUTPUT — Return ONLY this exact JSON, no markdown, no extra text:
+{
+  "issue_id": "slug_from_list_above",
+  "titleEn": "Short English name (e.g. Light Leak)",
+  "title": "中文名称（如：漏光）",
+  "color": "#hexcolor",
+  "technical_diagnosis": "2-3 sentence forensic analysis in English referencing specific visual evidence you observed",
+  "descEn": "same as technical_diagnosis",
+  "desc": "2-3句中文专业分析，引用你在图中观察到的具体视觉证据",
+  "repair_tip": "Specific actionable advice to fix the camera or shooting technique in English",
+  "fixEn": "same as repair_tip",
+  "fix": "对应的中文修复建议",
+  "confidence": 85,
+  "secondary": "次要问题（如有，否则空字符串）",
+  "secondaryEn": "Secondary issue in English (empty string if none)"
+}`;
+
 async function startDiag() {
   document.getElementById('diagActions').style.display = 'none';
   document.getElementById('diagLoading').style.display = 'block';
 
   try {
-    const resp = await fetch('https://api.anthropic.com/v1/messages', {
+    if (!window._diagBase64) throw new Error('No image data');
+
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+
+    const requestBody = {
+      system_instruction: {
+        parts: [{ text: GEMINI_SYSTEM_INSTRUCTION }]
+      },
+      contents: [{
+        parts: [
+          {
+            inline_data: {
+              mime_type: window._diagMediaType || 'image/jpeg',
+              data: window._diagBase64
+            }
+          },
+          {
+            text: 'Perform a complete forensic analysis on this film scan following the framework. Return ONLY the JSON object.'
+          }
+        ]
+      }],
+      generation_config: {
+        temperature: 0.1,
+        top_p: 0.85,
+        max_output_tokens: 1000,
+        response_mime_type: 'application/json'
+      }
+    };
+
+    const resp = await fetch(endpoint, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 600,
-        system: DIAG_SYSTEM_PROMPT,
-        messages: [{
-          role: 'user',
-          content: [
-            {
-              type: 'image',
-              source: {
-                type: 'base64',
-                media_type: window._diagMediaType || 'image/jpeg',
-                data: window._diagBase64
-              }
-            },
-            {
-              type: 'text',
-              text: '请仔细分析这张胶片照片，识别问题，必须返回如下 JSON 格式，所有字段都必须填写，英文字段必须是准确的英文翻译：{"title":"中文标题","titleEn":"English title","color":"十六进制颜色","desc":"中文原因描述","descEn":"English description of the issue","fix":"中文处理建议","fixEn":"English fix advice","conf":置信度0-100,"secondary":"次要问题中文（没有则省略）","secondaryEn":"secondary issue in English (omit if none)"}'
-            }
-          ]
-        }]
-      })
+      body: JSON.stringify(requestBody)
     });
 
     const data = await resp.json();
-    const text = data.content?.filter(b => b.type === 'text').map(b => b.text).join('') || '';
-    const match = text.match(/\{[\s\S]*?\}/);
+    if (data.error) throw new Error(data.error.message || 'Gemini API error');
+
+    const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    const cleaned = rawText.replace(/```json\n?/g,'').replace(/```\n?/g,'').trim();
+    const match = cleaned.match(/\{[\s\S]*\}/);
 
     document.getElementById('diagLoading').style.display = 'none';
 
     if (match) {
       const r = JSON.parse(match[0]);
-      // Store bilingual data on window for save
       window._diagResult = r;
+      // Support both new field names and legacy
+      r.desc = r.desc || r.technical_diagnosis || '';
+      r.descEn = r.descEn || r.technical_diagnosis || '';
+      r.fix = r.fix || r.repair_tip || '';
+      r.fixEn = r.fixEn || r.repair_tip || '';
+      r.conf = r.confidence || r.conf || 80;
+
       const title = (curLang==='en' ? r.titleEn||r.title : r.title) || (curLang==='en'?'Diagnosis complete':'诊断完成');
-      const desc  = (curLang==='en' ? r.descEn||r.desc   : r.desc)  || '';
-      const fix   = (curLang==='en' ? r.fixEn||r.fix     : r.fix)   || '';
-      document.getElementById('diagResultTitle').textContent = title;
-      document.getElementById('diagResultTitle').dataset.zh = r.title||'';
-      document.getElementById('diagResultTitle').dataset.en = r.titleEn||r.title||'';
-      document.getElementById('diagResultTitle').previousElementSibling.style.background = r.color || '#9FE1CB';
-      document.getElementById('diagResultDesc').textContent = desc;
-      document.getElementById('diagResultDesc').dataset.zh = r.desc||'';
-      document.getElementById('diagResultDesc').dataset.en = r.descEn||r.desc||'';
-      document.getElementById('diagResultFix').textContent = fix;
-      document.getElementById('diagResultFix').dataset.zh = r.fix||'';
-      document.getElementById('diagResultFix').dataset.en = r.fixEn||r.fix||'';
-      document.getElementById('diagConfBar').style.width = (r.conf || 80) + '%';
-      document.getElementById('diagConfVal').textContent = (r.conf || 80) + '%';
-      const secEl = document.getElementById('diagSecondary');
-      if (secEl) {
-        const sec = curLang==='en'?(r.secondaryEn||r.secondary):r.secondary;
-        if (sec) {
-          secEl.textContent = (curLang==='en'?'Also detected: ':'同时检测到：') + sec;
-          secEl.style.display = 'block';
-        } else {
-          secEl.style.display = 'none';
-        }
+      const desc  = (curLang==='en' ? r.descEn : r.desc) || '';
+      const fix   = (curLang==='en' ? r.fixEn  : r.fix)  || '';
+      const titleEl=document.getElementById('diagResultTitle');
+      const descEl=document.getElementById('diagResultDesc');
+      const fixEl=document.getElementById('diagResultFix');
+      titleEl.textContent=title; titleEl.dataset.zh=r.title||''; titleEl.dataset.en=r.titleEn||r.title||'';
+      titleEl.previousElementSibling.style.background=r.color||'#9FE1CB';
+      descEl.textContent=desc; descEl.dataset.zh=r.desc||''; descEl.dataset.en=r.descEn||'';
+      fixEl.textContent=fix; fixEl.dataset.zh=r.fix||''; fixEl.dataset.en=r.fixEn||'';
+      document.getElementById('diagConfBar').style.width=(r.conf)+'%';
+      document.getElementById('diagConfVal').textContent=(r.conf)+'%';
+      const secEl=document.getElementById('diagSecondary');
+      if(secEl){
+        const sec=curLang==='en'?(r.secondaryEn||r.secondary):r.secondary;
+        if(sec){secEl.textContent=(curLang==='en'?'Also detected: ':'同时检测到：')+sec;secEl.style.display='block';}
+        else secEl.style.display='none';
       }
-      document.getElementById('diagResult').style.display = 'block';
+      document.getElementById('diagResult').style.display='block';
     } else {
       throw new Error('JSON parse failed');
     }
-  } catch (err) {
-    document.getElementById('diagLoading').style.display = 'none';
-    // fallback：用本地知识库随机结果
+  } catch(err) {
+    console.error('Gemini diagnosis error:', err);
+    document.getElementById('diagLoading').style.display='none';
     const FALLBACK = [
       {title:'漏光（Light Leak）',titleEn:'Light Leak',color:'#e05252',
        desc:'检测到画面边缘出现橙红色条状光斑，特征符合机身背盖漏光。常见于背盖密封海绵老化的相机。',
