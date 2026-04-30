@@ -3254,108 +3254,72 @@ function onDiagFile(input) {
 // ── GEMINI FILM DIAGNOSIS ──
 // ⚠️ WARNING: Never expose API keys in production client-side code.
 // Use a backend proxy in production. This key is for prototype use only.
-const GEMINI_API_KEY = 'AIzaSyAe094wQEUaeK-DufmMqMio_c5IaSKUIB0'; // ⚠️ Use a backend proxy in production.
+// ── GPT-4o FILM DIAGNOSIS ──
+// ⚠️ WARNING: Never expose API keys in production. Use a backend proxy.
+const OPENAI_API_KEY = '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';
 
-const GEMINI_SYSTEM_INSTRUCTION = `You are an elite Analog Film Lab Technician with 30 years of experience. Your task is to perform a forensic visual analysis on a film scan.
+const DIAG_SYSTEM_PROMPT = `You are an elite Analog Film Lab Technician with 30 years of experience. Perform a forensic visual analysis on a film scan.
 
-ANALYSIS FRAMEWORK — follow these steps in order:
-
-1. ORIENTATION: Determine if the image is a "Positive" (color slide / already inverted scan) or a "Negative" (visible orange mask, or dark/inverted tones). This affects how you interpret density.
-
-2. ARTIFACT DETECTION — scan for NON-IMAGE artifacts:
-   - Orange/Red Streaks or blobs along edges → Light Leak (back-foam seal failure). issue_id: "light_leak"
-   - White/Blue flares, uniform wash on one side → Front Light Leak or Lens Flare. issue_id: "light_leak_front"
-   - Vertical black bar cutting across the frame → Shutter Capping (mechanical timing failure). issue_id: "shutter_capping"
-   - Repeating fine lines, dust patterns, newton rings → Scanning/Sensor Artifacts. issue_id: "scan_artifact"
-   - Double or ghost image of same subject → Multiple Exposure. issue_id: "multiple_exposure"
-   - Frames bleeding into each other → Frame Overlap (film advance issue). issue_id: "frame_overlap"
-
+ANALYSIS FRAMEWORK:
+1. ORIENTATION: Determine if Positive (color/slide) or Negative (orange mask/inverted).
+2. ARTIFACT DETECTION:
+   - Orange/Red streaks along edges → Light Leak (back-foam seal). issue_id: "light_leak"
+   - White/Blue flares on one side → Front Light Leak. issue_id: "light_leak_front"
+   - Vertical black bar → Shutter Capping. issue_id: "shutter_capping"
+   - Repeating lines/dust → Scan Artifact. issue_id: "scan_artifact"
+   - Ghost/double image → Multiple Exposure. issue_id: "multiple_exposure"
+   - Frames bleeding together → Frame Overlap. issue_id: "frame_overlap"
 3. CHEMISTRY CHECK:
-   - "Thin" areas (transparent on negative = dark on positive): Underexposure. issue_id: "underexposure"
-   - "Dense" areas (opaque on negative = blown highlights on positive): Overexposure. issue_id: "overexposure"
-   - Uneven development, tide marks, streaks from sprocket holes: Development Error. issue_id: "development_error"
-   - Overall color cast (magenta, cyan, yellow) not matching the scene: Chemistry / Expired Film issue. issue_id: "expired_film"
+   - Thin/dark areas → Underexposure. issue_id: "underexposure"
+   - Dense/blown highlights → Overexposure. issue_id: "overexposure"
+   - Uneven development/tide marks → Development Error. issue_id: "development_error"
+   - Colour cast not matching scene → Expired Film. issue_id: "expired_film"
+4. FOCUS & MOTION: Distinguish artistic choice from technical failure.
+   - Missed focus on subject → issue_id: "out_of_focus"
+   - Unintentional camera shake → issue_id: "motion_blur"
+5. No issues → issue_id: "normal"
 
-4. FOCUS & MOTION:
-   - CRITICAL CONSTRAINT: You MUST distinguish between "Intentional Artistic Choice" (shallow depth of field bokeh, intentional motion blur for effect) and "Technical Failure" (missed focus on intended subject, unintentional camera shake).
-   - Only diagnose as technical failure if the PRIMARY subject is unsharp and there is no artistic intent.
-   - Missed focus on subject: issue_id: "out_of_focus"
-   - Unintentional camera shake or subject blur: issue_id: "motion_blur"
+COLORS: light_leak=#e05252, light_leak_front=#e07a52, shutter_capping=#E74C3C, scan_artifact=#95A5A6, multiple_exposure=#9B59B6, frame_overlap=#E67E22, underexposure=#5B7EA8, overexposure=#F5A623, development_error=#9FE1CB, expired_film=#D4A017, out_of_focus=#8B7EA8, motion_blur=#1ABC9C, normal=#1D9E75
 
-5. NORMAL IMAGE: If the image has no technical issues and artifacts are intentional/artistic, use issue_id: "normal"
-
-COLOR CODES by issue:
-light_leak=#e05252, light_leak_front=#e07a52, shutter_capping=#E74C3C, scan_artifact=#95A5A6,
-multiple_exposure=#9B59B6, frame_overlap=#E67E22, underexposure=#5B7EA8, overexposure=#F5A623,
-development_error=#9FE1CB, expired_film=#D4A017, out_of_focus=#8B7EA8, motion_blur=#1ABC9C, normal=#1D9E75
-
-OUTPUT — Return ONLY this exact JSON, no markdown, no extra text:
-{
-  "issue_id": "slug_from_list_above",
-  "titleEn": "Short English name (e.g. Light Leak)",
-  "title": "中文名称（如：漏光）",
-  "color": "#hexcolor",
-  "technical_diagnosis": "2-3 sentence forensic analysis in English referencing specific visual evidence you observed",
-  "descEn": "same as technical_diagnosis",
-  "desc": "2-3句中文专业分析，引用你在图中观察到的具体视觉证据",
-  "repair_tip": "Specific actionable advice to fix the camera or shooting technique in English",
-  "fixEn": "same as repair_tip",
-  "fix": "对应的中文修复建议",
-  "confidence": 85,
-  "secondary": "次要问题（如有，否则空字符串）",
-  "secondaryEn": "Secondary issue in English (empty string if none)"
-}`;
+Return ONLY valid JSON, no markdown:
+{"issue_id":"slug","titleEn":"English name","title":"中文名称","color":"#hex","technical_diagnosis":"2-3 sentence forensic analysis","descEn":"same as technical_diagnosis","desc":"2-3句中文分析","repair_tip":"actionable fix advice","fixEn":"same as repair_tip","fix":"中文修复建议","confidence":85,"secondary":"次要问题（无则空字符串）","secondaryEn":"secondary issue (empty if none)"}`;
 
 async function startDiag() {
   document.getElementById('diagActions').style.display = 'none';
   document.getElementById('diagLoading').style.display = 'block';
-  // Clear any previous error banner
   const prev = document.getElementById('diagErrBanner');
   if(prev) prev.remove();
 
   try {
     if (!window._diagBase64) throw new Error('No image data');
 
-    // Use CORS proxy to bypass host allowlist restriction in PWA mode
-    const GEMINI_BASE = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
-    const ENDPOINTS = [
-      `${GEMINI_BASE}?key=${GEMINI_API_KEY}`,
-      `https://corsproxy.io/?${encodeURIComponent(GEMINI_BASE + '?key=' + GEMINI_API_KEY)}`,
-    ];
-
-    const makeBody = (includeSystem) => ({
-      ...(includeSystem ? { system_instruction: { parts: [{ text: GEMINI_SYSTEM_INSTRUCTION }] } } : {}),
-      contents: [{
-        parts: [
-          { text: includeSystem
-            ? 'Analyze the following film scan. Return ONLY the JSON object, no markdown, no extra text.'
-            : GEMINI_SYSTEM_INSTRUCTION + '\n\nAnalyze the following film scan. Return ONLY the JSON object, no markdown, no extra text.'
-          },
-          { inline_data: { mime_type: window._diagMediaType || 'image/jpeg', data: window._diagBase64 } }
+    const resp = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${OPENAI_API_KEY}`
+      },
+      body: JSON.stringify({
+        model: 'gpt-4o',
+        max_tokens: 1000,
+        temperature: 0.1,
+        messages: [
+          { role: 'system', content: DIAG_SYSTEM_PROMPT },
+          { role: 'user', content: [
+            { type: 'image_url', image_url: {
+              url: `data:${window._diagMediaType||'image/jpeg'};base64,${window._diagBase64}`,
+              detail: 'high'
+            }},
+            { type: 'text', text: 'Analyze this film scan. Return ONLY the JSON object.' }
+          ]}
         ]
-      }],
-      generation_config: { temperature: 0.1, top_p: 0.85, max_output_tokens: 1000 }
+      })
     });
 
-    let data = null;
-    let lastErr = '';
-    for (let i = 0; i < ENDPOINTS.length; i++) {
-      try {
-        const r = await fetch(ENDPOINTS[i], {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          referrerPolicy: 'no-referrer',
-          body: JSON.stringify(makeBody(i === 0))
-        });
-        const d = await r.json();
-        if (d.error) { lastErr = d.error.message; continue; }
-        data = d;
-        break;
-      } catch(e) { lastErr = e.message; }
-    }
-    if (!data) throw new Error(lastErr || 'All endpoints failed');
+    const data = await resp.json();
+    if (data.error) throw new Error(data.error.message || 'OpenAI API error');
 
-    const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    const rawText = data.choices?.[0]?.message?.content || '';
     const cleaned = rawText.replace(/```json\n?/g,'').replace(/```\n?/g,'').trim();
     const match = cleaned.match(/\{[\s\S]*\}/);
 
@@ -3364,16 +3328,14 @@ async function startDiag() {
     if (match) {
       const r = JSON.parse(match[0]);
       window._diagResult = r;
-      // Support both new field names and legacy
       r.desc = r.desc || r.technical_diagnosis || '';
       r.descEn = r.descEn || r.technical_diagnosis || '';
       r.fix = r.fix || r.repair_tip || '';
       r.fixEn = r.fixEn || r.repair_tip || '';
       r.conf = r.confidence || r.conf || 80;
-
-      const title = (curLang==='en' ? r.titleEn||r.title : r.title) || (curLang==='en'?'Diagnosis complete':'诊断完成');
-      const desc  = (curLang==='en' ? r.descEn : r.desc) || '';
-      const fix   = (curLang==='en' ? r.fixEn  : r.fix)  || '';
+      const title=(curLang==='en'?r.titleEn||r.title:r.title)||(curLang==='en'?'Diagnosis complete':'诊断完成');
+      const desc=(curLang==='en'?r.descEn:r.desc)||'';
+      const fix=(curLang==='en'?r.fixEn:r.fix)||'';
       const titleEl=document.getElementById('diagResultTitle');
       const descEl=document.getElementById('diagResultDesc');
       const fixEl=document.getElementById('diagResultFix');
@@ -3390,50 +3352,44 @@ async function startDiag() {
         else secEl.style.display='none';
       }
       document.getElementById('diagResult').style.display='block';
-    } else {
-      throw new Error('JSON parse failed');
-    }
+    } else { throw new Error('JSON parse failed'); }
+
   } catch(err) {
-    console.error('Gemini diagnosis error:', err);
+    console.error('Diagnosis error:', err);
     document.getElementById('diagLoading').style.display='none';
-    // 显示错误信息让用户知道走了 fallback
-    const errBanner = document.createElement('div');
-    errBanner.style.cssText = 'margin:0 24px 8px;padding:8px 12px;background:rgba(224,82,82,.12);border:.5px solid rgba(224,82,82,.3);border-radius:8px;font-size:10px;color:rgba(224,82,82,.8)';
-    errBanner.textContent = '⚠️ API Error: ' + (err.message||'unknown') + ' — showing fallback result';
-    errBanner.id = 'diagErrBanner';
-    const diagResult = document.getElementById('diagResult');
-    diagResult.parentNode.insertBefore(errBanner, diagResult);
-    const FALLBACK = [
+    const errBanner=document.createElement('div');
+    errBanner.style.cssText='margin:0 24px 8px;padding:8px 12px;background:rgba(224,82,82,.12);border:.5px solid rgba(224,82,82,.3);border-radius:8px;font-size:10px;color:rgba(224,82,82,.8)';
+    errBanner.textContent='⚠️ API Error: '+(err.message||'unknown')+' — showing fallback result';
+    errBanner.id='diagErrBanner';
+    document.getElementById('diagResult').parentNode.insertBefore(errBanner,document.getElementById('diagResult'));
+    const FALLBACK=[
       {title:'漏光（Light Leak）',titleEn:'Light Leak',color:'#e05252',
-       desc:'检测到画面边缘出现橙红色条状光斑，特征符合机身背盖漏光。常见于背盖密封海绵老化的相机。',
+       desc:'检测到画面边缘出现橙红色条状光斑，特征符合机身背盖漏光。',
        descEn:'Orange-red streaks detected along frame edges — consistent with a light leak from the camera body seal.',
-       fix:'检查机身背盖密封海绵是否老化脱落，可更换新海绵条。装卸胶卷时务必在阴影处进行，避免直射阳光。',
-       fixEn:'Check the back door foam seal for deterioration — replace if needed. Always load/unload film in shade.',conf:78},
+       fix:'检查机身背盖密封海绵是否老化，装卸胶卷时在阴影处进行。',
+       fixEn:'Check the back door foam seal and always load/unload film in shade.',conf:78},
       {title:'欠曝（Underexposure）',titleEn:'Underexposure',color:'#5B7EA8',
-       desc:'画面整体偏暗，暗部细节丧失，阴影区呈纯黑，推测欠曝 1.5–2 档。',
+       desc:'画面整体偏暗，暗部细节丧失，推测欠曝 1.5–2 档。',
        descEn:'Overall image is too dark with lost shadow detail — estimated 1.5–2 stops underexposed.',
-       fix:'提高 ISO 或增大光圈，负片建议宁可轻微过曝。检查相机测光表是否准确。',
-       fixEn:'Increase ISO or open the aperture. For negatives, slight overexposure is safer. Check your meter.',conf:83},
+       fix:'提高 ISO 或增大光圈，负片建议宁可轻微过曝。',
+       fixEn:'Increase ISO or open the aperture. For negatives, slight overexposure is safer.',conf:83},
       {title:'过曝（Overexposure）',titleEn:'Overexposure',color:'#F5A623',
-       desc:'整体画面泛白，高光区域细节丢失，判断为过度曝光 2–3 档。',
+       desc:'整体画面泛白，高光区域细节丢失，判断过度曝光 2–3 档。',
        descEn:'Image appears washed out with blown highlights — estimated 2–3 stops overexposed.',
-       fix:'降低 ISO 或缩小光圈，强光下参考 Sunny 16 法则。拍摄反转片时需格外精准测光。',
-       fixEn:'Lower ISO or stop down the aperture. Use Sunny 16 in bright light. Slide film needs precise metering.',conf:87},
+       fix:'降低 ISO 或缩小光圈，强光下参考 Sunny 16 法则。',
+       fixEn:'Lower ISO or stop down. Use Sunny 16 in bright light.',conf:87},
     ];
-    const r = FALLBACK[Math.floor(Math.random() * FALLBACK.length)];
-    const titleEl=document.getElementById('diagResultTitle');
-    const descEl=document.getElementById('diagResultDesc');
-    const fixEl=document.getElementById('diagResultFix');
-    titleEl.textContent = curLang==='en'?r.titleEn:r.title;
-    titleEl.dataset.zh=r.title; titleEl.dataset.en=r.titleEn;
-    titleEl.previousElementSibling.style.background = r.color;
-    descEl.textContent = curLang==='en'?r.descEn:r.desc;
-    descEl.dataset.zh=r.desc; descEl.dataset.en=r.descEn;
-    fixEl.textContent = curLang==='en'?r.fixEn:r.fix;
-    fixEl.dataset.zh=r.fix; fixEl.dataset.en=r.fixEn;
-    document.getElementById('diagConfBar').style.width = r.conf + '%';
-    document.getElementById('diagConfVal').textContent = r.conf + '%';
-    document.getElementById('diagResult').style.display = 'block';
+    const r=FALLBACK[Math.floor(Math.random()*FALLBACK.length)];
+    const tEl=document.getElementById('diagResultTitle');
+    const dEl=document.getElementById('diagResultDesc');
+    const fEl=document.getElementById('diagResultFix');
+    tEl.textContent=curLang==='en'?r.titleEn:r.title; tEl.dataset.zh=r.title; tEl.dataset.en=r.titleEn;
+    tEl.previousElementSibling.style.background=r.color;
+    dEl.textContent=curLang==='en'?r.descEn:r.desc; dEl.dataset.zh=r.desc; dEl.dataset.en=r.descEn;
+    fEl.textContent=curLang==='en'?r.fixEn:r.fix; fEl.dataset.zh=r.fix; fEl.dataset.en=r.fixEn;
+    document.getElementById('diagConfBar').style.width=r.conf+'%';
+    document.getElementById('diagConfVal').textContent=r.conf+'%';
+    document.getElementById('diagResult').style.display='block';
   }
 }
 
