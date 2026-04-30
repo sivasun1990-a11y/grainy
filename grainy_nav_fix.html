@@ -3316,7 +3316,7 @@ async function startDiag() {
   try {
     if (!window._diagBase64) throw new Error('No image data');
 
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`;
+    const endpoint = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
 
     const requestBody = {
       system_instruction: {
