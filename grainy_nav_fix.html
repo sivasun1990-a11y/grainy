@@ -3345,6 +3345,7 @@ async function startDiag() {
         const r = await fetch(ENDPOINTS[i], {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
+          referrerPolicy: 'no-referrer',
           body: JSON.stringify(makeBody(i === 0))
         });
         const d = await r.json();
