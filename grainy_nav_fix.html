@@ -3316,37 +3316,44 @@ async function startDiag() {
   try {
     if (!window._diagBase64) throw new Error('No image data');
 
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-002:generateContent?key=${GEMINI_API_KEY}`;
+    // Try multiple endpoints in order for PWA/browser compatibility
+    const ENDPOINTS = [
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-002:generateContent?key=${GEMINI_API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro-vision:generateContent?key=${GEMINI_API_KEY}`,
+    ];
 
-    const requestBody = {
+    const makeBody = (includeSystem) => ({
+      ...(includeSystem ? { system_instruction: { parts: [{ text: GEMINI_SYSTEM_INSTRUCTION }] } } : {}),
       contents: [{
         parts: [
-          {
-            text: GEMINI_SYSTEM_INSTRUCTION + '\n\nAnalyze the following film scan. Return ONLY the JSON object, no markdown, no extra text.'
+          { text: includeSystem
+            ? 'Analyze the following film scan. Return ONLY the JSON object, no markdown, no extra text.'
+            : GEMINI_SYSTEM_INSTRUCTION + '\n\nAnalyze the following film scan. Return ONLY the JSON object, no markdown, no extra text.'
           },
-          {
-            inline_data: {
-              mime_type: window._diagMediaType || 'image/jpeg',
-              data: window._diagBase64
-            }
-          }
+          { inline_data: { mime_type: window._diagMediaType || 'image/jpeg', data: window._diagBase64 } }
         ]
       }],
-      generation_config: {
-        temperature: 0.1,
-        top_p: 0.85,
-        max_output_tokens: 1000
-      }
-    };
-
-    const resp = await fetch(endpoint, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(requestBody)
+      generation_config: { temperature: 0.1, top_p: 0.85, max_output_tokens: 1000 }
     });
 
-    const data = await resp.json();
-    if (data.error) throw new Error(data.error.message || 'Gemini API error');
+    let data = null;
+    let lastErr = '';
+    for (let i = 0; i < ENDPOINTS.length; i++) {
+      try {
+        const r = await fetch(ENDPOINTS[i], {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(makeBody(i === 0))
+        });
+        const d = await r.json();
+        if (d.error) { lastErr = d.error.message; continue; }
+        data = d;
+        break;
+      } catch(e) { lastErr = e.message; }
+    }
+    if (!data) throw new Error(lastErr || 'All endpoints failed');
 
     const rawText = data.candidates?.[0]?.content?.parts?.[0]?.text || '';
     const cleaned = rawText.replace(/```json\n?/g,'').replace(/```\n?/g,'').trim();
