@@ -3299,11 +3299,11 @@ async function startDiag() {
     const body = JSON.stringify({
       contents: [{
         parts: [
-          { text: DIAG_SYSTEM_PROMPT + '\n\nAnalyze the following film scan. Return ONLY the JSON object, no markdown, no extra text.' },
-          { inline_data: { mime_type: window._diagMediaType || 'image/jpeg', data: window._diagBase64 } }
+          { inline_data: { mime_type: window._diagMediaType || 'image/jpeg', data: window._diagBase64 } },
+          { text: DIAG_SYSTEM_PROMPT + '\n\nAnalyze this film scan now. Return ONLY the JSON object, no markdown, no extra text.' }
         ]
       }],
-      generation_config: { temperature: 0.1, top_p: 0.85, max_output_tokens: 1000 }
+      generation_config: { temperature: 0.1, top_p: 0.85, max_output_tokens: 1500 }
     });
 
     // Try direct first, then proxy
@@ -3318,7 +3318,8 @@ async function startDiag() {
           body
         });
         const d = await r.json();
-        if (d.error) { lastErr = d.error.message; continue; }
+        if (d.error) { lastErr = d.error.message; console.warn('Endpoint failed:', url, d.error.message); continue; }
+        console.log('Diagnosis succeeded via:', url);
         data = d;
         break;
       } catch(e) { lastErr = e.message; }
