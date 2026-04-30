@@ -3316,12 +3316,11 @@ async function startDiag() {
   try {
     if (!window._diagBase64) throw new Error('No image data');
 
-    // Try multiple endpoints in order for PWA/browser compatibility
+    // Use CORS proxy to bypass host allowlist restriction in PWA mode
+    const GEMINI_BASE = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent';
     const ENDPOINTS = [
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-002:generateContent?key=${GEMINI_API_KEY}`,
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${GEMINI_API_KEY}`,
-      `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`,
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro-vision:generateContent?key=${GEMINI_API_KEY}`,
+      `${GEMINI_BASE}?key=${GEMINI_API_KEY}`,
+      `https://corsproxy.io/?${encodeURIComponent(GEMINI_BASE + '?key=' + GEMINI_API_KEY)}`,
     ];
 
     const makeBody = (includeSystem) => ({
