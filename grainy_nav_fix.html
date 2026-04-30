@@ -3316,30 +3316,26 @@ async function startDiag() {
   try {
     if (!window._diagBase64) throw new Error('No image data');
 
-    const endpoint = `https://generativelanguage.googleapis.com/v1/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
+    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_API_KEY}`;
 
     const requestBody = {
-      system_instruction: {
-        parts: [{ text: GEMINI_SYSTEM_INSTRUCTION }]
-      },
       contents: [{
         parts: [
+          {
+            text: GEMINI_SYSTEM_INSTRUCTION + '\n\nAnalyze the following film scan. Return ONLY the JSON object, no markdown, no extra text.'
+          },
           {
             inline_data: {
               mime_type: window._diagMediaType || 'image/jpeg',
               data: window._diagBase64
             }
-          },
-          {
-            text: 'Perform a complete forensic analysis on this film scan following the framework. Return ONLY the JSON object.'
           }
         ]
       }],
       generation_config: {
         temperature: 0.1,
         top_p: 0.85,
-        max_output_tokens: 1000,
-        response_mime_type: 'application/json'
+        max_output_tokens: 1000
       }
     };
 
