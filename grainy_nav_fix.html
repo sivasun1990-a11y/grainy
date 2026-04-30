@@ -3309,6 +3309,9 @@ OUTPUT — Return ONLY this exact JSON, no markdown, no extra text:
 async function startDiag() {
   document.getElementById('diagActions').style.display = 'none';
   document.getElementById('diagLoading').style.display = 'block';
+  // Clear any previous error banner
+  const prev = document.getElementById('diagErrBanner');
+  if(prev) prev.remove();
 
   try {
     if (!window._diagBase64) throw new Error('No image data');
@@ -3390,6 +3393,13 @@ async function startDiag() {
   } catch(err) {
     console.error('Gemini diagnosis error:', err);
     document.getElementById('diagLoading').style.display='none';
+    // 显示错误信息让用户知道走了 fallback
+    const errBanner = document.createElement('div');
+    errBanner.style.cssText = 'margin:0 24px 8px;padding:8px 12px;background:rgba(224,82,82,.12);border:.5px solid rgba(224,82,82,.3);border-radius:8px;font-size:10px;color:rgba(224,82,82,.8)';
+    errBanner.textContent = '⚠️ API Error: ' + (err.message||'unknown') + ' — showing fallback result';
+    errBanner.id = 'diagErrBanner';
+    const diagResult = document.getElementById('diagResult');
+    diagResult.parentNode.insertBefore(errBanner, diagResult);
     const FALLBACK = [
       {title:'漏光（Light Leak）',titleEn:'Light Leak',color:'#e05252',
        desc:'检测到画面边缘出现橙红色条状光斑，特征符合机身背盖漏光。常见于背盖密封海绵老化的相机。',
