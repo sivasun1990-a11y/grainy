@@ -3293,7 +3293,7 @@ async function startDiag() {
   try {
     if (!window._diagBase64) throw new Error('No image data');
 
-    const GEMINI_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=' + GEMINI_API_KEY;
+    const GEMINI_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=' + GEMINI_API_KEY; // fallback
     const PROXY_URL  = 'https://corsproxy.io/?' + encodeURIComponent('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=' + GEMINI_API_KEY);
 
     const body = JSON.stringify({
@@ -3309,7 +3309,7 @@ async function startDiag() {
     // Try direct first, then proxy
     let data = null;
     let lastErr = '';
-    for (const url of [GEMINI_URL, PROXY_URL]) {
+    for (const url of [PROXY_URL, GEMINI_URL]) {
       try {
         const r = await fetch(url, {
           method: 'POST',
