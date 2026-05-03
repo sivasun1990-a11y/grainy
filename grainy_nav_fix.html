@@ -2499,7 +2499,11 @@ async function fetchLiveWeather() {
   let lat = 1.35, lon = 103.82, cityName = '新加坡', cityNameEn = 'Singapore';
   try {
     const pos = await new Promise((res, rej) =>
-      navigator.geolocation.getCurrentPosition(res, rej, { timeout: 8000 })
+      navigator.geolocation.getCurrentPosition(res, rej, {
+        timeout: 10000,
+        maximumAge: 300000,      // 5分钟内的缓存位置可复用
+        enableHighAccuracy: false // 低精度更快，够用了
+      })
     );
     lat = pos.coords.latitude;
     lon = pos.coords.longitude;
@@ -2514,17 +2518,32 @@ async function fetchLiveWeather() {
     const temp = Math.round(weatherData.current.temperature_2m);
     const code = weatherData.current.weathercode;
 
-    // 3. 获取城市名（中英文各一次）
+    // 3. 获取城市名 — BigDataCloud 免费 API，亚洲城市更准确
     try {
-      const geoZh = await fetch(`https://geocoding-api.open-meteo.com/v1/reverse?latitude=${lat}&longitude=${lon}&language=zh`);
-      const geoDataZh = await geoZh.json();
-      cityName = geoDataZh.name || geoDataZh.admin1 || '当前位置';
-    } catch(e) {}
-    try {
-      const geoEn = await fetch(`https://geocoding-api.open-meteo.com/v1/reverse?latitude=${lat}&longitude=${lon}&language=en`);
-      const geoDataEn = await geoEn.json();
-      cityNameEn = geoDataEn.name || geoDataEn.admin1 || 'Current Location';
-    } catch(e) {}
+      const geoResp = await fetch(
+        `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=zh`
+      );
+      const geoData = await geoResp.json();
+      cityName = geoData.city || geoData.locality || geoData.principalSubdivision || '当前位置';
+
+      const geoRespEn = await fetch(
+        `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`
+      );
+      const geoDataEn = await geoRespEn.json();
+      cityNameEn = geoDataEn.city || geoDataEn.locality || geoDataEn.principalSubdivision || 'Current Location';
+    } catch(e) {
+      // fallback to Open-Meteo geocoding
+      try {
+        const geoZh = await fetch(`https://geocoding-api.open-meteo.com/v1/reverse?latitude=${lat}&longitude=${lon}&language=zh`);
+        const geoDataZh = await geoZh.json();
+        cityName = geoDataZh.name || geoDataZh.admin1 || '当前位置';
+      } catch(e2) {}
+      try {
+        const geoEn = await fetch(`https://geocoding-api.open-meteo.com/v1/reverse?latitude=${lat}&longitude=${lon}&language=en`);
+        const geoDataEn = await geoEn.json();
+        cityNameEn = geoDataEn.name || geoDataEn.admin1 || 'Current Location';
+      } catch(e2) {}
+    }
 
     // 4. WMO 天气代码 → 中英文描述
     function wmoToWeather(code) {
